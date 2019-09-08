@@ -5,6 +5,7 @@ public class User {
     private String emailAdd;
     private String passWord;
 
+
     public User()
     {
         firstName = " ";
@@ -13,6 +14,7 @@ public class User {
         emailAdd = " ";
         passWord = " ";
     }
+
 
     public User (String newFirstName, String newLastName, int newPhoneNo, String newEmailAdd, String newPassWord)
     {
