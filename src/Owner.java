@@ -13,7 +13,7 @@ public class Owner extends User {
             System.out.println();
             System.out.println("1 CREATE HALL");
             System.out.println("2 MANAGE HALL");
-            System.out.println("3 MANAGE HALL");
+            System.out.println("3 MANAGE BOOKING");
             System.out.println("4 VIEW BOOKING HISTORY OF OWNER HALLS");
             System.out.println("5 MANAGE OWNER DISCOUNT");
             System.out.println("6 LOGIN OUT");
