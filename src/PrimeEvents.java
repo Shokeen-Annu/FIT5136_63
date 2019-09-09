@@ -1,5 +1,4 @@
 
-
 import java.io.*;
 import java.util.Scanner;
 
@@ -9,28 +8,31 @@ public class PrimeEvents {
     {
         System.out.println("      WELCOME TO PRIME EVENTS     ");
         System.out.println();
-        System.out.println("1 View Halls");
-        System.out.println("2 Login");
-        System.out.println("3 Register");
-        System.out.println("4 Forgot Password");
-        System.out.println("5 Exit");
+        System.out.println("1 VIEW HALLS");
+        System.out.println("2 SEARCH HALLS");
+        System.out.println("3 LOGIN");
+        System.out.println("4 REGISTER");
+        System.out.println("5 FORGOT PASSWORD");
+        System.out.println("6 EXIT");
         System.out.println();
         System.out.println("Enter your choice number:");
 
 
         int choiceNumber = receiveInt();
-
+        Customer cust = new Customer();
         switch (choiceNumber)
         {
-            case 1: System.out.println("View Halls page and Search hall option");
+            case 1: cust.viewHalls(true);
                 break;
-            case 2: primeEventsLogin();
+            case 2: cust.searchHalls(true);
                 break;
-            case 3: registerNewUser();
+            case 3: primeEventsLogin();
                 break;
-            case 4: System.out.println("Forgot password page");
+            case 4: registerNewUser();
                 break;
-            case 5: System.out.println("You exited the system...");
+            case 5: forgotPassword();
+                break;
+            case 6: System.out.println("You exited the system...");
                 break;
             default: System.out.println("Please enter your choice correctly!");
                 break;
@@ -117,26 +119,16 @@ public class PrimeEvents {
                // admin.displayAdminMenu();
             break;
             case "CUSTOMER":
-                System.out.println("Welcome to Prime Events System to book halls!!");
-               // Customer cust = new Customer();
-               // cust.displayCustomerMenu();
+                Customer cust = new Customer();
+                cust.displayCustomerMenu();
             break;
             case "OWNER":
-                System.out.println("Welcome Owner of halls!");
-               // Owner owner = new Owner();
-              //  owner.displayOwnerMenu();
+                Owner owner = new Owner();
+                owner.displayOwnerMenu();
             break;
             default: System.out.println("You do not have a verified role. Contact Administrator.");
             break;
         }
-
-        // Only to check logout
-        System.out.println("Enter 9 to logout");
-        int choice = receiveInt();
-        if(choice == 9)
-            logout();
-        else
-            System.out.println("Wrong input");
     }
     private String readFile(String filePath)
     {
@@ -167,13 +159,25 @@ public class PrimeEvents {
     {
         boolean tryAgain = true;
         while(tryAgain) {
-            System.out.println("-------------- REGISTER PAGE --------------");
+            System.out.println("-------------- REGISTER --------------");
             System.out.println();
             System.out.println();
             System.out.println("Please provide details to register yourself.");
             tryAgain = exitMenu("Do you want to register again?");
         }
 
+    }
+
+    private  void forgotPassword()
+    {
+        boolean tryAgain = true;
+        while(tryAgain) {
+            System.out.println("-------------- RESET PASSWORD --------------");
+            System.out.println();
+            System.out.println();
+            System.out.println("Please provide details to reset your password.");
+            tryAgain = exitMenu("Do you want to try again?");
+        }
     }
 
     public void logout()
@@ -185,7 +189,13 @@ public class PrimeEvents {
     private boolean exitMenu(String message)
     {
         boolean tryAgain = false;
-        System.out.println(message);
+        System.out.println("Press 0 to go back to main menu");
+        int choice = receiveInt();
+        if(choice == 0) {
+            tryAgain = false;
+            displayMainMenu();
+        }
+      /*  System.out.println(message);
         System.out.println("1 Yes!");
         System.out.println("2 No, Send me to main menu!");
         System.out.println("3 Logout");
@@ -200,7 +210,7 @@ public class PrimeEvents {
             tryAgain = false;
             logout();
         }
-
+*/
         return tryAgain;
     }
 }

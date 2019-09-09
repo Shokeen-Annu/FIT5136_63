@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class Owner extends User {
     private int choiceNumber;
 
-    public static void main(String[] args)
+    public void displayOwnerMenu()
     {
         Owner owner = new Owner ();
 
@@ -16,7 +16,7 @@ public class Owner extends User {
             System.out.println("3 MANAGE BOOKING");
             System.out.println("4 VIEW BOOKING HISTORY OF OWNER HALLS");
             System.out.println("5 MANAGE OWNER DISCOUNT");
-            System.out.println("6 LOGIN OUT");
+            System.out.println("6 LOG OUT");
             System.out.println();
             System.out.println("Enter your choice number:");
             //Test
@@ -41,19 +41,23 @@ public class Owner extends User {
                       flag = owner.manageOwnerDiscount();
                        }
                   else if (owner.choiceNumber == 6) {
-
+                      flag = true;
+                      new PrimeEvents().logout();
                   }
                   else {
                       System.out.println();
                       System.out.println("Re-enter your option!");
                       System.out.println();
                   }
-        } while (owner.choiceNumber < 1 || owner.choiceNumber >5 || !flag);
+        } while (owner.choiceNumber < 1 || owner.choiceNumber >6 || !flag);
     }
     public boolean creatHall()
     {
         Owner owner = new Owner();
-        System.out.println("please enter information");
+        System.out.println("-------------- CREATE HALL --------------");
+        System.out.println();
+        System.out.println();
+        System.out.println("please provide information");
         System.out.println("Enter 0 to return to the Owner Menu");
         Scanner scanner = new Scanner(System.in);
         owner.choiceNumber = scanner.nextInt();
@@ -71,7 +75,7 @@ public class Owner extends User {
         boolean manageHallFlag = true;
 
         do {
-            System.out.println("      Manage Hall      ");
+            System.out.println("------------- MANAGE HALLS ----------------");
             System.out.println();
             System.out.println("1 VIEW OWNER HALLS");
             System.out.println("2 UPDATE HALLS");
@@ -83,8 +87,11 @@ public class Owner extends User {
             owner.choiceNumber = scanner.nextInt();
 
             if (owner.choiceNumber == 1) {
+                System.out.println("-------------- VIEW OWNER HALLS --------------");
+                System.out.println();
+                System.out.println();
                 System.out.println("The page of View owner halls");
-                System.out.println("Enter 0 to return to the Manage Hall Menu");
+                System.out.println("Enter 0 to return to the Manage Halls Menu");
                 Scanner console = new Scanner(System.in);
                 owner.choiceNumber = console.nextInt();
                 if(choiceNumber==0)
@@ -93,8 +100,11 @@ public class Owner extends User {
                 }
             }
             else if (owner.choiceNumber == 2) {
-                System.out.println(" Update halls");
-                System.out.println("Enter 0 to return to the Manage Hall Menu");
+                System.out.println("-------------- UPDATE HALLS --------------");
+                System.out.println();
+                System.out.println();
+                System.out.println(" Provide information to update halls");
+                System.out.println("Enter 0 to return to the Manage Halls Menu");
                 Scanner console = new Scanner(System.in);
                 owner.choiceNumber = console.nextInt();
                 if(choiceNumber==0)
@@ -103,8 +113,11 @@ public class Owner extends User {
                 }
             }
             else if (owner.choiceNumber == 3) {
-                System.out.println(" Delete halls");
-                System.out.println("Enter 0 to return to the Manage Hall Menu");
+                System.out.println("-------------- DELETE HALLS --------------");
+                System.out.println();
+                System.out.println();
+                System.out.println(" DPlease provide information to delete hall");
+                System.out.println("Enter 0 to return to the Manage Halls Menu");
                 Scanner console = new Scanner(System.in);
                 owner.choiceNumber = console.nextInt();
                 if(choiceNumber==0)
@@ -113,8 +126,11 @@ public class Owner extends User {
                 }
             }
             else if (owner.choiceNumber == 4) {
-                System.out.println("View review of halls" );
-                System.out.println("Enter 0 to return to the Manage Hall Menu");
+                System.out.println("-------------- VIEW REVIEWS OF HALLS --------------");
+                System.out.println();
+                System.out.println();
+                System.out.println("This is the view review of halls page" );
+                System.out.println("Enter 0 to return to the Manage Halls Menu");
                 Scanner console = new Scanner(System.in);
                 owner.choiceNumber = console.nextInt();
                 if(choiceNumber==0)
