@@ -4,13 +4,14 @@ public class Customer extends User {
 
     public void displayCustomerMenu()
     {
-        System.out.println("1. Search a hall");
-        System.out.println("2. View all halls");
-        System.out.println("3. Book a hall");
-        System.out.println("4. Request a quotation");
-        System.out.println("5. Cancel booking");
-        System.out.println("6. Update booking");
-        System.out.println("7. Update customer information");
+        System.out.println("1 SEARCH A HALL");
+        System.out.println("2 VIEW ALL HALLS");
+        System.out.println("3 BOOK HALL");
+        System.out.println("4 REQUEST A QUOTATION");
+        System.out.println("5 VIEW QUOTATION");
+        System.out.println("6 CANCEL BOOKING");
+        System.out.println("7 UPDATE BOOKING");
+        System.out.println("8 UPDATE CUSTOMER INFORMATION");
 
         Scanner scanner = new Scanner(System.in);
         String customerInput = scanner.nextLine();
@@ -35,11 +36,13 @@ public class Customer extends User {
                          break;
                          case 4: System.out.println("Request a quotation page");
                          break;
-                         case 5: System.out.println("Cancel booking page");
+                         case 5: System.out.println("View quotation page");
                          break;
-                         case 6: System.out.println("Update page");
+                         case 6: System.out.println("Cancel booking page");
                          break;
-                         case 7: System.out.println("Update customer information");
+                         case 7: System.out.println("Update booking page");
+                         break;
+                         case 8: System.out.println("Update customer information");
                          break;
                          default: System.out.println("Please enter the option correctly");
                          break;
@@ -52,11 +55,13 @@ public class Customer extends User {
     {
         System.out.println("------Search a hall page---------");
         System.out.println("Choose one way to search a hall");
-        System.out.println("1. name of hall ");
-        System.out.println("2. Star rating");
-        System.out.println("3. Occassion type");
-        System.out.println("4. location");
-        System.out.println("5. date");
+        System.out.println("1 NAME OF HALL");
+        System.out.println("2 STAR RATING");
+        System.out.println("3 OCCASSION TYPE");
+        System.out.println("4 LOCATION");
+        System.out.println("5 DATE");
+        System.out.println("O BACK TO ADMINISTRATOR MAIN MENU");
+
 
         Scanner scanner = new Scanner(System.in);
         int searchChoice = scanner.nextInt();
@@ -73,6 +78,8 @@ public class Customer extends User {
             break;
             case 5: System.out.println("Please enter a date");
             break;
+            case 0: displayCustomerMenu();
+            break;
             default: System.out.println("Please choose the option correctly");
             break;
         }
@@ -81,8 +88,9 @@ public class Customer extends User {
     public void bookHalls()
     {
         System.out.println("This is booking halls page");
-        System.out.print("1. Pay deposit");
-        System.out.print("2. Provide rating");
+        System.out.print("1 PAY DEPOSIT");
+        System.out.print("2 PROVIDE RATING");
+        System.out.println("O BACK TO ADMINISTRATOR MAIN MENU");
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
         switch (choice)
@@ -91,18 +99,23 @@ public class Customer extends User {
             break;
             case 2: System.out.println("Rating page");
             break;
+            case 0: displayCustomerMenu();
+            break;
         }
     }
 
     public void payment()
     {
         System.out.println("Pay deposit page");
-        System.out.println("1. View receipt");
+        System.out.println("1 VIEW RECEIPT");
+        System.out.println("0 BACK TO ADMINISTRATOR MAIN MENU");
         Scanner scanner = new Scanner(System.in);
         int payChoice = scanner.nextInt();
         switch(payChoice)
         {
             case 1: System.out.println("Receipt page ");
+            break;
+            case 0: displayCustomerMenu();
             break;
             default: System.out.println("Please enter the right option");
             break;
