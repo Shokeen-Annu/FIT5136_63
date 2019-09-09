@@ -19,7 +19,8 @@ public class Owner extends User {
             System.out.println("6 LOGIN OUT");
             System.out.println();
             System.out.println("Enter your choice number:");
-             Scanner scanner = new Scanner(System.in);
+            //Test
+            Scanner scanner = new Scanner(System.in);
              owner.choiceNumber = scanner.nextInt();
 
                   if (owner.choiceNumber == 1) {
