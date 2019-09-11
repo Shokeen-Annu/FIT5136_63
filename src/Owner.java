@@ -35,7 +35,7 @@ public class Owner extends User {
                       flag = owner.manageBooking();
                   }
                   else if (owner.choiceNumber == 4) {
-                      flag = owner.viewReview();
+                      flag = owner.viewHistory();
                   }
                   else if (owner.choiceNumber == 5) {
                       flag = owner.manageOwnerDiscount();
@@ -58,7 +58,7 @@ public class Owner extends User {
         System.out.println();
         System.out.println();
         System.out.println("please provide information");
-        System.out.println("Enter 0 to return to the Owner Menu");
+        System.out.println("Enter 0 to go back to the Owner Menu");
         Scanner scanner = new Scanner(System.in);
         owner.choiceNumber = scanner.nextInt();
 
@@ -91,7 +91,7 @@ public class Owner extends User {
                 System.out.println();
                 System.out.println();
                 System.out.println("The page of View owner halls");
-                System.out.println("Enter 0 to return to the Manage Halls Menu");
+                System.out.println("Enter 0 to go back to the Manage Halls Menu");
                 Scanner console = new Scanner(System.in);
                 owner.choiceNumber = console.nextInt();
                 if(choiceNumber==0)
@@ -104,7 +104,7 @@ public class Owner extends User {
                 System.out.println();
                 System.out.println();
                 System.out.println(" Provide information to update halls");
-                System.out.println("Enter 0 to return to the Manage Halls Menu");
+                System.out.println("Enter 0 to go back to the Manage Halls Menu");
                 Scanner console = new Scanner(System.in);
                 owner.choiceNumber = console.nextInt();
                 if(choiceNumber==0)
@@ -116,8 +116,8 @@ public class Owner extends User {
                 System.out.println("-------------- DELETE HALLS --------------");
                 System.out.println();
                 System.out.println();
-                System.out.println(" DPlease provide information to delete hall");
-                System.out.println("Enter 0 to return to the Manage Halls Menu");
+                System.out.println("Please provide information to delete hall");
+                System.out.println("Enter 0 to go back to the Manage Halls Menu");
                 Scanner console = new Scanner(System.in);
                 owner.choiceNumber = console.nextInt();
                 if(choiceNumber==0)
@@ -130,7 +130,7 @@ public class Owner extends User {
                 System.out.println();
                 System.out.println();
                 System.out.println("This is the view review of halls page" );
-                System.out.println("Enter 0 to return to the Manage Halls Menu");
+                System.out.println("Enter 0 to go back to the Manage Halls Menu");
                 Scanner console = new Scanner(System.in);
                 owner.choiceNumber = console.nextInt();
                 if(choiceNumber==0)
@@ -155,7 +155,7 @@ public class Owner extends User {
         boolean manageBookingFlag = true;
 
         do {
-            System.out.println("      Manage Booking     ");
+            System.out.println("      MANAGE BOOKING     ");
             System.out.println();
             System.out.println("1 VIEW RECEIPT");
             System.out.println("2 PROVIDE QUOTATION");
@@ -165,8 +165,8 @@ public class Owner extends User {
             owner.choiceNumber = scanner.nextInt();
 
              if (owner.choiceNumber == 1) {
-                System.out.println("view receipt");
-                 System.out.println("Enter 0 to return to the  Manage Booking  Menu");
+                System.out.println("You can view receipts here");
+                 System.out.println("Enter 0 to go back to the Manage Booking Menu");
                  Scanner console = new Scanner(System.in);
                  owner.choiceNumber = console.nextInt();
                  if(choiceNumber==0)
@@ -175,8 +175,8 @@ public class Owner extends User {
                  }
             }
             else if (owner.choiceNumber == 2) {
-                 System.out.println("provide quotation");
-                 System.out.println("Enter 0 to return to the  Manage Booking  Menu");
+                 System.out.println("Please provide quotation to customer here");
+                 System.out.println("Enter 0 to go back to the Manage Booking Menu");
                  Scanner console = new Scanner(System.in);
                  owner.choiceNumber = console.nextInt();
                  if(choiceNumber==0)
@@ -185,8 +185,8 @@ public class Owner extends User {
                  }
             }
             else if (owner.choiceNumber == 3) {
-                 System.out.println("cancel booking");
-                 System.out.println("Enter 0 to return to the  Manage Booking  Menu");
+                 System.out.println("You can cancel a booking here");
+                 System.out.println("Enter 0 to go back to the Manage Booking Menu");
                  Scanner console = new Scanner(System.in);
                  owner.choiceNumber = console.nextInt();
                  if(choiceNumber==0)
@@ -204,11 +204,11 @@ public class Owner extends User {
         return true;
     }
 
-    public boolean viewReview()
+    public boolean viewHistory()
     {
         Owner owner = new Owner ();
-        System.out.println("view Review of Halls");
-        System.out.println("Enter 0 to return to the Owner Menu");
+        System.out.println("View booking history of Halls");
+        System.out.println("Enter 0 to go back to the Owner Menu");
         Scanner scanner = new Scanner(System.in);
         owner.choiceNumber = scanner.nextInt();
         if ( owner.choiceNumber == 0)
@@ -224,7 +224,7 @@ public class Owner extends User {
         boolean manageOwnerDiscountFlag = true;
 
          do {
-             System.out.println("      Manage Owner Discount    ");
+             System.out.println("      MANAGE OWNER DISCOUNTS    ");
              System.out.println();
              System.out.println("1 ADD DISCOUNT");
              System.out.println("2 DELETE DISCOUNT");
@@ -234,8 +234,8 @@ public class Owner extends User {
             owner.choiceNumber = scanner.nextInt();
 
             if (owner.choiceNumber == 1) {
-                System.out.println("Please Add discount information");
-                System.out.println("Enter 0 to return to the  Manage Owner Discount Menu");
+                System.out.println("Please add discount information");
+                System.out.println("Enter 0 to go back to the  Manage Owner Discount Menu");
                 Scanner console = new Scanner(System.in);
                 owner.choiceNumber = console.nextInt();
                 if(choiceNumber==0)
@@ -245,8 +245,8 @@ public class Owner extends User {
 
             }
             else if (owner.choiceNumber == 2) {
-                System.out.println("Delete discount");
-                System.out.println("Enter 0 to return to the  Manage Owner Discount Menu");
+                System.out.println("You can delete discount here");
+                System.out.println("Enter 0 to go back to the  Manage Owner Discount Menu");
                 Scanner console = new Scanner(System.in);
                 owner.choiceNumber = console.nextInt();
                 if(choiceNumber==0)
@@ -255,8 +255,8 @@ public class Owner extends User {
                 }
             }
             else if (owner.choiceNumber == 3) {
-                System.out.println("Edit discount");
-                System.out.println("Enter 0 to return to the  Manage Owner Discount Menu");
+                System.out.println("You can edit discount here");
+                System.out.println("Enter 0 to go back to the  Manage Owner Discount Menu");
                 Scanner console = new Scanner(System.in);
                 owner.choiceNumber = console.nextInt();
                 if(choiceNumber==0)

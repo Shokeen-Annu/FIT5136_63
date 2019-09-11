@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class User {
     private String firstName;
     private String lastName;
@@ -68,5 +70,18 @@ public class User {
     public String displayUser()
     {
         return firstName + " " + lastName  + "\r\n" + "phone number: " + phoneNo + "\r\n" + "email address: "+ emailAdd;
+    }
+    public  boolean viewHalls()
+    {
+        System.out.println("-------------- VIEW HALLS --------------");
+        System.out.println();
+        System.out.println();
+        System.out.println("View all halls page");
+        System.out.println("Press 0 to return");
+        int admInput = new Scanner(System.in).nextInt();
+        if(admInput == 0)
+            return false;
+        else
+            return true;
     }
 }

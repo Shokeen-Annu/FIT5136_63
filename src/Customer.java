@@ -5,7 +5,10 @@ public class Customer extends User {
     public void displayCustomerMenu()
     {
         int customerNumber = -1;
+        boolean flag = true;
         do {
+        System.out.println("      WELCOME TO CUSTOMER MENU     ");
+        System.out.println();
         System.out.println("1 SEARCH A HALL");
         System.out.println("2 VIEW ALL HALLS");
         System.out.println("3 BOOK HALL");
@@ -14,7 +17,9 @@ public class Customer extends User {
         System.out.println("6 CANCEL BOOKING");
         System.out.println("7 UPDATE BOOKING");
         System.out.println("8 UPDATE CUSTOMER INFORMATION");
-        System.out.println("9 LOG OUT");
+        System.out.println("9 LOG OUT");              // View booking history needs to be added.
+        System.out.println();
+        System.out.println("Enter your choice number:");
 
         Scanner scanner = new Scanner(System.in);
         String customerInput = scanner.nextLine();
@@ -31,85 +36,97 @@ public class Customer extends User {
                 else {
                           customerNumber = Integer.parseInt(customerInput);
                          switch (customerNumber) {
-                         case 1: searchHalls(false);
+                         case 1: flag = searchHalls(false);
                          break;
-                         case 2: viewHalls(false);
+                         case 2: flag = viewHalls();
                          break;
-                         case 3: bookHalls();
+                         case 3: flag = bookHalls();
                          break;
-                         case 4: requestQuotation();
+                         case 4: flag = requestQuotation();
                          break;
-                         case 5: viewQuotation();
+                         case 5: flag = viewQuotation();
                          break;
-                         case 6: cancelBooking();
+                         case 6: flag = cancelBooking();
                          break;
-                         case 7: updateBooking();
+                         case 7: flag = updateBooking();
                          break;
-                         case 8: updateCustInfo();
+                         case 8: flag = updateCustInfo();
                          break;
                          case 9:
-                             isExit = true;
-                             new PrimeEvents().logout();
+                             flag = true;
+                             PrimeEvents.logout();
                          break;
                          default: System.out.println("Please enter the option correctly");
                          break;
                       }
             }
-                if(!isExit) {
-                    System.out.println("Enter 0 to go back to main menu");
-                    customerNumber = scanner.nextInt();
-                }
-        }while (customerNumber < 1 || customerNumber > 9);
+
+        }while (customerNumber < 1 || customerNumber > 9 || !flag);
     }
-    public  void viewHalls(boolean isMainMenu)
+    public boolean repeat()
     {
-        System.out.println("-------------- VIEW HALLS --------------");
-        System.out.println();
-        System.out.println();
-        System.out.println("View all halls page");
+        System.out.println("Press 0 to return to menu");
+        int admInput = new Scanner(System.in).nextInt();
+        if(admInput == 0)
+            return false;
+        else
+            return true;
     }
-    public  void viewQuotation()
+
+    public  boolean viewQuotation()
     {
         System.out.println("-------------- VIEW QUOTATIONS --------------");
         System.out.println();
         System.out.println();
         System.out.println("View all quotations page");
+        boolean flag = repeat();
+        return flag;
     }
-    public  void requestQuotation()
+    public  boolean requestQuotation()
     {
         System.out.println("-------------- REQUEST QUOTATION --------------");
         System.out.println();
         System.out.println();
         System.out.println("Request a quotation page");
+        boolean flag = repeat();
+        return flag;
     }
-    public  void cancelBooking()
+    public  boolean cancelBooking()
     {
         System.out.println("-------------- CANCEL BOOKING --------------");
         System.out.println();
         System.out.println();
         System.out.println("Cancel booking page.");
+        boolean flag = repeat();
+        return flag;
     }
-    public  void updateBooking()
+    public  boolean updateBooking()
     {
         System.out.println("-------------- UPDATE BOOKING --------------");
         System.out.println();
         System.out.println();
         System.out.println("Update booking page");
+        boolean flag = repeat();
+        return flag;
     }
-    public  void updateCustInfo()
+    public  boolean updateCustInfo()
     {
         System.out.println("-------------- UPDATE PROFILE --------------");
         System.out.println();
         System.out.println();
         System.out.println("Update customer information page");
+        boolean flag = repeat();
+        return flag;
     }
-    public void searchHalls(boolean isMainMenu)
+    public boolean searchHalls(boolean isMainMenu)
     {
-        //boolean flag = true;
+        boolean flag = true;
         int searchChoice;
         do {
 
-            System.out.println("------Search a hall page---------");
+            System.out.println("------SEARCH HALLS---------");
+            System.out.println();
+            System.out.println();
             System.out.println("Choose one way to search a hall");
             System.out.println("1 NAME OF HALL");
             System.out.println("2 STAR RATING");
@@ -117,7 +134,8 @@ public class Customer extends User {
             System.out.println("4 LOCATION");
             System.out.println("5 DATE");
             System.out.println("6 BACK TO MAIN MENU");
-
+            System.out.println();
+            System.out.println("Enter your choice number:");
 
             Scanner scanner = new Scanner(System.in);
             searchChoice = scanner.nextInt();
@@ -125,86 +143,97 @@ public class Customer extends User {
             switch (searchChoice) {
                 case 1:
                     System.out.println("Please enter the name of hall");
+                    flag = repeat();
                     break;
                 case 2:
                     System.out.println("Please enter the rating");
+                    flag = repeat();
                     break;
                 case 3:
                     System.out.println("Please enter a occasion type");
+                    flag = repeat();
                     break;
                 case 4:
                     System.out.println("Please enter a location");
                     break;
                 case 5:
                     System.out.println("Please enter a date");
+                    flag = repeat();
                     break;
                 case 6:
-                    if(isMainMenu)
-                        new PrimeEvents().displayMainMenu();
-                    else
-                        displayCustomerMenu();
-                    break;
+                   // if(isMainMenu)
+                   //     new PrimeEvents().displayMainMenu();
+                   // else
+                   //     displayCustomerMenu();
+                    return false;
                 default:
                     System.out.println("Please choose the option correctly");
                     break;
             }
-            System.out.println("Enter 0 to go back to main menu");
-            searchChoice = scanner.nextInt();
 
-        }while(searchChoice == 0);
+        }while(searchChoice < 1 || searchChoice > 6 || !flag);
+        return true;
     }
 
-    public void bookHalls()
+    public boolean bookHalls()
     {
         int choice;
+        boolean flag = true;
         do {
         System.out.println("--------- BOOK HALL -----------");
         System.out.println();
         System.out.println("1 PAY DEPOSIT");
         System.out.println("2 PROVIDE RATING");
         System.out.println("3 BACK TO MAIN MENU");
+        System.out.println();
+        System.out.println("Enter your choice number:");
         Scanner scanner = new Scanner(System.in);
          choice = scanner.nextInt();
         switch (choice)
         {
             case 1: payment();
+            flag = repeat();
             break;
-            case 2: System.out.println("Rating page");
+            case 2: System.out.println("Please provide rating of hall here");
+            flag = repeat();
             break;
-            case 3: displayCustomerMenu();
-            break;
-        }
-            System.out.println("Enter 0 to go back to main menu");
-            choice = scanner.nextInt();
+            case 3: return false;
 
-        }while(choice == 0);
+        }
+
+        }while(choice < 1 || choice > 3 || !flag);
+        return true;
     }
 
-    public void payment()
+    public boolean payment()
     {
         int payChoice;
+        boolean flag = true;
         do {
         System.out.println("------ PAY DEPOSIT -------");
-        System.out.println("1 PAY PAYMENT");
+        System.out.println();
+        System.out.println("1 MAKE THE PAYMENT");
         System.out.println("2 VIEW RECEIPT");
         System.out.println("3 BACK TO MAIN MENU");
+        System.out.println();
+        System.out.println("Enter your choice number:");
         Scanner scanner = new Scanner(System.in);
         payChoice = scanner.nextInt();
         switch(payChoice)
         {
             case 1: System.out.println("Please provide card details for payment");
+            flag = repeat();
             break;
-            case 2: System.out.println("Receipt page ");
+            case 2: System.out.println("You can view your receipt here.");
+                flag = repeat();
             break;
-            case 3: displayCustomerMenu();
-            break;
+            case 3: return false;
             default: System.out.println("Please enter the right option");
             break;
         }
-            System.out.println("Enter 0 to go back to main menu");
-            payChoice = scanner.nextInt();
 
-        }while(payChoice == 0);
+        }while(payChoice < 1 || payChoice > 3 || !flag);
+        return true;
     }
 
     public boolean isNumber(String inputLength)

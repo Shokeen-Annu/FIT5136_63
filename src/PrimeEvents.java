@@ -4,41 +4,64 @@ import java.util.Scanner;
 
 public class PrimeEvents {
 
+    private User eventUser;
     public void displayMainMenu()
     {
-        System.out.println("      WELCOME TO PRIME EVENTS     ");
-        System.out.println();
-        System.out.println("1 VIEW HALLS");
-        System.out.println("2 SEARCH HALLS");
-        System.out.println("3 LOGIN");
-        System.out.println("4 REGISTER");
-        System.out.println("5 FORGOT PASSWORD");
-        System.out.println("6 EXIT");
-        System.out.println();
-        System.out.println("Enter your choice number:");
+        int choiceNumber = -1;
+        boolean flag = true;
+        do {
+
+            System.out.println("      WELCOME TO PRIME EVENTS     ");
+            System.out.println();
+            System.out.println("1 VIEW HALLS");
+            System.out.println("2 SEARCH HALLS");
+            System.out.println("3 LOGIN");
+            System.out.println("4 REGISTER");
+            System.out.println("5 FORGOT PASSWORD");
+            System.out.println("6 EXIT");
+            System.out.println();
+            System.out.println("Enter your choice number:");
 
 
-        int choiceNumber = receiveInt();
-        Customer cust = new Customer();
-        switch (choiceNumber)
-        {
-            case 1: cust.viewHalls(true);
-                break;
-            case 2: cust.searchHalls(true);
-                break;
-            case 3: primeEventsLogin();
-                break;
-            case 4: registerNewUser();
-                break;
-            case 5: forgotPassword();
-                break;
-            case 6: System.out.println("You exited the system...");
-                break;
-            default: System.out.println("Please enter your choice correctly!");
-                break;
-        }
+            choiceNumber = receiveInt();
+            eventUser = new Customer();
+            switch (choiceNumber) {
+                case 1:
+                    flag = eventUser.viewHalls();
+                    break;
+                case 2:
+                    flag = ((Customer) eventUser).searchHalls(true);
+                    break;
+                case 3:
+                    flag = true;
+                    primeEventsLogin();
+                    break;
+                case 4:
+                    flag = registerNewUser();
+                    break;
+                case 5:
+                    flag = forgotPassword();
+                    break;
+                case 6:
+                    flag = true;
+                    System.out.println("You exited the system...");
+                    break;
+                default:
+                    System.out.println("Please enter your choice correctly!");
+                    break;
+            }
+        }while(choiceNumber<1 || choiceNumber>6 || !flag);
     }
 
+    public boolean repeat()
+    {
+        System.out.println("Press 0 to return to menu");
+        int admInput = new Scanner(System.in).nextInt();
+        if(admInput == 0)
+            return false;
+        else
+            return true;
+    }
     private void primeEventsLogin()
     {
         System.out.println("---------------- LOGIN ---------------");
@@ -115,16 +138,16 @@ public class PrimeEvents {
         {
             case "ADMINISTRATOR":
                 System.out.println("Welcome Administrator!!");
-               // Administrator admin = new Administrator();
-               // admin.displayAdminMenu();
+                eventUser = new Administrator();
+                ((Administrator)eventUser).displayAdminMenu();
             break;
             case "CUSTOMER":
-                Customer cust = new Customer();
-                cust.displayCustomerMenu();
+
+                ((Customer) eventUser).displayCustomerMenu();
             break;
             case "OWNER":
-                Owner owner = new Owner();
-                owner.displayOwnerMenu();
+                eventUser = new Owner();
+                ((Owner) eventUser).displayOwnerMenu();
             break;
             default: System.out.println("You do not have a verified role. Contact Administrator.");
             break;
@@ -155,32 +178,27 @@ public class PrimeEvents {
         return result;
     }
 
-    private void registerNewUser()
+    private boolean registerNewUser()
     {
-        boolean tryAgain = true;
-        while(tryAgain) {
             System.out.println("-------------- REGISTER --------------");
             System.out.println();
             System.out.println();
             System.out.println("Please provide details to register yourself.");
-            tryAgain = exitMenu("Do you want to register again?");
-        }
+            return repeat();
 
     }
 
-    private  void forgotPassword()
+    private  boolean forgotPassword()
     {
-        boolean tryAgain = true;
-        while(tryAgain) {
+
             System.out.println("-------------- RESET PASSWORD --------------");
             System.out.println();
             System.out.println();
             System.out.println("Please provide details to reset your password.");
-            tryAgain = exitMenu("Do you want to try again?");
-        }
+            return repeat();
     }
 
-    public void logout()
+    public static void logout()
     {
         System.out.println("You are logged out!!!");
         System.out.println("You can close the window...");
@@ -189,16 +207,9 @@ public class PrimeEvents {
     private boolean exitMenu(String message)
     {
         boolean tryAgain = false;
-        System.out.println("Press 0 to go back to main menu");
-        int choice = receiveInt();
-        if(choice == 0) {
-            tryAgain = false;
-            displayMainMenu();
-        }
-      /*  System.out.println(message);
+        System.out.println(message);
         System.out.println("1 Yes!");
         System.out.println("2 No, Send me to main menu!");
-        System.out.println("3 Logout");
         int choice = receiveInt();
         if(choice == 2) {
             tryAgain = false;
@@ -210,7 +221,8 @@ public class PrimeEvents {
             tryAgain = false;
             logout();
         }
-*/
+
         return tryAgain;
     }
+
 }

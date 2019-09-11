@@ -4,6 +4,9 @@ public class Administrator extends User {
 
     public void displayAdminMenu()
     {
+        int admInput = -1;
+        boolean flag = true;
+        do {
         System.out.println("      WELCOME TO ADMINISTRATOR MENU     ");
         System.out.println();
         System.out.println("1 VIEW BOOKING HISTORY");
@@ -11,71 +14,114 @@ public class Administrator extends User {
         System.out.println("3 DELETE CUSTOMER");
         System.out.println("4 MANAGE ADMINISTRATOR DISCOUNT");
         System.out.println("5 VIEW ALL HALLS");
-
+        System.out.println("6 LOG OUT");
+        System.out.println();
+        System.out.println("Enter your choice number:");
         Scanner scanner = new Scanner(System.in);
-        int admInput = scanner.nextInt();
+        admInput = scanner.nextInt();
 
         switch(admInput)
         {
-            case 1: viewBookingHis();
+            case 1: flag = viewBookingHis();
             break;
-            case 2: System.out.println("View reviews of halls page");
+            case 2: System.out.println();
+                System.out.println("View reviews of halls here");
+                flag = repeat();
             break;
-            case 3: System.out.println("Delete customer page");
+            case 3: System.out.println();
+                System.out.println("You can delete customer here");
+                flag = repeat();
             break;
-            case 4: manAdmDiscount();
+            case 4: flag = manAdmDiscount();
             break;
-            case 5: System.out.println("View all halls page");
+            case 5: flag = viewHalls();
             break;
+            case 6: flag = true;
+                PrimeEvents.logout();
+                break;
             default: System.out.println("Re-enter your option!");
             break;
         }
+
+    }while(admInput<1 || admInput>6 || !flag);
     }
 
-    public void viewBookingHis()
+    public boolean repeat()
     {
-        System.out.println("1 VIEW BY CUSTOMERS");
-        System.out.println("2 VIEW BY OWNER");
-        System.out.println("0 BACK TO ADMINISTRATOR MAIN MENU");
+        System.out.println("Press 0 to return to menu");
+        int admInput = new Scanner(System.in).nextInt();
+        if(admInput == 0)
+            return false;
+        else
+            return true;
+    }
+    public boolean viewBookingHis() {
+        boolean flag = true;
+        int admView = -1;
+        do {
+            System.out.println("      VIEW BOOKING HISTORY     ");
+            System.out.println();
+            System.out.println("1 VIEW BY CUSTOMERS");
+            System.out.println("2 VIEW BY OWNER");
+            System.out.println("3 BACK TO ADMINISTRATOR MAIN MENU");
+            System.out.println();
+            System.out.println("Enter your choice number:");
+            Scanner scanner = new Scanner(System.in);
+            admView = scanner.nextInt();
 
-        Scanner scanner = new Scanner(System.in);
-        int admView = scanner.nextInt();
+            switch (admView) {
+                case 1:
+                    System.out.println("View history for customers");
+                    flag = repeat();
+                    break;
+                case 2:
+                    System.out.println("View history for owners");
+                    flag = repeat();
+                    break;
+                case 3:
+                    return false;
+                default:
+                    System.out.println("Re-enter your option!");
+                    break;
+            }
+        }while(admView < 1 || admView > 3 || !flag);
 
-        switch (admView)
-        {
-            case 1: System.out.println("View by customer page");
-            break;
-            case 2: System.out.println("View by owner page");
-            break;
-            case 0: displayAdminMenu();
-            break;
-            default: System.out.println("Re-enter your option!");
-            break;
-        }
+        return true;
     }
 
-    public void manAdmDiscount()
+    public boolean manAdmDiscount()
     {
+        int admDis = -1;
+        boolean flag = true;
+        do {
+        System.out.println("      MANAGE ADMINISTRATOR DISCOUNTS     ");
+        System.out.println();
         System.out.println("1 ADD DISCOUNT");
         System.out.println("2 DELETE DISCOUNT");
         System.out.println("3 EDIT DISCOUNT");
-        System.out.println("0 BACK TO ADMINISTRATOR MAIN MENU");
-
+        System.out.println("4 BACK TO ADMINISTRATOR MAIN MENU");
+        System.out.println();
+        System.out.println("Enter your choice number:");
         Scanner scanner = new Scanner(System.in);
-        int admDis = scanner.nextInt();
+        admDis = scanner.nextInt();
 
         switch (admDis)
         {
-            case 1: System.out.println("Add discount page");
+            case 1: System.out.println("Please add new discount here");
+            flag = repeat();
             break;
-            case 2: System.out.println("Delete discount");
+            case 2: System.out.println("Please delete discount here");
+                flag = repeat();
             break;
-            case 3: System.out.println("Edit discount");
+            case 3: System.out.println("Please edit discount here");
+                flag = repeat();
             break;
-            case 0: displayAdminMenu();
-            break;
+            case 4: return false;
             default: System.out.println("Re-enter your option!");
             break;
         }
+
+        }while(admDis < 1 || admDis > 4 || !flag);
+        return true;
     }
 }
