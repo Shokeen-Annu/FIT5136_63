@@ -248,9 +248,28 @@ public class PrimeEvents {
             halls.add(temdriHall);
         }
     }
-
-    public void searchHalls(){
-
-
+    //did not connect to the menu
+    public boolean searchHall()
+    {
+        displayHallList();
+        System.out.println("-------------------");
+        System.out.println();
+        System.out.println("SEARCH HALL BY NAME");
+        String searchName = receiveString().trim();
+        for(int i = 0; i < halls.size(); i++) {
+            if (halls.get(i).getName().equals(searchName)) {
+                System.out.println(halls.get(i).displayHall());
+            }
+        }
+        return repeat();
     }
+
+    public void displayHallList()
+    {
+        for(int i = 0; i < halls.size(); i++)
+        {
+            System.out.println(halls.get(i).displayHall());
+        }
+    }
+
 }

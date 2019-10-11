@@ -101,4 +101,10 @@ public class Hall {
     public void setPhotography(boolean photography) {
         isPhotography = photography;
     }
+    public String displayHall()
+    {
+        return hallId + " " + name + " " + address + " " + contactNumber + " " + rating
+                + " " + description + " " + availability + " " + foodMenu + " " + typeOfOccassion
+                + " " + isCatering + " " + isPhotography;
+    }
 }
