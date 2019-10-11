@@ -227,13 +227,30 @@ public class PrimeEvents {
 
         return tryAgain;
     }
-    public void createHallList(ArrayList<String[]> newHall){
-        for(int i = 0; i < newHall.size(); i++)
+    public void createHallList(){
+        String hallList = readFile("Halls");
+        String[] hallDetailsArr = hallList.split(";");
+        for(int i = 0; i< hallDetailsArr.length; i++)
         {
+            String[] specificHall = hallDetailsArr[i].split(",");
             Hall temdriHall = new Hall();
-
-
+            temdriHall.setHallId(Integer.parseInt(specificHall[0]));
+            temdriHall.setName(specificHall[1]);
+            temdriHall.setAddress(specificHall[2]);
+            temdriHall.setContactNumber(specificHall[3]);
+            temdriHall.setRating(Double.parseDouble(specificHall[4]));
+            temdriHall.setDescription(specificHall[5]);
+            temdriHall.setAvailability(Boolean.parseBoolean(specificHall[6]));
+            temdriHall.setFoodMenu(specificHall[7]);
+            temdriHall.setTypeOfOccassion(specificHall[8]);
+            temdriHall.setCatering(Boolean.parseBoolean(specificHall[9]));
+            temdriHall.setPhotography(Boolean.parseBoolean(specificHall[10]));
+            halls.add(temdriHall);
         }
+    }
+
+    public void searchHalls(){
+
 
     }
 }
