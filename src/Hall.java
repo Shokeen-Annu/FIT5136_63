@@ -10,7 +10,7 @@ public class Hall {
     private String typeOfOccassion;
     private boolean isCatering;
     private boolean isPhotography;
-   // private  ArrayList<Quotation>
+   private  ArrayList<Quotation> Quotation;
 
 
     public int getHallId() {

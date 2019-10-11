@@ -1,10 +1,13 @@
-
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PrimeEvents {
 
     private User eventUser;
+    private ArrayList<Hall> halls;
+
     public void displayMainMenu()
     {
         int choiceNumber = -1;
@@ -224,5 +227,13 @@ public class PrimeEvents {
 
         return tryAgain;
     }
+    public void createHallList(ArrayList<String[]> newHall){
+        for(int i = 0; i < newHall.size(); i++)
+        {
+            Hall temdriHall = new Hall();
 
+
+        }
+
+    }
 }
