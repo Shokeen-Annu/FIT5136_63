@@ -102,7 +102,7 @@ public class PrimeEvents {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
-    private int receiveInt()
+    public static int receiveInt()
     {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
@@ -249,15 +249,70 @@ public class PrimeEvents {
         }
     }
     //did not connect to the menu
-    public boolean searchHall()
+    public void searchHallMenu()
     {
+        boolean flag = true;
         displayHallList();
         System.out.println("-------------------");
         System.out.println();
-        System.out.println("SEARCH HALL BY NAME");
+        System.out.println("1 SEARCH HALL BY NAME");
+        System.out.println("2 SEARCH Hall BY OCCASSION TYPE");
+        System.out.println("3 SEARCH HALL BY ADDRESS");
+        System.out.println("4 SEARCH HALL BY RATING");
+        int chooseNumber = -1;
+        chooseNumber = receiveInt();
+        switch(chooseNumber)
+        {
+            case 1: flag = searchName();
+            break;
+            case 2: flag = searchType();
+            break;
+            case 3: flag = searchAddress();
+            break;
+            case 4: flag = searchRating();
+            break;
+            default: System.out.println("Please enter the option correctly");
+            break;
+        }
+
+    }
+
+    public boolean searchName(){
         String searchName = receiveString().trim();
         for(int i = 0; i < halls.size(); i++) {
             if (halls.get(i).getName().equals(searchName)) {
+                System.out.println(halls.get(i).displayHall());
+            }
+        }
+        return repeat();
+    }
+
+    public boolean searchType()
+    {
+        String searchOccassionType = receiveString().trim();
+        for(int i = 0; i < halls.size(); i++) {
+            if (halls.get(i).getTypeOfOccassion().equals(searchOccassionType)) {
+                System.out.println(halls.get(i).displayHall());
+            }
+        }
+        return repeat();
+    }
+
+    public boolean searchAddress()
+    {
+        String searchAdd = receiveString().trim();
+        for(int i = 0; i < halls.size(); i++) {
+            if (halls.get(i).getAddress().equals(searchAdd)) {
+                System.out.println(halls.get(i).displayHall());
+            }
+        }
+        return repeat();
+    }
+    public boolean searchRating()
+    {
+        int searchRate = receiveInt();
+        for(int i = 0; i < halls.size(); i++) {
+            if (halls.get(i).getRating() > searchRate) {
                 System.out.println(halls.get(i).displayHall());
             }
         }

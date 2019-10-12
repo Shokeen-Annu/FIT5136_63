@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Administrator extends User {
 
+
     public void displayAdminMenu()
     {
         int admInput = -1;
@@ -124,4 +125,6 @@ public class Administrator extends User {
         }while(admDis < 1 || admDis > 4 || !flag);
         return true;
     }
+
+
 }
