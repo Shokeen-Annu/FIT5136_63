@@ -1,7 +1,15 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Owner extends User {
     private int choiceNumber;
-
+    private String securityQuestion1;
+    private String securityQuestion2;
+    private String securityAnswer1;
+    private String securityAnswer2;
+    private ArrayList<Hall> hallList;
+    private  String address;
+    private ArrayList<Discount> discountList;
+    private ArrayList<Booking> bookingList;
     public void displayOwnerMenu()
     {
         Owner owner = new Owner ();
@@ -273,6 +281,71 @@ public class Owner extends User {
         } while (owner.choiceNumber < 1 || owner.choiceNumber >4 || !manageOwnerDiscountFlag );
 
         return true;
+    }
+
+
+    public String getSecurityQuestion1() {
+        return securityQuestion1;
+    }
+
+    public void setSecurityQuestion1(String securityQuestion1) {
+        this.securityQuestion1 = securityQuestion1;
+    }
+
+    public String getSecurityQuestion2() {
+        return securityQuestion2;
+    }
+
+    public void setSecurityQuestion2(String securityQuestion2) {
+        this.securityQuestion2 = securityQuestion2;
+    }
+
+    public String getSecurityAnswer1() {
+        return securityAnswer1;
+    }
+
+    public void setSecurityAnswer1(String securityAnswer1) {
+        this.securityAnswer1 = securityAnswer1;
+    }
+
+    public String getSecurityAnswer2() {
+        return securityAnswer2;
+    }
+
+    public void setSecurityAnswer2(String securityAnswer2) {
+        this.securityAnswer2 = securityAnswer2;
+    }
+
+    public ArrayList<Hall> getHallList() {
+        return hallList;
+    }
+
+    public void createHallList(ArrayList<Hall> hallList) {
+        this.hallList = hallList;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public ArrayList<Discount> getDiscountList() {
+        return discountList;
+    }
+
+    public void createDiscountList(ArrayList<Discount> discountList) {
+        this.discountList = discountList;
+    }
+
+    public ArrayList<Booking> getBookingList() {
+        return bookingList;
+    }
+
+    public void createBookingList(ArrayList<Booking> bookingList) {
+        this.bookingList = bookingList;
     }
 
 }
