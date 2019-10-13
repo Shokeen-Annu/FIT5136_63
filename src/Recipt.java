@@ -6,8 +6,8 @@ public class Recipt {
     private int receipId;
     private Date receiptDate;
     private  int userId;
-    private DecimalFormat finalPrice;
-    private DecimalFormat restOfBill;
+    private double finalPrice;
+    private double restOfBill;
     private  String hallAddress;
 
     public int getReceipId() {
