@@ -1,7 +1,7 @@
 import java.text.DecimalFormat;
 import java.util.Date;
 
-public class Recipt {
+public class Receipt {
 
     private int receipId;
     private Date receiptDate;
@@ -34,19 +34,19 @@ public class Recipt {
         this.userId = userId;
     }
 
-    public DecimalFormat getFinalPrice() {
+    public Double getFinalPrice() {
         return finalPrice;
     }
 
-    public void setFinalPrice(DecimalFormat finalPrice) {
+    public void setFinalPrice(Double finalPrice) {
         this.finalPrice = finalPrice;
     }
 
-    public DecimalFormat getRestOfBill() {
+    public Double getRestOfBill() {
         return restOfBill;
     }
 
-    public void setRestOfBill(DecimalFormat restOfBill) {
+    public void setRestOfBill(Double restOfBill) {
         this.restOfBill = restOfBill;
     }
 
