@@ -1,5 +1,5 @@
 public class OwnerController {
-    private boolean addHall(Hall)
+    private boolean addHall(Hall hall)
     {
 
     }
@@ -8,39 +8,39 @@ public class OwnerController {
     {
 
     }
-    private boolean deleteHall(Hall)
+    private boolean deleteHall(Hall hall)
     {
 
     }
-    private boolean updateHall(Hall)
+    private boolean updateHall(Hall hall)
     {
 
     }
-    private void viewHalls(String)
+    private void viewHalls(String type)
     {
 
     }
-    private void viewReviewOfHall(int)
+    private void viewReviewOfHall(int hallId)
     {
 
     }
-    private Quotation provideQuotation(int)
+    private Quotation provideQuotation(int quotationId)
     {
 
     }
-    private boolean cancelBooking(int)
+    private boolean cancelBooking(int bookingId)
     {
 
     }
-    private void viewBookingHistory(int)
+    private void viewBookingHistory(int bookingId)
     {
 
     }
-    private boolean addDiscount(String, double, int, String)
+    private boolean addDiscount(String name, double value, int id, String comments)
     {
 
     }
-    private boolean isHallPresent(int)
+    private boolean isHallPresent(int hallId)
     {
 
     }

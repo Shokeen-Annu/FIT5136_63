@@ -8,7 +8,7 @@ public class Quotation {
     private int numberOfGuest;
     private int userId;
     private int hallId;
-    private Decimal price;
+    private double price;
     private boolean isCatering;
     private String typeOfMeal;
 
@@ -50,11 +50,11 @@ public class Quotation {
         this.numberOfGuest = numberOfGuest;
     }
 
-    public Decimal getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Decimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
     public boolean isCatering() {
