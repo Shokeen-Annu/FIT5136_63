@@ -20,12 +20,14 @@ public class User {
 
     public User (String newFirstName, String newLastName, int newPhoneNo, String newEmailAdd, String newPassWord)
     {
+
         firstName = newFirstName;
         lastName = newLastName;
         phoneNo = newPhoneNo;
         emailAdd = newEmailAdd;
         passWord = newPassWord;
     }
+
 
     public String getFirstName() {
         return firstName;
