@@ -80,8 +80,12 @@ public class CustomerInterface{
                              flag = backMenu();
                          break;
                          case 9:
-                             flag = true;
-                             commonController.logout("Do you want to logout?");
+                             System.out.println("Are you sure you want to logout? Enter your choice number");
+                             System.out.println("1 Yes");
+                             System.out.println("2 No");
+                             int choiceLogout = validator.receiveInt();
+                             flag = commonController.logout(choiceLogout);
+
                          break;
                          default: System.out.println("Please enter the option correctly");
                          break;

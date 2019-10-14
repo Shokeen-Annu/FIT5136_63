@@ -1,7 +1,3 @@
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-
 public class OwnerController {
     private Owner owner;
     private InputValidation input = new InputValidation();
@@ -9,20 +5,29 @@ public class OwnerController {
     private FileIO io = new FileIO();
     private boolean addHall(Hall hall)
     {
+        boolean result=false;
 
+        //code here
+        return result;
     }
 
     private Hall generateHallObject()
     {
-
+        return new Hall();
     }
     private boolean deleteHall(Hall hall)
     {
+        boolean result=false;
 
+        //code here
+        return result;
     }
     private boolean updateHall(Hall hall)
     {
+        boolean result=false;
 
+        //code here
+        return result;
     }
     private void viewHalls(String type)
     {
@@ -34,11 +39,14 @@ public class OwnerController {
     }
     private Quotation provideQuotation(int quotationId)
     {
-
+     return new Quotation();
     }
     private boolean cancelBooking(int bookingId)
     {
+        boolean result=false;
 
+        //code here
+        return result;
     }
     private void viewBookingHistory(int bookingId)
     {
@@ -69,7 +77,13 @@ public class OwnerController {
                 System.out.println();
         }while(choose == 1);
     }
+    private boolean isHallPresent(int hallId)
+    {
+        boolean result=false;
 
+        //code here
+        return result;
+    }
 
 }
 

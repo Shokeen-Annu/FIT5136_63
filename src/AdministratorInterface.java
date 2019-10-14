@@ -38,8 +38,12 @@ public class AdministratorInterface{
             break;
             case 5: flag = commonController.viewHalls();
             break;
-            case 6: flag = true;
-                commonController.logout("Do you want to logout");
+            case 6:
+                System.out.println("Are you sure you want to logout? Enter your choice number");
+                System.out.println("1 Yes");
+                System.out.println("2 No");
+                int choiceLogout = validator.receiveInt();
+                flag = commonController.logout(choiceLogout);
                 break;
             default: System.out.println("Re-enter your option!");
             break;
