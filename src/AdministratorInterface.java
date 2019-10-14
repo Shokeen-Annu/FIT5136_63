@@ -43,7 +43,7 @@ public class AdministratorInterface{
                 System.out.println("1 Yes");
                 System.out.println("2 No");
                 int choiceLogout = validator.receiveInt();
-                flag = !commonController.logout(choiceLogout);
+                flag = commonController.logout(choiceLogout);
                 break;
             default: System.out.println("Re-enter your option!");
             break;

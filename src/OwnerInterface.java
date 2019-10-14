@@ -49,7 +49,7 @@ public class OwnerInterface {
                 System.out.println("1 Yes");
                 System.out.println("2 No");
                 int choiceLogout = validator.receiveInt();
-                flag = !commonController.logout(choiceLogout);
+                flag = commonController.logout(choiceLogout);
             }
             else {
                 System.out.println();
