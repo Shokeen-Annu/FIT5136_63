@@ -21,7 +21,7 @@ public class PrimeEvents {
     private double veteranConcession;
     private double seniorCitizenConcession;
     private FileIO fileIO = new FileIO();
-    private InputValidation validator = new InputValidation();
+    private InputValidation input = new InputValidation();
 
 
     public void createHallList(){
@@ -32,7 +32,7 @@ public class PrimeEvents {
             String[] specificHall = hallDetailsArr[i].split(Pattern.quote("$"));
             Hall temdriHall = new Hall();
             temdriHall.setHallId(Integer.parseInt(specificHall[0]));
-            temdriHall.setName(specificHall[1]);
+            temdriHall.setHallName(specificHall[1]);
             temdriHall.setAddress(specificHall[2]);
             temdriHall.setContactNumber(specificHall[3]);
             temdriHall.setRating(Double.parseDouble(specificHall[4]));
@@ -40,8 +40,8 @@ public class PrimeEvents {
             temdriHall.setAvailability(Boolean.parseBoolean(specificHall[6]));
             temdriHall.setFoodMenu(specificHall[7]);
             temdriHall.setTypeOfOccassion(specificHall[8]);
-            temdriHall.setCatering(Boolean.parseBoolean(specificHall[9]));
-            temdriHall.setPhotography(Boolean.parseBoolean(specificHall[10]));
+            temdriHall.setIsCatering(Boolean.parseBoolean(specificHall[9]));
+            temdriHall.setIsPhotography(Boolean.parseBoolean(specificHall[10]));
             hallList.add(temdriHall);
         }
     }
@@ -110,25 +110,33 @@ public class PrimeEvents {
         boolean flag = true;
         displayHallList();
         System.out.println("-------------------");
-        System.out.println();
-        System.out.println("1 SEARCH HALL BY NAME");
-        System.out.println("2 SEARCH Hall BY OCCASION TYPE");
-        System.out.println("3 SEARCH HALL BY ADDRESS");
-        System.out.println("4 SEARCH HALL BY RATING");
-        int chooseNumber = -1;
-        chooseNumber = validator.receiveInt();
-        switch(chooseNumber)
-        {
-            case 1: flag = searchName();
-            break;
-            case 2: flag = searchType();
-            break;
-            case 3: flag = searchAddress();
-            break;
-            case 4: flag = searchRating();
-            break;
-            default: System.out.println("Please enter the option correctly");
-            break;
+        System.out.println("Do you want to search hall? Y/N");
+        String choose = input.receiveString().trim();
+        if(input.validateString(choose)) {
+            System.out.println();
+            System.out.println("1 SEARCH HALL BY NAME");
+            System.out.println("2 SEARCH Hall BY OCCASION TYPE");
+            System.out.println("3 SEARCH HALL BY ADDRESS");
+            System.out.println("4 SEARCH HALL BY RATING");
+            int chooseNumber = -1;
+            chooseNumber = input.receiveInt();
+            switch (chooseNumber) {
+                case 1:
+                    flag = searchName();
+                    break;
+                case 2:
+                    flag = searchType();
+                    break;
+                case 3:
+                    flag = searchAddress();
+                    break;
+                case 4:
+                    flag = searchRating();
+                    break;
+                default:
+                    System.out.println("Please enter the option correctly");
+                    break;
+            }
         }
 
     }*/
@@ -169,5 +177,48 @@ public class PrimeEvents {
             System.out.println(hallList.get(i).displayHall());
         }
     }
+    public boolean searchName(){
+        String searchName = input.receiveString().trim();
+        for(int i = 0; i < hallList.size(); i++) {
+            if (hallList.get(i).getHallName().equals(searchName)) {
+                System.out.println(hallList.get(i).displayHall());
+            }
+        }
+        return repeat();
+    }
+
+    public boolean searchType()
+    {
+        String searchOccassionType = input.receiveString().trim();
+        for(int i = 0; i < hallList.size(); i++) {
+            if (hallList.get(i).getTypeOfOccassion().equals(searchOccassionType)) {
+                System.out.println(hallList.get(i).displayHall());
+            }
+        }
+        return repeat();
+    }
+
+    public boolean searchAddress()
+    {
+        String searchAdd =  input.receiveString.trim();
+        for(int i = 0; i < hallList.size(); i++) {
+            if (hallList.get(i).getAddress().equals(searchAdd)) {
+                System.out.println(hallList.get(i).displayHall());
+            }
+        }
+        return repeat();
+    }
+    public boolean searchRating()
+    {
+        int searchRate = input.receiveInt();
+        for(int i = 0; i < hallList.size(); i++) {
+            if (hallList.get(i).getRating() > searchRate) {
+                System.out.println(hallList.get(i).displayHall());
+            }
+        }
+        return repeat();
+    }
+
+
 
 }

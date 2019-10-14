@@ -24,4 +24,10 @@ public class InputValidation {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
+    public boolean validateString(String input)
+    {
+        if(input.toUpperCase().equals("YES"))
+        {  return true;}
+        return false;
+    }
 }

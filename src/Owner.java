@@ -1,15 +1,17 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Owner extends User {
-
+    private int choiceNumber;
     private String securityQuestion1;
     private String securityQuestion2;
     private String securityAnswer1;
     private String securityAnswer2;
     private ArrayList<Hall> hallList;
+    private  String address;
     private ArrayList<Discount> discountList;
     private ArrayList<Booking> bookingList;
-    /*public void displayOwnerMenu()
+    private FileIO fileIO = new FileIO();
+    public void displayOwnerMenu()
     {
         Owner owner = new Owner ();
 
@@ -280,7 +282,7 @@ public class Owner extends User {
         } while (owner.choiceNumber < 1 || owner.choiceNumber >4 || !manageOwnerDiscountFlag );
 
         return true;
-    }*/
+    }
 
 
     public String getSecurityQuestion1() {
@@ -323,12 +325,33 @@ public class Owner extends User {
         this.hallList = hallList;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public ArrayList<Discount> getDiscountList() {
         return discountList;
     }
 
-    public void createDiscountList(ArrayList<Discount> discountList) {
-        this.discountList = discountList;
+    public ArrayList<Discount> createDiscountList()
+    {
+        String allDiscount = fileIO.readFile("Halls");
+        String[] discountDetail = allDiscount.split(";");
+        for(int i = 0; i< discountDetail.length; i++)
+        {
+            String[] specificDiscount = discountDetail[i].split(",");
+            Discount temdriDiscount = new Discount();
+            temdriDiscount.setDiscountId(Integer.parseInt(specificDiscount[0]));
+            temdriDiscount.setDiscountName(specificDiscount[1]);
+            temdriDiscount.setValue(Double.parseDouble(specificDiscount[2]));
+            temdriDiscount.setComments(specificDiscount[3]);
+            discountList.add(temdriDiscount);
+        }
+        return discountList;
     }
 
     public ArrayList<Booking> getBookingList() {
