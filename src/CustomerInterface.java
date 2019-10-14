@@ -189,7 +189,7 @@ public class CustomerInterface{
         switch (choice)
         {
             case 1:
-                /*do {
+                do {
                     System.out.println("Do you want to view all halls or search hall");
                     System.out.println("1 VIEW ALL HALLS");
                     System.out.println("2 SEARCH HALLS");
@@ -229,7 +229,7 @@ public class CustomerInterface{
                                     String isCatering = scanner.nextLine();
 
 
-                                     customerController.requestForQuotation();
+                                     //customerController.requestForQuotation();
                                 }
 
 

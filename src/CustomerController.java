@@ -31,7 +31,7 @@ public class CustomerController {
         if (choice == 1 )
         {
             tryAgain = true;
-            requestForQuotation();
+           // requestForQuotation();
 
         }
         else  {
