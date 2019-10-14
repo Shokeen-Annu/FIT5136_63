@@ -9,6 +9,7 @@ public class Booking {
     private int quotationId;
     private int customerId;
     private int receiptId;
+    private Hall hall;
 
     public int getBookingId() {
         return bookingId;
@@ -65,4 +66,6 @@ public class Booking {
     public void setReceiptId(int receiptId) {
         this.receiptId = receiptId;
     }
+
+
 }

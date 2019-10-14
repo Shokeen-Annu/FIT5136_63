@@ -39,6 +39,7 @@ public class PrimeEvents {
             temdriHall.setTypeOfOccassion(specificHall[8]);
             temdriHall.setIsCatering(Boolean.parseBoolean(specificHall[9]));
             temdriHall.setIsPhotography(Boolean.parseBoolean(specificHall[10]));
+            temdriHall.setUserId(Integer.parseInt(specificHall[11]));
             hallList.add(temdriHall);
         }
     }
@@ -68,10 +69,18 @@ public class PrimeEvents {
                     break;
                 case "owner":
                     user = new Owner();
+                    int ownerId = Integer.parseInt(userData[0]);
                     ((Owner)user).setSecurityQuestion1(userData[8]);
                     ((Owner)user).setSecurityQuestion2(userData[9]);
                     ((Owner)user).setSecurityAnswer1(userData[10]);
                     ((Owner)user).setSecurityAnswer2(userData[11]);
+                    ArrayList<Hall> ownerHalls = new ArrayList<>();
+                    for(Hall hall : hallList)
+                    {
+                        if(hall.getUserId() == ownerId)
+                            ownerHalls.add(hall);
+                    }
+                    ((Owner)user).createHallList(ownerHalls);
                     ((Owner)user).createDiscountList(Integer.parseInt(userData[0]));
                     break;
                 default:
@@ -128,6 +137,10 @@ public class PrimeEvents {
 
     public void setSeniorCitizenConcession(double seniorCitizenConcession) {
         this.seniorCitizenConcession = seniorCitizenConcession;
+    }
+    public Hall getSpecificHall(int hallID)
+    {
+        return hallList.get(hallID);
     }
 
 }

@@ -48,4 +48,21 @@ public class FileIO {
         }
     }
 
+    public void reWriteFile(String filename,String data) {
+
+        if (filename.trim().length() > 0) {
+            try {
+                PrintWriter output = new PrintWriter(filename);
+
+                output.write(data);
+
+                output.close();
+            } catch (IOException e) {
+                System.out.println("I/O Error");
+            }
+        } else {
+            System.out.println("Enter a filename:");
+        }
+    }
+
 }
