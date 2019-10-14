@@ -10,6 +10,7 @@ public class PEInterface {
 
     public void displayMainMenu()
     {
+        commonController.createDatabase();
         int choiceNumber = -1;
         boolean flag = true;
         do {
@@ -35,8 +36,38 @@ public class PEInterface {
                     flag = customerInterface.displaySearchHallMenu(true);
                     break;
                 case 3:
-                    flag = true;
-                    //login
+
+                    System.out.println("---------------- LOGIN ---------------");
+                    System.out.println("Provide your login details to login.....");
+                    System.out.println();
+                    System.out.println();
+                    boolean tryAgain = true;
+                    boolean isUserAuthorized = false;
+                    while(!isUserAuthorized && tryAgain) {
+                        System.out.println("Enter your email id:");
+
+                        String emailId = validator.receiveString().trim();
+                        System.out.println();
+                        System.out.println("Enter your password:");
+                        String password = validator.receiveString();
+                        String role = commonController.primeEventsLogin(emailId,password);
+                        if(!role.isEmpty()) {
+                            isUserAuthorized = true;
+                            displayUserMenu(role);
+                            flag = false;
+                        }
+                        if(!isUserAuthorized)
+                        {
+                            System.out.println("Either email id or password is wrong....");
+                            System.out.println("Do you want to try again? Enter your choice number");
+                            System.out.println("1 Yes");
+                            System.out.println("2 No");
+                            int choiceLogout = validator.receiveInt();
+                            tryAgain = commonController.logout(choiceLogout);
+                            flag = tryAgain;
+                        }
+                    }
+
                     break;
                 case 4:
                     System.out.println("-------------- REGISTER --------------");

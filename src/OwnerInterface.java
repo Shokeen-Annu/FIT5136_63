@@ -45,8 +45,11 @@ public class OwnerInterface {
                 flag = displayManageDiscountMenu();
             }
             else if (choiceNumber == 6) {
-                flag = true;
-                commonController.logout("Do you want to logout");
+                System.out.println("Are you sure you want to logout? Enter your choice number");
+                System.out.println("1 Yes");
+                System.out.println("2 No");
+                int choiceLogout = validator.receiveInt();
+                flag = !commonController.logout(choiceLogout);
             }
             else {
                 System.out.println();

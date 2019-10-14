@@ -13,7 +13,7 @@ public class Customer extends User {
     private ArrayList<Booking> bookingList;
     private ArrayList<Quotation> quotationList;
 
-    public void displayCustomerMenu()
+    /*public void displayCustomerMenu()
     {
         int customerNumber = -1;
         boolean flag = true;
@@ -270,7 +270,7 @@ public class Customer extends User {
             }
         }
         return true;
-    }
+    }*/
     public boolean getIsSeniorCitizen() {
         return isSeniorCitizen;
     }

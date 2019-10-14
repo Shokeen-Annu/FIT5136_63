@@ -14,7 +14,7 @@ public class InputValidation {
         }
         return true;
     }
-    private String receiveString()
+    public String receiveString()
     {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
