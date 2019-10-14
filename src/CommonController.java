@@ -95,14 +95,57 @@ public class CommonController {
                 owner.getDiscountList().remove(discountId - 1);
             }
         }
+        //re-write txt
     }
 
+    public void editDiscount(int discountId) {
 
+        for (int i = 0; i < primeEvents.getUserList().size(); i++) {
+            if (primeEvents.getUserList().get(i) == primeEvents.getEventUser()) {
+                Owner owner = (Owner) primeEvents.getUserList().get(i);
+                System.out.println(owner.getDiscountList().get(discountId - 1).displayDiscount());
+                System.out.println();
+                int disAttribute = -1;
+                do {
+                    System.out.println("Which attribute you want to ");
+                    System.out.println("1 NAME");
+                    System.out.println("2 VALUE");
+                    System.out.println("3 COMMENT");
+                    disAttribute = validator.receiveInt();
+                    switch (disAttribute) {
+                        case 1: {
+                            System.out.println("Please enter the name:");
+                            String disEditName = validator.receiveString();
+                            owner.getDiscountList().get(discountId - 1).setDiscountName(disEditName);
+                        }
+                        break;
+                        case 2: {
+                            System.out.println("Please enter the value");
+                            double disEditValue = Double.parseDouble(validator.receiveString());
+                            owner.getDiscountList().get(discountId - 1).setValue(disEditValue);
+                        }
+                        break;
+                        case 3: {
+                            System.out.println("Please change the comments");
+                            String disEditComment = validator.receiveString();
+                            owner.getDiscountList().get(discountId - 1).setComments(disEditComment);
+                        }
+                        break;
+                        default:
+                            break;
+                    }
+
+                } while (disAttribute < 1 || disAttribute > 3);
+            }
+        }
+    }
 
     public void createDatabase()
     {
+        primeEvents.createHallList();
         primeEvents.createUserList();
         primeEvents.createBookingList();
-        primeEvents.createHallList();
+
     }
 }
+

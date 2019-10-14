@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 public class Owner extends User {
 
     private String securityQuestion1;
@@ -58,19 +57,20 @@ public class Owner extends User {
         return discountList;
     }
 
-    public ArrayList<Discount> createDiscountList()
+    public ArrayList<Discount> createDiscountList(int userId)
     {
         String allDiscount = fileIO.readFile("Halls");
         String[] discountDetail = allDiscount.split(";");
-        for(int i = 0; i< discountDetail.length; i++)
-        {
-            String[] specificDiscount = discountDetail[i].split(",");
-            Discount temdriDiscount = new Discount();
-            temdriDiscount.setDiscountId(Integer.parseInt(specificDiscount[0]));
-            temdriDiscount.setDiscountName(specificDiscount[1]);
-            temdriDiscount.setValue(Double.parseDouble(specificDiscount[2]));
-            temdriDiscount.setComments(specificDiscount[3]);
-            discountList.add(temdriDiscount);
+        if(getUserId() == userId) {
+            for (int i = 0; i < discountDetail.length; i++) {
+                String[] specificDiscount = discountDetail[i].split(",");
+                Discount temdriDiscount = new Discount();
+                temdriDiscount.setDiscountId(Integer.parseInt(specificDiscount[0]));
+                temdriDiscount.setDiscountName(specificDiscount[1]);
+                temdriDiscount.setValue(Double.parseDouble(specificDiscount[2]));
+                temdriDiscount.setComments(specificDiscount[3]);
+                discountList.add(temdriDiscount);
+            }
         }
         return discountList;
     }

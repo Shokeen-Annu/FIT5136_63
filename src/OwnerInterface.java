@@ -46,15 +46,18 @@ public class OwnerInterface {
                 flag = displayManageDiscountMenu();
             }
             else if (choiceNumber == 6) {
-                System.out.println("Are you sure you want to logout? Enter your choice number");
-                System.out.println("1 Yes");
-                System.out.println("2 No");
-                int choiceLogout = validator.receiveInt();
-                flag = commonController.logout(choiceLogout);
+                int choiceLogout;
+                do {
+                    System.out.println("Are you sure you want to logout? Enter your choice number");
+                    System.out.println("1 Yes");
+                    System.out.println("2 No");
+                    choiceLogout = validator.receiveInt();
+                    flag = commonController.logout(choiceLogout);
+                }while(choiceLogout == -1);
             }
             else {
                 System.out.println();
-                System.out.println("Re-enter your option!");
+                System.out.println("Please enter your choice correctly!");
                 System.out.println();
             }
         } while (choiceNumber < 1 || choiceNumber >6 || !flag);
@@ -90,10 +93,28 @@ public class OwnerInterface {
                 manageHallFlag = backMenu();
             }
             else if (choiceNumber == 3) {
+                boolean repeat = false;
                 System.out.println("-------------- DELETE HALLS --------------");
                 System.out.println();
                 System.out.println();
-                System.out.println("Please provide information to delete hall");
+                System.out.println("Please select hall from the list below:");
+                commonController.viewHalls("ALL",""); //show only owner's halls
+                do {
+                    boolean isDeleteSuccess = false;
+                    System.out.println("Enter hall number to delete:");
+                    int hallId = validator.receiveInt();
+                    if (hallId == -1)
+                        repeat = true;
+                    else {
+                        // ask for confirmation
+                        isDeleteSuccess = ownerController.deleteHall(hallId);
+                        if(isDeleteSuccess)
+                            System.out.println("Hall is deleted successfully");
+                        else
+                            System.out.println("Please enter correct hall number");
+                    }
+                }while(repeat);
+
                 manageHallFlag = backMenu();
             }
             else if (choiceNumber == 4) {
