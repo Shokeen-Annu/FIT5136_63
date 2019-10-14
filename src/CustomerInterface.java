@@ -4,6 +4,9 @@ public class CustomerInterface{
 
     private InputValidation validator = new InputValidation();
     private CommonController commonController = new CommonController();
+    private CustomerController customerController = new CustomerController();
+
+
     public void displayCustomerMenu()
     {
         int customerNumber = -1;
@@ -173,11 +176,12 @@ public class CustomerInterface{
     public boolean displayBookHallMenu()
     {
         int choice;
+
         boolean flag = true;
         do {
         System.out.println("--------- BOOK HALL -----------");
         System.out.println();
-        System.out.println("1 PAY DEPOSIT");
+        System.out.println("1 SELECT HALL");
         System.out.println("2 PROVIDE RATING");
         System.out.println("3 BACK TO MAIN MENU");
         System.out.println();
@@ -186,9 +190,69 @@ public class CustomerInterface{
          choice = scanner.nextInt();
         switch (choice)
         {
-            case 1: displayPaymentMenu();
+            case 1:
+                do {
+                    System.out.println("Do you want to view all halls or search hall");
+                    System.out.println("1 VIEW ALL HALLS");
+                    System.out.println("2 SEARCH HALLS");
+                    System.out.println("3 BACK TO MAIN MENU");
+                    switch (choice) {
+                        case 1:
+                            System.out.println("the methods of view halls");
+                            flag = backMenu();
+                            break;
+                        case 2:
+                            System.out.println("the methods of search halls");
+                            flag = backMenu();
+                            break;
+                        case 3:
+                            return false;
+                    }
+                    // after choose hall number*/
+
+                    switch (choice) {
+                        case 1:
+                            System.out.println("Please enter the hall ID");
+                            int hallId = scanner.nextInt();
+
+                            if(customerController.bookHall(hallId))
+                            {
+                                System.out.println("Are you sure you want to book this hall? Enter your choice number");
+                                System.out.println("1 YES");
+                                System.out.println("2 NO");
+                                int choiceBook = validator.receiveInt();
+                                if(customerController.askForConfirmation(choiceBook))
+                                {
+
+                                    System.out.println("Now you need to write the quotation details");
+                                    System.out.println("The number of people :");
+                                    int numberOfPeople = scanner.nextInt();
+                                    System.out.println("If you want to catering, please enter Yes or Not");
+                                    String isCatering = scanner.nextLine();
+
+
+                                     //customerController.requestForQuotation();
+                                }
+
+
+                            }
+
+                                flag = customerController.bookHall(hallId);
+
+
+
+                             break;
+
+                        case 2:
+                            System.out.println("Back TO CUSTOMER MENU");
+                            flag = backMenu();
+                            break;
+                    }
+                }while(choice < 1 || choice > 3 || !flag) ;
             flag = backMenu();
             break;
+
+
             case 2: System.out.println("Please provide rating of hall here");
             flag = backMenu();
             break;
@@ -230,6 +294,8 @@ public class CustomerInterface{
         }while(payChoice < 1 || payChoice > 3 || !flag);
         return true;
     }
+
+
 
     public boolean displayManageAccountMenu()
     {
