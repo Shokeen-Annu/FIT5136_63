@@ -36,7 +36,8 @@ public class AdministratorInterface{
             break;
             case 4: flag = manageDiscountMenu();
             break;
-            case 5: flag = commonController.viewHalls();
+            case 5: commonController.viewHalls("ALL","");
+                    flag = backMenu();
             break;
             case 6:
                 System.out.println("Are you sure you want to logout? Enter your choice number");

@@ -1,14 +1,9 @@
-import java.util.Scanner;
-
 public class CommonController {
 
-    //private PEInterface peInterface = new PEInterface();
+    // Do not add any interface class object here
     private PrimeEvents primeEvents = new PrimeEvents();
-
-    //private PEInterface peInterface = new PEInterface();
-    //private PrimeEvents primeEvents = new PrimeEvents();
     private InputValidation validator = new InputValidation();
-    private CustomerInterface customerInterface = new CustomerInterface();
+
     public String primeEventsLogin(String email,String password)
     {
         String role = "";
@@ -85,17 +80,8 @@ public class CommonController {
                     }
                 }
                 break;
-                default: {
-                            System.out.println("Press 0 to return");
-                            int admInput = new Scanner(System.in).nextInt();
-                            if (admInput == 0)
-                            customerInterface.displaySearchHallMenu(true);
-                        }
+                default: break;
         }
-        // System.out.println("-------------- VIEW HALLS --------------");
-        // System.out.println();
-        //  System.out.println();
-        // System.out.println("View all halls page");
 
     }
     // take hardcoded email id
@@ -103,7 +89,7 @@ public class CommonController {
     {
         for(int i = 0; i < primeEvents.getUserList().size(); i++)
         {
-            if(primeEvents.getUserList().get(i).getEmail().equals("asho0007@student.monash.edu"))
+            if(primeEvents.getUserList().get(i) == primeEvents.getEventUser())
             {
                 Owner owner = (Owner)primeEvents.getUserList().get(i);
                 owner.getDiscountList().remove(discountId - 1);

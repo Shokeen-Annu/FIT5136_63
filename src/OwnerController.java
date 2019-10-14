@@ -1,7 +1,6 @@
 public class OwnerController {
     private Owner owner;
     private InputValidation input = new InputValidation();
-    private OwnerInterface ownerinterface = new OwnerInterface();
     private FileIO io = new FileIO();
     private boolean addHall(Hall hall)
     {

@@ -41,6 +41,7 @@ public class CustomerInterface{
                          case 1: flag = displaySearchHallMenu(false);
                          break;
                          case 2: commonController.viewHalls("ALL","");
+                         flag = backMenu();
                          break;
                          case 3: flag = displayBookHallMenu();
                          break;
