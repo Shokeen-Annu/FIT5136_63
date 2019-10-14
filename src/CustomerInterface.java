@@ -1,3 +1,7 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class CustomerInterface{
@@ -46,7 +50,7 @@ public class CustomerInterface{
                          case 2: commonController.viewHalls("ALL","");
                          flag = backMenu();
                          break;
-                         case 3: flag = displayBookHallMenu();
+                         case 3: flag = displayBookHallMenu(false);
                          break;
                          case 4:
                              System.out.println("-------------- REQUEST QUOTATION --------------");
@@ -171,10 +175,9 @@ public class CustomerInterface{
     }
 
 
-    public boolean displayBookHallMenu()
+    public boolean displayBookHallMenu(boolean isMainMenu)
     {
         int choice;
-
         boolean flag = true;
         do {
         System.out.println("--------- BOOK HALL -----------");
@@ -186,15 +189,17 @@ public class CustomerInterface{
         System.out.println("Enter your choice number:");
         Scanner scanner = new Scanner(System.in);
          choice = scanner.nextInt();
-        switch (choice)
+             switch (choice)
         {
             case 1:
-                do {
+                    int select =scanner.nextInt();
+                    do {
                     System.out.println("Do you want to view all halls or search hall");
                     System.out.println("1 VIEW ALL HALLS");
                     System.out.println("2 SEARCH HALLS");
                     System.out.println("3 BACK TO MAIN MENU");
-                    switch (choice) {
+
+                    /*switch (choice) {
                         case 1:
                             System.out.println("the methods of view halls");
                             flag = backMenu();
@@ -205,11 +210,13 @@ public class CustomerInterface{
                             break;
                         case 3:
                             return false;
-                    }
+                        default:   System.out.println("Please choose the option correctly");
+                            break;
+                    }*/
                     // after choose hall number*/
 
-                    switch (choice) {
-                        case 1:
+                    switch (select) {
+                        case 1:  //booking hall now
                             System.out.println("Please enter the hall ID");
                             int hallId = scanner.nextInt();
 
@@ -224,29 +231,45 @@ public class CustomerInterface{
 
                                     System.out.println("Now you need to write the quotation details");
                                     System.out.println("The number of people :");
-                                    int numberOfPeople = scanner.nextInt();
+                                    int numberOfPeople = validator.receiveInt();
+
                                     System.out.println("If you want to catering, please enter Yes or Not");
-                                    String isCatering = scanner.nextLine();
+                                    String isCatering = validator.receiveString();
+                                    System.out.println("Which date you want to start (dd-MM-yyyy)");
+                                    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                                    try {
+                                        Date bookingStartDate = dateFormat.parse(validator.receiveString());
+                                    }catch(ParseException e){
+                                        System.out.println("Please enter right format of date: dd-MM-yyyy");
+                                    }
+                                    System.out.println("Which date you want to finish (dd-MM-yyyy)");
+
+                                    try {
+                                        Date bookingFinishDate = dateFormat.parse(validator.receiveString());
+                                    }catch(ParseException e){
+                                        System.out.println("Please enter right format of date: dd-MM-yyyy");
+                                    }
+
+                                    customerController.requestForQuotation();
 
 
-                                     //customerController.requestForQuotation();
+
+
+
                                 }
-
+                            }
+                            else {
+                                flag = customerController.bookHall(hallId);
 
                             }
 
-                                flag = customerController.bookHall(hallId);
-
-
-
                              break;
-
-                        case 2:
+                        case 2: // go back to customer menu
                             System.out.println("Back TO CUSTOMER MENU");
                             flag = backMenu();
                             break;
                     }
-                }while(choice < 1 || choice > 3 || !flag) ;
+                }while(select < 1 || select> 2|| !flag) ;
             flag = backMenu();
             break;
 
@@ -254,13 +277,20 @@ public class CustomerInterface{
             case 2: System.out.println("Please provide rating of hall here");
             flag = backMenu();
             break;
+
             case 3: return false;
+
+            default:
+                System.out.println("Please choose the option correctly");
+                break;
 
         }
 
         }while(choice < 1 || choice > 3 || !flag);
         return true;
     }
+
+
 
     public boolean displayPaymentMenu()
     {

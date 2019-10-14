@@ -14,6 +14,7 @@ public class Customer extends User {
     private ArrayList<Quotation> quotationList;
     private Booking booking;
 
+
     public boolean getIsSeniorCitizen() {
         return isSeniorCitizen;
     }
