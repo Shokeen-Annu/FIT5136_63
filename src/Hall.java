@@ -122,8 +122,8 @@ public class Hall {
     public String displayHall()
     {
         return hallId + " " + name + " " + address + " " + contactNumber + " " + rating
-                + " " + description + " " + availability + " " + foodMenu + " " + typeOfOccassion
-                + " " + isCatering + " " + isPhotography;
+                + " " + description + " " + availability + " " + foodMenu + " " + typeOfOccassion;
+
     }
     public double calculateAverageRating()
     {

@@ -1,9 +1,18 @@
 public class Discount {
 
     private int discountId;
+    private int userId;
     private double value;
     private String discountName;
     private String comments;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public int getDiscountId() {
         return discountId;
@@ -35,5 +44,10 @@ public class Discount {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public String displayDiscount()
+    {
+        return discountName + "/n" + value + "/n" + comments;
     }
 }

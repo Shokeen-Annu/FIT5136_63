@@ -72,6 +72,7 @@ public class PrimeEvents {
                     ((Owner)user).setSecurityQuestion2(userData[9]);
                     ((Owner)user).setSecurityAnswer1(userData[10]);
                     ((Owner)user).setSecurityAnswer2(userData[11]);
+                    ((Owner)user).createDiscountList(Integer.parseInt(userData[0]));
                     break;
                 default:
                         break;
