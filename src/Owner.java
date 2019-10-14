@@ -10,6 +10,7 @@ public class Owner extends User {
     private  String address;
     private ArrayList<Discount> discountList;
     private ArrayList<Booking> bookingList;
+    private FileIO fileIO = new FileIO();
     public void displayOwnerMenu()
     {
         Owner owner = new Owner ();
@@ -336,8 +337,21 @@ public class Owner extends User {
         return discountList;
     }
 
-    public void createDiscountList(ArrayList<Discount> discountList) {
-        this.discountList = discountList;
+    public ArrayList<Discount> createDiscountList()
+    {
+        String allDiscount = fileIO.readFile("Halls");
+        String[] discountDetail = allDiscount.split(";");
+        for(int i = 0; i< discountDetail.length; i++)
+        {
+            String[] specificDiscount = discountDetail[i].split(",");
+            Discount temdriDiscount = new Discount();
+            temdriDiscount.setDiscountId(Integer.parseInt(specificDiscount[0]));
+            temdriDiscount.setDiscountName(specificDiscount[1]);
+            temdriDiscount.setValue(Double.parseDouble(specificDiscount[2]));
+            temdriDiscount.setComments(specificDiscount[3]);
+            discountList.add(temdriDiscount);
+        }
+        return discountList;
     }
 
     public ArrayList<Booking> getBookingList() {

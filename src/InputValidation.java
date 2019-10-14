@@ -14,7 +14,7 @@ public class InputValidation {
         }
         return true;
     }
-    private String receiveString()
+    public String receiveString()
     {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
@@ -23,5 +23,11 @@ public class InputValidation {
     {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
+    }
+    public boolean validateString(String input)
+    {
+        if(input.toUpperCase().equals("YES"))
+        {  return true;}
+        return false;
     }
 }

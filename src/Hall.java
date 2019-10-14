@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Hall {
     private int hallId;
     private String name;
@@ -10,15 +12,30 @@ public class Hall {
     private String typeOfOccassion;
     private boolean isCatering;
     private boolean isPhotography;
-    //private  ArrayList<Quotation> quotation;
-    //private ArrayList<Review> review;
+    private  ArrayList<Quotation> quotation;
+    private ArrayList<Review> review;
 
+    public ArrayList<Quotation> getQuotation() {
+        return quotation;
+    }
+
+    public void setQuotation(ArrayList<Quotation> quotation) {
+        this.quotation = quotation;
+    }
+
+    public ArrayList<Review> getReview() {
+        return review;
+    }
+
+    public void setReview(ArrayList<Review> review) {
+        this.review = review;
+    }
 
     public int getHallId() {
         return hallId;
     }
 
-    public String getName() {
+    public String getHallName() {
         return name;
     }
 
@@ -38,7 +55,7 @@ public class Hall {
         return description;
     }
 
-    public boolean isAvailability() {
+    public boolean getAvailability() {
         return availability;
     }
 
@@ -50,11 +67,11 @@ public class Hall {
         return typeOfOccassion;
     }
 
-    public boolean isCatering() {
+    public boolean getIsCatering() {
         return isCatering;
     }
 
-    public boolean isPhotography() {
+    public boolean getIsPhotography() {
         return isPhotography;
     }
 
@@ -62,7 +79,7 @@ public class Hall {
         this.hallId = hallId;
     }
 
-    public void setName(String name) {
+    public void setHallName(String name) {
         this.name = name;
     }
 
@@ -94,17 +111,23 @@ public class Hall {
         this.typeOfOccassion = typeOfOccassion;
     }
 
-    public void setCatering(boolean catering) {
+    public void setIsCatering(boolean catering) {
         isCatering = catering;
     }
 
-    public void setPhotography(boolean photography) {
+    public void setIsPhotography(boolean photography) {
         isPhotography = photography;
     }
+
     public String displayHall()
     {
         return hallId + " " + name + " " + address + " " + contactNumber + " " + rating
                 + " " + description + " " + availability + " " + foodMenu + " " + typeOfOccassion
                 + " " + isCatering + " " + isPhotography;
     }
+    public double calculateAverageRating()
+    {
+        return rating;
+    }
+
 }
