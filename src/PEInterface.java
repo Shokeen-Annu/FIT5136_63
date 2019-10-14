@@ -29,7 +29,7 @@ public class PEInterface {
             choiceNumber = validator.receiveInt();
             switch (choiceNumber) {
                 case 1:
-                    flag = commonController.viewHalls();
+                    commonController.viewHalls("ALL"," ");
                     break;
                 case 2:
                     flag = customerInterface.displaySearchHallMenu(true);
