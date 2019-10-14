@@ -4,6 +4,7 @@ public class OwnerInterface {
     private int choiceNumber;
     private InputValidation validator = new InputValidation();
     private CommonController commonController = new CommonController();
+    private OwnerController ownerController = new OwnerController();
     public void displayOwnerMenu()
     {
         boolean flag = true;
@@ -45,8 +46,11 @@ public class OwnerInterface {
                 flag = displayManageDiscountMenu();
             }
             else if (choiceNumber == 6) {
-                flag = true;
-                commonController.logout("Do you want to logout");
+                System.out.println("Are you sure you want to logout? Enter your choice number");
+                System.out.println("1 Yes");
+                System.out.println("2 No");
+                int choiceLogout = validator.receiveInt();
+                flag = commonController.logout(choiceLogout);
             }
             else {
                 System.out.println();
@@ -161,11 +165,14 @@ public class OwnerInterface {
 
             if (choiceNumber == 1) {
                 System.out.println("Please add discount information");
+                ownerController.addDiscount();
                 manageOwnerDiscountFlag = backMenu();
 
             }
             else if (choiceNumber == 2) {
                 System.out.println("You can delete discount here");
+                int deleteId = validator.receiveInt();
+                commonController.deleteDiscount(deleteId);
                 manageOwnerDiscountFlag = backMenu();
             }
             else if (choiceNumber == 3) {

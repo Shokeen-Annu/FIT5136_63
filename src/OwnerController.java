@@ -1,26 +1,32 @@
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-
 public class OwnerController {
-    private ArrayList<Discount> ownerDiscount;
+    private Owner owner;
     private InputValidation input = new InputValidation();
+    private FileIO io = new FileIO();
     private boolean addHall(Hall hall)
     {
+        boolean result=false;
 
+        //code here
+        return result;
     }
 
     private Hall generateHallObject()
     {
-
+        return new Hall();
     }
     private boolean deleteHall(Hall hall)
     {
+        boolean result=false;
 
+        //code here
+        return result;
     }
     private boolean updateHall(Hall hall)
     {
+        boolean result=false;
 
+        //code here
+        return result;
     }
     private void viewHalls(String type)
     {
@@ -32,46 +38,50 @@ public class OwnerController {
     }
     private Quotation provideQuotation(int quotationId)
     {
-
+     return new Quotation();
     }
     private boolean cancelBooking(int bookingId)
     {
+        boolean result=false;
 
+        //code here
+        return result;
     }
     private void viewBookingHistory(int bookingId)
     {
 
     }
-    private boolean addDiscount(String name, double value, int id, String comments)
+    public void addDiscount()
+    //String name, double value, int id, String comments
     {
-
-        System.out.println("Please enter discount name");
-        String discountName = input.receiveString().trim();
-
-
-
-    }
-    public void writeFile(String filename) {
-
-        if (filename.trim().length() > 0) {
-            try {
-                PrintWriter output = new PrintWriter(filename);
-                for (int i = 0; i < ownerDiscount.size(); i++) {
-                    String contents =  ownerDiscount.get(i).getDiscountId()+ "," + ownerDiscount.get(i).getDiscountName() + "," + ownerDiscount.get(i).getValue() + ","
-                            + ownerDiscount.get(i).getComments() + ";";
-                    output.print(contents);
-                }
-                output.close();
-            } catch (IOException e) {
-                System.out.println("I/O Error");
+        int choose = -1;
+        do{
+            System.out.println("Please enter discount name");
+            String discountName = input.receiveString().trim();
+            System.out.println("Please enter discount value");
+            double discountValue = Double.parseDouble(input.receiveString().trim());
+            System.out.println("Please enter comments for the discount");
+            String discountComments = input.receiveString().trim();
+            int discountId = owner.getDiscountList().size() + 1;
+            System.out.println(discountId + "," + discountName + "," + discountValue + "," + discountComments + ";");
+            System.out.println("Do you add the discount into system");
+            System.out.println("1 YES     2 NO  (PLEASE ENTER NUMBER)");
+            choose = input.receiveInt();
+            if(choose == 1)
+            {
+                io.writeFile("Discounts", "contents");
             }
-        } else {
-            System.out.println("Enter a filename:");
-        }
+            else
+                System.out.println("Please re-add the discount");
+                System.out.println();
+        }while(choose == 1);
     }
     private boolean isHallPresent(int hallId)
     {
+        boolean result=false;
 
+        //code here
+        return result;
     }
 
 }

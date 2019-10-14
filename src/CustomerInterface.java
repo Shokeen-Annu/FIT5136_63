@@ -43,7 +43,8 @@ public class CustomerInterface{
                          switch (customerNumber) {
                          case 1: flag = displaySearchHallMenu(false);
                          break;
-                         case 2: flag = commonController.viewHalls();
+                         case 2: commonController.viewHalls("ALL","");
+                         flag = backMenu();
                          break;
                          case 3: flag = displayBookHallMenu();
                          break;
@@ -83,8 +84,12 @@ public class CustomerInterface{
                              flag = backMenu();
                          break;
                          case 9:
-                             flag = true;
-                             commonController.logout("Do you want to logout?");
+                             System.out.println("Are you sure you want to logout? Enter your choice number");
+                             System.out.println("1 Yes");
+                             System.out.println("2 No");
+                             int choiceLogout = validator.receiveInt();
+                             flag = commonController.logout(choiceLogout);
+
                          break;
                          default: System.out.println("Please enter the option correctly");
                          break;
@@ -116,7 +121,7 @@ public class CustomerInterface{
             System.out.println("1 NAME OF HALL");
             System.out.println("2 STAR RATING");
             System.out.println("3 OCCASION TYPE");
-            System.out.println("4 LOCATION");
+            System.out.println("4 ADDRESS");
             System.out.println("5 DATE");
             System.out.println("6 BACK TO MAIN MENU");
             System.out.println();
@@ -124,22 +129,31 @@ public class CustomerInterface{
 
             Scanner scanner = new Scanner(System.in);
             searchChoice = scanner.nextInt();
-
+            String searchInput = " ";
             switch (searchChoice) {
                 case 1:
                     System.out.println("Please enter the name of hall");
+                     searchInput = validator.receiveString();
+                    commonController.viewHalls("NAME", "searchInput");
                     flag = backMenu();
                     break;
                 case 2:
                     System.out.println("Please enter the rating");
+                    int searchRate = validator.receiveInt();
+                    commonController.viewHalls("RATING", "searchRate");
                     flag = backMenu();
                     break;
                 case 3:
                     System.out.println("Please enter a occasion type");
+                    searchInput = validator.receiveString();
+                    commonController.viewHalls("OCCASSION", "searchInput");
                     flag = backMenu();
                     break;
                 case 4:
-                    System.out.println("Please enter a location");
+                    System.out.println("Please enter a Address");
+                    searchInput = validator.receiveString();
+                    commonController.viewHalls("ADDRESS", "searchInput");
+                    flag = backMenu();
                     break;
                 case 5:
                     System.out.println("Please enter a date");

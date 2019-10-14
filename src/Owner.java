@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Owner extends User {
-    private int choiceNumber;
+
     private String securityQuestion1;
     private String securityQuestion2;
     private String securityAnswer1;
     private String securityAnswer2;
     private ArrayList<Hall> hallList;
-    private  String address;
+
     private ArrayList<Discount> discountList;
     private ArrayList<Booking> bookingList;
-
+    private FileIO fileIO = new FileIO();
 
 
     public String getSecurityQuestion1() {
@@ -53,13 +53,6 @@ public class Owner extends User {
         this.hallList = hallList;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public ArrayList<Discount> getDiscountList() {
         return discountList;
