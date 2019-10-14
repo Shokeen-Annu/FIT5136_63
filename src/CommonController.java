@@ -101,8 +101,9 @@ public class CommonController {
 
     public void createDatabase()
     {
+        primeEvents.createHallList();
         primeEvents.createUserList();
         primeEvents.createBookingList();
-        primeEvents.createHallList();
+
     }
 }

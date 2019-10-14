@@ -29,6 +29,7 @@ public class PEInterface {
 
             choiceNumber = validator.receiveInt();
             switch (choiceNumber) {
+                case -1: break;
                 case 1:
                     commonController.viewHalls("ALL"," ");
                     break;
@@ -47,6 +48,7 @@ public class PEInterface {
                         System.out.println("Enter your email id:");
 
                         String emailId = validator.receiveString().trim();
+
                         System.out.println();
                         System.out.println("Enter your password:");
                         String password = validator.receiveString();
@@ -59,11 +61,14 @@ public class PEInterface {
                         if(!isUserAuthorized)
                         {
                             System.out.println("Either email id or password is wrong....");
-                            System.out.println("Do you want to try again? Enter your choice number");
-                            System.out.println("1 Yes");
-                            System.out.println("2 No");
-                            int choiceLogout = validator.receiveInt();
-                            tryAgain = commonController.logout(choiceLogout);
+                            int choiceLogout;
+                            do {
+                                System.out.println("Do you want to try again? Enter your choice number");
+                                System.out.println("1 Yes");
+                                System.out.println("2 No");
+                                choiceLogout = validator.receiveInt();
+                                tryAgain = commonController.logout(choiceLogout);
+                            }while(choiceLogout == -1);
                             flag = tryAgain;
                         }
                     }
@@ -89,6 +94,7 @@ public class PEInterface {
                     break;
                 default:
                     System.out.println("Please enter your choice correctly!");
+
                     break;
             }
         }while(choiceNumber<1 || choiceNumber>6 || !flag);

@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+
 public class OwnerController {
     private Owner owner;
     private InputValidation input = new InputValidation();
     private FileIO io = new FileIO();
+    private PrimeEvents primeEvents = new PrimeEvents();
     private boolean addHall(Hall hall)
     {
         boolean result=false;
@@ -14,11 +17,49 @@ public class OwnerController {
     {
         return new Hall();
     }
-    private boolean deleteHall(Hall hall)
+    public boolean deleteHall(int hallId)
     {
         boolean result=false;
+        try {
+            Owner owner = (Owner) primeEvents.getEventUser();
+            ArrayList<Hall> allHalls = primeEvents.getHallList();
+            Hall hall = null;
+            for(Hall item: allHalls)
+            {
+                if(item.getHallId() == hallId) {
+                    hall = item;
+                    result = true;
+                }
+            }
+            if(hall == null)
+                return result;
+            // verify hall exists for owner
+            ArrayList<Hall> ownerHalls = owner.getHallList();
+            boolean isHallVerified = false;
+            for (Hall ownerHall : ownerHalls) {
+                if (ownerHall.getHallId() == hall.getHallId())
+                    isHallVerified = true;
+            }
+            if (isHallVerified) {
+                ownerHalls.remove(hall);
+                owner.createHallList(ownerHalls);
 
-        //code here
+                allHalls.remove(hall);
+
+                //rewrite file
+                String hallContent = "";
+                for (Hall item : allHalls) {
+                    hallContent += item.toString();
+                }
+                io.reWriteFile("Halls", hallContent);
+                result = true;
+            }
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Some error occurred.");
+            result = false;
+        }
         return result;
     }
     private boolean updateHall(Hall hall)

@@ -39,14 +39,16 @@ public class AdministratorInterface{
             case 5: commonController.viewHalls("ALL","");
                     flag = backMenu();
             break;
-            case 6:
-                System.out.println("Are you sure you want to logout? Enter your choice number");
-                System.out.println("1 Yes");
-                System.out.println("2 No");
-                int choiceLogout = validator.receiveInt();
-                flag = commonController.logout(choiceLogout);
+            case 6:int choiceLogout;
+                do {
+                    System.out.println("Are you sure you want to logout? Enter your choice number");
+                    System.out.println("1 Yes");
+                    System.out.println("2 No");
+                    choiceLogout = validator.receiveInt();
+                    flag = commonController.logout(choiceLogout);
+                }while(choiceLogout == -1);
                 break;
-            default: System.out.println("Re-enter your option!");
+            default: System.out.println("Please enter your choice correctly!");
             break;
         }
 

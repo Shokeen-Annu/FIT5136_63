@@ -29,7 +29,7 @@ public class CustomerInterface{
 
                 if (validator.validateInt(customerInput) == false)
                 {
-                    System.out.println("Please enter the number");
+                    System.out.println("Please enter integer value.");
                 }
                 else if (customerInput.length() == 0)
                 {
@@ -80,15 +80,17 @@ public class CustomerInterface{
                              System.out.println("Update customer information page");
                              flag = backMenu();
                          break;
-                         case 9:
-                             System.out.println("Are you sure you want to logout? Enter your choice number");
-                             System.out.println("1 Yes");
-                             System.out.println("2 No");
-                             int choiceLogout = validator.receiveInt();
-                             flag = commonController.logout(choiceLogout);
+                         case 9:int choiceLogout;
+                             do {
+                                 System.out.println("Are you sure you want to logout? Enter your choice number");
+                                 System.out.println("1 Yes");
+                                 System.out.println("2 No");
+                                 choiceLogout = validator.receiveInt();
+                                 flag = commonController.logout(choiceLogout);
+                             }while(choiceLogout == -1);
 
                          break;
-                         default: System.out.println("Please enter the option correctly");
+                         default: System.out.println("Please enter your choice correctly!");
                          break;
                       }
             }

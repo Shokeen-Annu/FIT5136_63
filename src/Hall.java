@@ -2,6 +2,16 @@ import java.util.ArrayList;
 
 public class Hall {
     private int hallId;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    private int userId;
     private String name;
     private String address;
     private String contactNumber;
@@ -21,6 +31,22 @@ public class Hall {
 
     public void setQuotation(ArrayList<Quotation> quotation) {
         this.quotation = quotation;
+    }
+
+    @Override
+    public String toString() {
+        return hallId +
+                "$" + name +
+                "$" + address +
+                "$" + contactNumber +
+                "$" + rating +
+                "$" + description +
+                "$" + availability +
+                "$" + foodMenu +
+                "$" + typeOfOccassion +
+                "$" + isCatering +
+                "$" + isPhotography +
+                "$" + userId +"$$";
     }
 
     public ArrayList<Review> getReview() {
