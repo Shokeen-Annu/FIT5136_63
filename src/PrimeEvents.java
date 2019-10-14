@@ -165,6 +165,9 @@ public class PrimeEvents {
         return repeat();
     }
 
-
+public Hall getSpecificHall(int hallID)
+{
+    return hallList.get(hallID);
+}
 
 }
