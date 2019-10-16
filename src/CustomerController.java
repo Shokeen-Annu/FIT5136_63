@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CustomerController {
     private Customer customer = new Customer();
@@ -11,8 +12,7 @@ public class CustomerController {
         int checkId = primeEvents.getSpecificHall(id-1).getHallId() +1;
         if (id != checkId)
        {
-           System.out.println("The hall is not exist");
-           result = false;
+            result = false;
        }
        return result;
     }
@@ -30,10 +30,14 @@ public class CustomerController {
         return tryAgain;
     }
 
-    public void requestForQuotation( )
+    public void requestForQuotation(int hallId,Date date,Date bookinStartDate, Date bookingFinishDate, int numberOfGuest,double price,
+                                    boolean isCatering, String typeOfMeal)
     {
 
-
+        int customerId = customer.getUserId();
+        customer.quoatationAdd(date,bookinStartDate, bookingFinishDate,numberOfGuest,customerId,hallId, price,
+       isCatering, typeOfMeal);
+        // save quotation into customer quotation list
     }
     private boolean cancelBooking(int bookingId)
     {

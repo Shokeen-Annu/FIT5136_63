@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Customer extends User {
@@ -86,4 +87,17 @@ public class Customer extends User {
     public void setQuotationList(ArrayList<Quotation> quotationList) {
         this.quotationList = quotationList;
     }
+
+    public void quoatationAdd(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest,int customerId, int newHallId, double newPrice,
+                              boolean newIsCatering, String newTypeOfMeal)
+    {
+        int quotationId = 1;
+        quotationId= quotationId+1;
+
+        Quotation newQuotation =new Quotation(  quotationId,newDate, newBookingStartDate,newBookingFinishDate,
+                                                newNumberOfGuest,customerId,newHallId,newPrice,
+                                                newIsCatering, newTypeOfMeal);
+         quotationList.add(newQuotation);
+    }
 }
+

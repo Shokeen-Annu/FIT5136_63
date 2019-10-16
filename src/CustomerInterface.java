@@ -190,18 +190,36 @@ public class CustomerInterface{
         System.out.println();
         System.out.println("Enter your choice number:");
         Scanner scanner = new Scanner(System.in);
-         choice = scanner.nextInt();
-             switch (choice)
+       choice = scanner.nextInt();
+       switch (choice)
         {
-            case 1:
-                    int select =scanner.nextInt();
-                    do {
-                    System.out.println("Do you want to view all halls or search hall");
-                    System.out.println("1 VIEW ALL HALLS");
-                    System.out.println("2 SEARCH HALLS");
-                    System.out.println("3 BACK TO MAIN MENU");
+            case 1: bookingMenu(false);
+            flag = backMenu();
+            break;
+            case 2: System.out.println("Please provide rating of hall here");
+            flag = backMenu();
+            break;
+            case 3: return false;
+            default:
+                System.out.println("Please choose the option correctly");
+                break;
+        }
+        }while(choice < 1 || choice > 3 || !flag);
+        return true;
+    }
 
-                    /*switch (choice) {
+
+    public boolean bookingMenu(boolean isMainMenu)
+    {
+        /*Scanner scanner = new Scanner(System.in);
+        int select = scanner.nextInt();
+
+            System.out.println("Do you want to view all halls or search hall");
+            System.out.println("1 VIEW ALL HALLS");
+            System.out.println("2 SEARCH HALLS");
+            System.out.println("3 BACK TO MAIN MENU");*/
+
+            /*switch (choice) {
                         case 1:
                             System.out.println("the methods of view halls");
                             flag = backMenu();
@@ -214,121 +232,108 @@ public class CustomerInterface{
                             return false;
                         default:   System.out.println("Please choose the option correctly");
                             break;
-                    }*/
-                    // after choose hall number*/
-
-                    switch (select) {
-                        case 1:  //booking hall now
-                            System.out.println("Please enter the hall ID");
-                            int hallId = scanner.nextInt();
-
-                            if(customerController.bookHall(hallId))
-                            {
-                                System.out.println("Are you sure you want to book this hall? Enter your choice number");
-                                System.out.println("1 YES");
-                                System.out.println("2 NO");
-                                int choiceBook = validator.receiveInt();
-                                if(customerController.askForConfirmation(choiceBook))
-                                {
-
-                                    System.out.println("Now you need to write the quotation details");
-                                    System.out.println("The number of people :");
-                                    int numberOfPeople = validator.receiveInt();
-
-                                    System.out.println("If you want to catering, please enter Yes or Not");
-                                    String isCatering = validator.receiveString();
-                                    System.out.println("Which date you want to start (dd-MM-yyyy)");
-                                    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                                    try {
-                                        Date bookingStartDate = dateFormat.parse(validator.receiveString());
-                                    }catch(ParseException e){
-                                        System.out.println("Please enter right format of date: dd-MM-yyyy");
-                                    }
-                                    System.out.println("Which date you want to finish (dd-MM-yyyy)");
-
-                                    try {
-                                        Date bookingFinishDate = dateFormat.parse(validator.receiveString());
-                                    }catch(ParseException e){
-                                        System.out.println("Please enter right format of date: dd-MM-yyyy");
-                                    }
-
-                                    customerController.requestForQuotation();
-
-
-
-
-
-                                }
-                            }
-                            else {
-                                flag = customerController.bookHall(hallId);
-
-                            }
-
-                             break;
-                        case 2: // go back to customer menu
-                            System.out.println("Back TO CUSTOMER MENU");
-                            flag = backMenu();
-                            break;
                     }
-                }while(select < 1 || select> 2|| !flag) ;
-            flag = backMenu();
-            break;
+            */
+            System.out.println("Please enter the hall ID");
+           int hallId = validator.receiveInt();
+           if (customerController.bookHall(hallId)) {
+                System.out.println("Are you sure you want to book this hall? Enter your choice number");
+                System.out.println("1 YES");
+                System.out.println("2 NO");
+                int choiceBook = validator.receiveInt();
+                if (customerController.askForConfirmation(choiceBook)) {
+                    sendQuotation(hallId);
+                    System.out.println("Do you want to send quotation?");
+                    System.out.println("1 YES");
+                    System.out.println("2 NO");
 
-
-            case 2: System.out.println("Please provide rating of hall here");
-            flag = backMenu();
-            break;
-
-            case 3: return false;
-
-            default:
-                System.out.println("Please choose the option correctly");
-                break;
-
-        }
-
-        }while(choice < 1 || choice > 3 || !flag);
-        return true;
+                    displayQuotation();
+                }
+                else
+                {
+                    System.out.println("The hall is not exist");
+                }
+            }
+           return true;
     }
 
 
+public void sendQuotation(int hallId){
+    System.out.println("Now you need to write the quotation details");
+
+    System.out.println("Today is: (dd-MM-yyyy)");
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    try {
+        Date todayDate = dateFormat.parse(validator.receiveString());
+        System.out.println("Which date you want to start (dd-MM-yyyy)");
+        Date bookingStartDate = dateFormat.parse(validator.receiveString());
+        System.out.println("Which date you want to finish (dd-MM-yyyy)");
+        Date bookingFinishDate = dateFormat.parse(validator.receiveString());
+        System.out.println("The number of Guest :");
+        int numberOfGuest = validator.receiveInt();
+        System.out.println("The price you want to pay :");
+        double price = validator.receiveInt(); //不知道可以不可以int
+        System.out.println("If you want to catering, please enter Yes or Not");
+        String isCateringString = validator.receiveString();
+        boolean isCatering = false;
+        String typeOfMeal ="";
+        if (isCateringString.equals("Yes"))
+        {
+            isCatering = true;
+            System.out.println("What type of meal you want to :");
+            typeOfMeal = validator.receiveString();
+            customerController.requestForQuotation(hallId,todayDate, bookingStartDate,  bookingFinishDate,
+                    numberOfGuest, price,isCatering, typeOfMeal);
+        }
+        else{
+
+            customerController.requestForQuotation(hallId,todayDate, bookingStartDate,  bookingFinishDate,
+                numberOfGuest, price,isCatering, typeOfMeal);
+        }
+    } catch (ParseException e) {
+        System.out.println("Please enter right format of date: dd-MM-yyyy");
+    }
+}
+
+public void displayQuotation()
+{
+
+
+}
 
     public boolean displayPaymentMenu()
     {
         int payChoice;
         boolean flag = true;
         do {
-        System.out.println("------ PAY DEPOSIT -------");
-        System.out.println();
-        System.out.println("1 MAKE THE PAYMENT");
-        System.out.println("2 VIEW RECEIPT");
-        System.out.println("3 BACK TO MAIN MENU");
-        System.out.println();
-        System.out.println("Enter your choice number:");
-        Scanner scanner = new Scanner(System.in);
-        payChoice = scanner.nextInt();
-        switch(payChoice)
-        {
-            case 1: System.out.println("Please provide card details for payment");
-            flag = backMenu();
-            break;
-            case 2: System.out.println("You can view your receipt here.");
-                flag = backMenu();
-            break;
-            case 3: return false;
-            default: System.out.println("Please enter the right option");
-            break;
-        }
+            System.out.println("------ PAY DEPOSIT -------");
+            System.out.println();
+            System.out.println("1 MAKE THE PAYMENT");
+            System.out.println("2 VIEW RECEIPT");
+            System.out.println("3 BACK TO MAIN MENU");
+            System.out.println();
+            System.out.println("Enter your choice number:");
+            Scanner scanner = new Scanner(System.in);
+            payChoice = scanner.nextInt();
+            switch(payChoice)
+            {
+                case 1: System.out.println("Please provide card details for payment");
+                    flag = backMenu();
+                    break;
+                case 2: System.out.println("You can view your receipt here.");
+                    flag = backMenu();
+                    break;
+                case 3: return false;
+                default: System.out.println("Please enter the right option");
+                    break;
+            }
 
         }while(payChoice < 1 || payChoice > 3 || !flag);
         return true;
     }
-
-
-
     public boolean displayManageAccountMenu()
     {
         return false;
     }
 }
+
