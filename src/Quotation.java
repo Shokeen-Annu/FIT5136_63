@@ -12,6 +12,22 @@ public class Quotation {
     private boolean isCatering;
     private String typeOfMeal;
 
+
+    public Quotation(int newQuotationId,Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest,int newUserId, int newHallId, double newPrice,
+                     boolean newIsCatering, String newTypeOfMeal)
+    {
+        quotationId=newQuotationId;
+        date = newDate;
+        bookingStartDate= newBookingStartDate;
+        bookingFinishDate = newBookingFinishDate;
+        numberOfGuest =newNumberOfGuest;
+        userId = newUserId;
+        hallId = newHallId;
+        price = newPrice;
+        isCatering = newIsCatering;
+        typeOfMeal=newTypeOfMeal;
+        quotationId = getQuotationId();
+    }
     public void setUserId(int userId) {
         this.userId = userId;
     }
