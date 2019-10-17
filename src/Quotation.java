@@ -28,6 +28,8 @@ public class Quotation {
         typeOfMeal=newTypeOfMeal;
         quotationId = getQuotationId();
     }
+    public Quotation()
+    {}
     public void setUserId(int userId) {
         this.userId = userId;
     }

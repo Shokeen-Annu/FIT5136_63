@@ -4,7 +4,7 @@ public class OwnerController {
     private Owner owner;
     private InputValidation input = new InputValidation();
     private FileIO io = new FileIO();
-    private PrimeEvents primeEvents = new PrimeEvents();
+    //private PrimeEvents primeEvents = new PrimeEvents();
     private CommonController commonController = new CommonController();
     private boolean addHall(Hall hall)
     {
