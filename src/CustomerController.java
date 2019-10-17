@@ -4,7 +4,7 @@ public class CustomerController {
     private Customer customer = new Customer();
 
     private  Booking booking = new Booking();
-    private PEInterface peInterface = new PEInterface();
+   // private PEInterface peInterface = new PEInterface();
     private PrimeEvents primeEvents = new PrimeEvents();
 
     public boolean bookHall(int id)

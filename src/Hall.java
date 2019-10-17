@@ -147,9 +147,24 @@ public class Hall {
 
     public String displayHall()
     {
-        return hallId + " " + name + " " + address + " " + contactNumber + " " + rating
-                + " " + description + " " + availability + " " + foodMenu + " " + typeOfOccassion;
+        return "Hall id: " +  hallId + "\n" +
+                "Hall name: " + name + "\n" +
+                "Hall address: " + address + "\n" +
+                "Contact number: " + contactNumber + "\n" +
+                "Rating: " + rating + "\n" +
+                "Description: " + description + "\n" +
+                "Availability: " + displayAvailability() + "\n" +
+                "Food menu: " + foodMenu + "\n" +
+                "Occassion type: " + typeOfOccassion + "\n";
+    }
 
+    public String displayAvailability()
+    {
+        if(getAvailability())
+        {
+            return "The hall is availability";
+        }
+        return "Tne hall is not availability";
     }
     public double calculateAverageRating()
     {

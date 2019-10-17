@@ -9,6 +9,7 @@ public class CustomerInterface{
 
     public void displayCustomerMenu()
     {
+        commonController.createDatabase();
         int customerNumber = -1;
         boolean flag = true;
         do {
@@ -112,6 +113,7 @@ public class CustomerInterface{
 
     public boolean displaySearchHallMenu(boolean isMainMenu)
     {
+        //commonController.createDatabase();
         boolean flag = true;
         int searchChoice;
         do {
@@ -134,27 +136,27 @@ public class CustomerInterface{
             String searchInput = " ";
             switch (searchChoice) {
                 case 1:
-                    System.out.println("Please enter the name of hall");
-                     searchInput = validator.receiveString();
-                    commonController.viewHalls("NAME", "searchInput");
-                    flag = backMenu();
+                         System.out.println("Please enter the name of hall");
+                         searchInput = validator.receiveString().toUpperCase();
+                         commonController.viewHalls("NAME", searchInput);
+                        flag = backMenu();
                     break;
                 case 2:
-                    System.out.println("Please enter the rating");
-                    int searchRate = validator.receiveInt();
-                    commonController.viewHalls("RATING", "searchRate");
-                    flag = backMenu();
-                    break;
+                        System.out.println("Please enter the rating");
+                        String searchRate = Integer.toString(validator.receiveInt());
+                        commonController.viewHalls("RATING", searchRate);
+                        flag = backMenu();
+                        break;
                 case 3:
                     System.out.println("Please enter a occasion type");
-                    searchInput = validator.receiveString();
-                    commonController.viewHalls("OCCASSION", "searchInput");
+                    searchInput = validator.receiveString().toUpperCase();
+                    commonController.viewHalls("OCCASSION", searchInput);
                     flag = backMenu();
                     break;
                 case 4:
                     System.out.println("Please enter a Address");
-                    searchInput = validator.receiveString();
-                    commonController.viewHalls("ADDRESS", "searchInput");
+                    searchInput = validator.receiveString().toUpperCase();
+                    commonController.viewHalls("ADDRESS", searchInput);
                     flag = backMenu();
                     break;
                 case 5:

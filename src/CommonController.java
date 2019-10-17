@@ -1,19 +1,21 @@
+import java.util.ArrayList;
+
 public class CommonController {
 
     // Do not add any interface class object here
-    private PrimeEvents primeEvents = new PrimeEvents();
     private InputValidation validator = new InputValidation();
+    private FileIO io = new FileIO();
 
     public String primeEventsLogin(String email,String password)
     {
         String role = "";
-        for(User user: primeEvents.getUserList())
+        for(User user: PrimeEvents.getUserList())
             {
                 if(user.getEmail().equals(email) && user.getPassword().equals(password)) {
 
                     System.out.println("Login successful!");
                     role = user.getRole();
-                    primeEvents.setEventUser(user);
+                    PrimeEvents.setEventUser(user);
                 }
             }
 
@@ -34,25 +36,26 @@ public class CommonController {
 
     public void viewHalls(String type, String searchInput)
     {
+        ArrayList<Hall> allHalls = PrimeEvents.getHallList();
         switch (type) {
             case "ALL": {
-                for (int i = 0; i < primeEvents.getHallList().size(); i++) {
-                    System.out.println(primeEvents.getHallList().get(i).displayHall());
+                for (int i = 0; i < allHalls.size(); i++) {
+                    System.out.println(allHalls.get(i).displayHall());
                 }
             }
             break;
             case "NAME": {
-                for (int i = 0; i < primeEvents.getHallList().size(); i++) {
-                    if (primeEvents.getHallList().get(i).getHallName().equals(searchInput)) {
-                        System.out.println(primeEvents.getHallList().get(i).displayHall());
+                for (int i = 0; i < allHalls.size(); i++) {
+                    if (allHalls.get(i).getHallName().toUpperCase().contains(searchInput)) {
+                        System.out.println(allHalls.get(i).displayHall());
                     }
                 }
             }
             break;
             case "ADDRESS": {
-                for (int i = 0; i < primeEvents.getHallList().size(); i++) {
-                    if (primeEvents.getHallList().get(i).getAddress().equals(searchInput)) {
-                        System.out.println(primeEvents.getHallList().get(i).displayHall());
+                for (int i = 0; i < allHalls.size(); i++) {
+                    if (allHalls.get(i).getAddress().toUpperCase().equals(searchInput)) {
+                        System.out.println(allHalls.get(i).displayHall());
                     }
                 }
             }
@@ -61,22 +64,24 @@ public class CommonController {
                 int searchRate = Integer.parseInt(searchInput);
                 ;
                 do {
-
                     if (searchRate < 1 || searchRate > 5)
+                    {
                         System.out.println("Please enter the number between 1 and 5 !!");
-                    searchRate = validator.receiveInt();
-                } while (searchRate > 1 && searchRate < 5);
-                for (int i = 0; i < primeEvents.getHallList().size(); i++) {
-                    if (primeEvents.getHallList().get(i).getRating() > searchRate) {
-                        System.out.println(primeEvents.getHallList().get(i).displayHall());
+                        searchRate = validator.receiveInt();
+                    }
+
+                } while (searchRate < 1 || searchRate > 5);
+                for (int i = 0; i < allHalls.size(); i++) {
+                    if (allHalls.get(i).getRating() > searchRate) {
+                        System.out.println(allHalls.get(i).displayHall());
                     }
                 }
             }
             break;
             case "OCCASSION":
-                for (int i = 0; i < primeEvents.getHallList().size(); i++) {
-                    if (primeEvents.getHallList().get(i).getTypeOfOccassion().equals(searchInput)) {
-                        System.out.println(primeEvents.getHallList().get(i).displayHall());
+                for (int i = 0; i < allHalls.size(); i++) {
+                    if (allHalls.get(i).getTypeOfOccassion().toUpperCase().equals(searchInput)) {
+                        System.out.println(allHalls.get(i).displayHall());
                     }
                 }
                 break;
@@ -87,22 +92,33 @@ public class CommonController {
     // take hardcoded email id
     public void deleteDiscount(int discountId)
     {
-        for(int i = 0; i < primeEvents.getUserList().size(); i++)
+        ArrayList<User> allUsers = PrimeEvents.getUserList();
+        for(int i = 0; i < allUsers.size(); i++)
         {
-            if(primeEvents.getUserList().get(i) == primeEvents.getEventUser())
+            if(allUsers.get(i) == PrimeEvents.getEventUser())
             {
-                Owner owner = (Owner)primeEvents.getUserList().get(i);
+                Owner owner = (Owner)allUsers.get(i);
                 owner.getDiscountList().remove(discountId - 1);
+                System.out.println("Now, the system delete the discount.");
+                for(int index = 0; i < owner.getDiscountList().size(); i++)
+                {
+                    String contents = owner.getUserId() + "$" + owner.getDiscountList().get(index).getDiscountName() + "$" +
+                                    owner.getDiscountList().get(index).getValue() + "$" + owner.getDiscountList().get(index).getComments()
+                                    + "$$";
+                    io.reWriteFile("Discounts", contents);
+                }
+
             }
         }
-        //re-write txt
+
+
     }
 
     public void editDiscount(int discountId) {
-
-        for (int i = 0; i < primeEvents.getUserList().size(); i++) {
-            if (primeEvents.getUserList().get(i) == primeEvents.getEventUser()) {
-                Owner owner = (Owner) primeEvents.getUserList().get(i);
+       ArrayList<User> allUsers = PrimeEvents.getUserList();
+        for (int i = 0; i < allUsers.size(); i++) {
+            if (allUsers.get(i) == PrimeEvents.getEventUser()) {
+                Owner owner = (Owner) allUsers.get(i);
                 System.out.println(owner.getDiscountList().get(discountId - 1).displayDiscount());
                 System.out.println();
                 int disAttribute = -1;
@@ -140,11 +156,11 @@ public class CommonController {
         }
     }
 
-    public void createDatabase()
+    public static void createDatabase()
     {
-        primeEvents.createHallList();
-        primeEvents.createUserList();
-        primeEvents.createBookingList();
+        PrimeEvents.createHallList();
+        PrimeEvents.createUserList();
+        PrimeEvents.createBookingList();
 
     }
 }

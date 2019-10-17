@@ -59,11 +59,11 @@ public class Owner extends User {
 
     public ArrayList<Discount> createDiscountList(int userId)
     {
-        String allDiscount = fileIO.readFile("Halls");
-        String[] discountDetail = allDiscount.split(";");
+        String allDiscount = fileIO.readFile("D:\\2019 monash S2\\FIT5136_Project\\FIT5136_ActualProject\\Discounts.txt");
+        String[] discountDetail = allDiscount.split("$$");
         if(getUserId() == userId) {
             for (int i = 0; i < discountDetail.length; i++) {
-                String[] specificDiscount = discountDetail[i].split(",");
+                String[] specificDiscount = discountDetail[i].split("$");
                 Discount temdriDiscount = new Discount();
                 temdriDiscount.setDiscountId(Integer.parseInt(specificDiscount[0]));
                 temdriDiscount.setDiscountName(specificDiscount[1]);

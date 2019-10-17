@@ -34,8 +34,7 @@ public class FileIO {
     public void writeFile(String filename,String data) {
 
         if (filename.trim().length() > 0) {
-            try {
-                PrintWriter output = new PrintWriter(filename);
+            try {                PrintWriter output = new PrintWriter(filename);
 
                 output.append(data);
 

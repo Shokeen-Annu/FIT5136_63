@@ -10,7 +10,7 @@ public class PEInterface {
 
     public void displayMainMenu()
     {
-        commonController.createDatabase();
+        CommonController.createDatabase();
         int choiceNumber = -1;
         boolean flag = true;
         do {

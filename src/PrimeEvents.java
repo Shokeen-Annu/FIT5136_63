@@ -2,26 +2,17 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class PrimeEvents {
-
-    public User getEventUser() {
-        return eventUser;
-    }
-
-    public void setEventUser(User eventUser) {
-        this.eventUser = eventUser;
-    }
-
-    private User eventUser;
-    private ArrayList<Hall> hallList = new ArrayList<>();
-    private ArrayList<User> userList = new ArrayList<>();
-    private ArrayList<Booking> bookingList = new ArrayList<>();
-    private double veteranConcession;
-    private double seniorCitizenConcession;
-    private FileIO fileIO = new FileIO();
+    private static User eventUser;
+    private static ArrayList<Hall> hallList = new ArrayList<>();
+    private static ArrayList<User> userList = new ArrayList<>();
+    private static ArrayList<Booking> bookingList = new ArrayList<>();
+    private static double veteranConcession;
+    private static double seniorCitizenConcession;
+    private static FileIO fileIO = new FileIO();
     private InputValidation input = new InputValidation();
 
 
-    public void createHallList(){
+    public static void createHallList(){
         String allHalls = fileIO.readFile("Halls");
         String[] hallDetailsArr = allHalls.split(Pattern.quote("$$"));
         for(int i = 0; i< hallDetailsArr.length; i++)
@@ -43,9 +34,10 @@ public class PrimeEvents {
             hallList.add(temdriHall);
         }
     }
-    public void createUserList()
+
+    public static void createUserList()
     {
-        String allUsers = fileIO.readFile("Users");
+        String allUsers = fileIO.readFile("D:\\2019 monash S2\\FIT5136_Project\\FIT5136_ActualProject\\Users");
         String[] userDetails = allUsers.split(Pattern.quote("$$"));
         for(int i = 0; i< userDetails.length;i++)
         {
@@ -99,9 +91,16 @@ public class PrimeEvents {
 
     }
 
-    public void createBookingList()
+    public static void createBookingList()
     {
 
+    }
+    public static User getEventUser() {
+        return eventUser;
+    }
+
+    public static void setEventUser(User user) {
+        eventUser = user;
     }
     public boolean deleteUser()
     {
@@ -111,32 +110,32 @@ public class PrimeEvents {
         return result;
     }
 
-    public ArrayList<Hall> getHallList() {
+    public static ArrayList<Hall> getHallList() {
         return hallList;
     }
 
-    public ArrayList<User> getUserList() {
+    public static ArrayList<User> getUserList() {
         return userList;
     }
 
-    public ArrayList<Booking> getBookingList() {
+    public static ArrayList<Booking> getBookingList() {
         return bookingList;
     }
 
-    public double getVeteranConcession() {
+    public static double getVeteranConcession() {
         return veteranConcession;
     }
 
-    public void setVeteranConcession(double veteranConcession) {
-        this.veteranConcession = veteranConcession;
+    public static void setVeteranConcession(double concession) {
+        veteranConcession = concession;
     }
 
-    public double getSeniorCitizenConcession() {
+    public static double getSeniorCitizenConcession() {
         return seniorCitizenConcession;
     }
 
-    public void setSeniorCitizenConcession(double seniorCitizenConcession) {
-        this.seniorCitizenConcession = seniorCitizenConcession;
+    public static void setSeniorCitizenConcession(double senCitizenConcession) {
+        seniorCitizenConcession = senCitizenConcession;
     }
     public Hall getSpecificHall(int hallID)
     {
