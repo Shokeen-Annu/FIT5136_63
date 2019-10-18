@@ -30,15 +30,49 @@ public class CustomerController {
         return tryAgain;
     }
 
-    public void requestForQuotation(int hallId,Date date,Date bookinStartDate, Date bookingFinishDate, int numberOfGuest,double price,
+    public void requestForQuotation(int hallId,Date date,Date bookingStartDate, Date bookingFinishDate, int numberOfGuest,double price,
                                     boolean isCatering, String typeOfMeal)
     {
-
         int customerId = customer.getUserId();
-        customer.quoatationAdd(date,bookinStartDate, bookingFinishDate,numberOfGuest,customerId,hallId, price,
-       isCatering, typeOfMeal);
+        customer.quotationAdd(date,bookingStartDate, bookingFinishDate,numberOfGuest,customerId,hallId, price,
+                                isCatering, typeOfMeal);
+
         // save quotation into customer quotation list
+
     }
+    public  void currentQuotation() // interface
+    {
+        int hallId = customer.getLastQuotation().getHallId();
+        Date date =  customer.getLastQuotation().getDate();
+        Date bookingStartDate = customer.getLastQuotation().getBookingStartDate();
+        Date bookingFinishDate = customer.getLastQuotation().getBookingFinishDate();
+        int numberOfGuest = customer.getLastQuotation().getNumberOfGuest();
+        double price = customer.getLastQuotation().getPrice();
+        boolean isCatering = customer.getLastQuotation().isCatering();
+        String typeOfMeal = customer.getLastQuotation().getTypeOfMeal();
+        System.out.println("Hall ID : "+ hallId);
+        System.out.println("Today is : "+ date);
+        System.out.println("Booking Start Date : "+ bookingStartDate);
+        System.out.println("Booking Finish Date : "+ bookingFinishDate);
+        System.out.println("Number Of Guests : "+ numberOfGuest);
+        System.out.println("price : "+ price);
+        System.out.println("IsCatering : "+ isCatering);
+        System.out.println("Type Of Meal : "+ typeOfMeal);
+    }
+
+    public void saveQuotation()
+    {
+
+    }
+
+    public boolean payDeposit(int hallId,double price)
+    {
+        boolean result = false;
+        //code here
+        return result;
+    }
+
+
     private boolean cancelBooking(int bookingId)
     {
         boolean result = false;
@@ -73,12 +107,6 @@ public class CustomerController {
 
     }
 
-    private boolean payDeposit(int hallId,double price)
-    {
-        boolean result = false;
-        //code here
-        return result;
-    }
 
     private void viewReceipt(int bookingId)
     {

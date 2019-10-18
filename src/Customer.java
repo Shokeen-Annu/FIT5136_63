@@ -88,7 +88,7 @@ public class Customer extends User {
         this.quotationList = quotationList;
     }
 
-    public void quoatationAdd(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest,int customerId, int newHallId, double newPrice,
+    public void quotationAdd(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest,int customerId, int newHallId, double newPrice,
                               boolean newIsCatering, String newTypeOfMeal)
     {
         int quotationId = 1;
@@ -99,5 +99,12 @@ public class Customer extends User {
                                                 newIsCatering, newTypeOfMeal);
          quotationList.add(newQuotation);
     }
+
+    public Quotation getLastQuotation()
+    {
+        int index =  quotationList.size()-1;
+        return quotationList.get(index);
+    }
+
 }
 
