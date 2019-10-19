@@ -48,6 +48,10 @@ public class Discount {
 
     public String displayDiscount()
     {
-        return discountName + "/n" + value + "/n" + comments;
+        return "Discount id: " + discountId + "\n" + "Name: " + discountName + "\n" + "Discount value: "+ value + "\n" + "Discount: " + comments + "\n";
+    }
+    public String disFile()
+    {
+        return userId + "$" + discountId + "$" + discountName + "$" + value + "$" + comments + "$$";
     }
 }

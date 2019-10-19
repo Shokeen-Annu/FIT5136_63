@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputValidation {
@@ -20,7 +19,15 @@ public class InputValidation {
     public String receiveString()
     {
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        String inputString = "";
+        try{
+            inputString = scanner.nextLine();
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Please enter correct value.");
+        }
+        return inputString;
     }
     public int receiveInt()
     {
@@ -65,7 +72,44 @@ public class InputValidation {
                 !password.matches("(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)") ||
                 !(password.length()<5 || password.length()>12))
             return false;
-
         return true;
+    }
+
+    public boolean validateSpecialChar(String input)
+    {
+        if(input.matches("(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)"))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public double validateDiscountValue()
+    {
+            Scanner scanner = new Scanner(System.in);
+            double input = 0.0;
+            try {
+                input = scanner.nextDouble();
+                if(input > 1)
+                {
+                    System.out.println("Please enter the value smaller than 1");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println("Please enter double value.");
+            }
+            return input;
+    }
+    public int validateRange(int number, int small, int big)
+    {
+        do{
+            if(number < small || number > big )
+            {
+                System.out.println("Please enter correct value.");
+                number = receiveInt();
+            }
+        }while(number < small || number > big);
+        return number;
     }
 }

@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class OwnerInterface {
     private int choiceNumber;
     private InputValidation validator = new InputValidation();
@@ -8,6 +6,7 @@ public class OwnerInterface {
     public void displayOwnerMenu()
     {
         boolean flag = true;
+        commonController.createOwnerDiscountList();
         do {
             System.out.println("      WELCOME TO OWNER MENU     ");
             System.out.println();
@@ -20,8 +19,8 @@ public class OwnerInterface {
             System.out.println();
             System.out.println("Enter your choice number:");
             //Test
-            Scanner scanner = new Scanner(System.in);
-            choiceNumber = scanner.nextInt();
+
+            choiceNumber = validator.receiveInt();
 
             if (choiceNumber == 1) {
                 System.out.println("-------------- CREATE HALL --------------");
@@ -75,8 +74,8 @@ public class OwnerInterface {
             System.out.println("4 VIEW REVIEW OF HALLS");
             System.out.println("5 RETURN TO OWNER MENU");
             System.out.println("Enter your choice number:");
-            Scanner scanner = new Scanner(System.in);
-            choiceNumber = scanner.nextInt();
+
+            choiceNumber = validator.receiveInt();
 
             if (choiceNumber == 1) {
                 System.out.println("-------------- VIEW OWNER HALLS --------------");
@@ -145,8 +144,8 @@ public class OwnerInterface {
             System.out.println("2 PROVIDE QUOTATION");
             System.out.println("3 CANCEL BOOKING");
             System.out.println("4 RETURN TO OWNER MENU");
-            Scanner scanner = new Scanner(System.in);
-            choiceNumber = scanner.nextInt();
+
+            choiceNumber = validator.receiveInt();
 
             if (choiceNumber == 1) {
                 System.out.println("You can view receipts here");
@@ -181,8 +180,8 @@ public class OwnerInterface {
             System.out.println("2 DELETE DISCOUNT");
             System.out.println("3 EDIT DISCOUNT");
             System.out.println("4 RETURN TO OWNER MENU");
-            Scanner scanner = new Scanner(System.in);
-            choiceNumber = scanner.nextInt();
+            System.out.println("PLEASE ENTER A CHOICE");
+            choiceNumber = validator.receiveInt();
 
             if (choiceNumber == 1) {
                 System.out.println("Please add discount information");
@@ -192,12 +191,12 @@ public class OwnerInterface {
             }
             else if (choiceNumber == 2) {
                 System.out.println("You can delete discount here");
-                int deleteId = validator.receiveInt();
-                commonController.deleteDiscount(deleteId);
+                commonController.deleteDiscount();
                 manageOwnerDiscountFlag = backMenu();
             }
             else if (choiceNumber == 3) {
                 System.out.println("You can edit discount here");
+                commonController.editDiscount();
                 manageOwnerDiscountFlag = backMenu();
             }
             else if (choiceNumber == 4) {

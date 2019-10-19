@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+
 public class Owner extends User {
 
     private String securityQuestion1;
@@ -7,7 +9,7 @@ public class Owner extends User {
     private String securityAnswer2;
     private ArrayList<Hall> hallList;
 
-    private ArrayList<Discount> discountList;
+    private ArrayList<Discount> discountList = new ArrayList<>();
     private ArrayList<Booking> bookingList;
     private FileIO fileIO = new FileIO();
 
@@ -59,19 +61,22 @@ public class Owner extends User {
 
     public ArrayList<Discount> createDiscountList(int userId)
     {
-        String allDiscount = fileIO.readFile("D:\\2019 monash S2\\FIT5136_Project\\FIT5136_ActualProject\\Discounts.txt");
-        String[] discountDetail = allDiscount.split("$$");
-        if(getUserId() == userId) {
+        String allDiscount = fileIO.readFile("Discounts");
+        String[] discountDetail = allDiscount.split(Pattern.quote("$$"));
+
             for (int i = 0; i < discountDetail.length; i++) {
-                String[] specificDiscount = discountDetail[i].split("$");
-                Discount temdriDiscount = new Discount();
-                temdriDiscount.setDiscountId(Integer.parseInt(specificDiscount[0]));
-                temdriDiscount.setDiscountName(specificDiscount[1]);
-                temdriDiscount.setValue(Double.parseDouble(specificDiscount[2]));
-                temdriDiscount.setComments(specificDiscount[3]);
-                discountList.add(temdriDiscount);
+                String[] specificDiscount = discountDetail[i].split(Pattern.quote("$"));
+                if(userId == Integer.parseInt(specificDiscount[0])) {
+                    Discount temdriDiscount = new Discount();
+                    temdriDiscount.setUserId(Integer.parseInt(specificDiscount[0]));
+                    temdriDiscount.setDiscountId(Integer.parseInt(specificDiscount[1]));
+                    temdriDiscount.setDiscountName(specificDiscount[2]);
+                    temdriDiscount.setValue(Double.parseDouble(specificDiscount[3]));
+                    temdriDiscount.setComments(specificDiscount[4]);
+                    discountList.add(temdriDiscount);
+                }
             }
-        }
+
         return discountList;
     }
 

@@ -1,7 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 public class FileIO {
@@ -33,12 +30,13 @@ public class FileIO {
 
     public void writeFile(String filename,String data) {
 
+        BufferedWriter out = null;
         if (filename.trim().length() > 0) {
-            try {                PrintWriter output = new PrintWriter(filename);
-
-                output.append(data);
-
-                output.close();
+            try {
+                out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename,true)));
+                //PrintWriter output = new PrintWriter(filename);
+                out.write(data);
+                out.close();
             } catch (IOException e) {
                 System.out.println("I/O Error");
             }

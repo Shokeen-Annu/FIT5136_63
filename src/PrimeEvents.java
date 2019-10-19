@@ -73,7 +73,7 @@ public class PrimeEvents {
                             ownerHalls.add(hall);
                     }
                     ((Owner)user).createHallList(ownerHalls);
-                    ((Owner)user).createDiscountList(Integer.parseInt(userData[0]));
+
                     break;
                 default:
                         break;

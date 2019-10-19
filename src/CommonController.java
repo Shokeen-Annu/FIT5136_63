@@ -89,69 +89,96 @@ public class CommonController {
         }
 
     }
-    // take hardcoded email id
-    public void deleteDiscount(int discountId)
+    // users can use the method to delete discount
+    public void deleteDiscount()
     {
+
         ArrayList<User> allUsers = PrimeEvents.getUserList();
         for(int i = 0; i < allUsers.size(); i++)
         {
             if(allUsers.get(i) == PrimeEvents.getEventUser())
             {
                 Owner owner = (Owner)allUsers.get(i);
-                owner.getDiscountList().remove(discountId - 1);
-                System.out.println("Now, the system delete the discount.");
-                for(int index = 0; i < owner.getDiscountList().size(); i++)
+                owner.createDiscountList(owner.getUserId());
+                ArrayList<Discount> ownerDiscount = owner.getDiscountList();
+                if(ownerDiscount == null)
                 {
-                    String contents = owner.getUserId() + "$" + owner.getDiscountList().get(index).getDiscountName() + "$" +
-                                    owner.getDiscountList().get(index).getValue() + "$" + owner.getDiscountList().get(index).getComments()
-                                    + "$$";
-                    io.reWriteFile("Discounts", contents);
+                    System.out.println("Now, there is no discount in the database, so you can not delete any discount.");
                 }
-
+                else {
+                        for (int index = 0; index < ownerDiscount.size(); index++) {
+                         System.out.println(ownerDiscount.get(index).displayDiscount());
+                    }
+                    System.out.println("Please enter the choice");
+                       int discountId = validator.receiveInt();
+                       validator.validateRange(discountId,1,ownerDiscount.size());
+                    ownerDiscount.remove(discountId - 1);
+                    System.out.println("Now, the system delete the discount.");
+                    String discountContent = "";
+                    for (Discount item : ownerDiscount) {
+                        discountContent += item.disFile();
+                    }
+                    io.reWriteFile("Discounts", discountContent);
+                }
             }
         }
 
 
     }
 
-    public void editDiscount(int discountId) {
+    public void editDiscount() {
        ArrayList<User> allUsers = PrimeEvents.getUserList();
         for (int i = 0; i < allUsers.size(); i++) {
-            if (allUsers.get(i) == PrimeEvents.getEventUser()) {
+            if (allUsers.get(i).getUserId() == PrimeEvents.getEventUser().getUserId()) {
                 Owner owner = (Owner) allUsers.get(i);
-                System.out.println(owner.getDiscountList().get(discountId - 1).displayDiscount());
+                ArrayList<Discount> ownerDiscount = owner.getDiscountList();
                 System.out.println();
                 int disAttribute = -1;
-                do {
-                    System.out.println("Which attribute you want to ");
-                    System.out.println("1 NAME");
-                    System.out.println("2 VALUE");
-                    System.out.println("3 COMMENT");
-                    disAttribute = validator.receiveInt();
-                    switch (disAttribute) {
-                        case 1: {
-                            System.out.println("Please enter the name:");
-                            String disEditName = validator.receiveString();
-                            owner.getDiscountList().get(discountId - 1).setDiscountName(disEditName);
+                if(ownerDiscount.size() == 0)
+                {
+                    System.out.println("Now, there is no discount in the database, so you can not edit any discount.");
+                }
+                else{
+                    do {
+                        for(int index = 0; index < ownerDiscount.size();index++)
+                        {
+                            System.out.println(ownerDiscount.get(index).displayDiscount());
                         }
-                        break;
-                        case 2: {
-                            System.out.println("Please enter the value");
-                            double disEditValue = Double.parseDouble(validator.receiveString());
-                            owner.getDiscountList().get(discountId - 1).setValue(disEditValue);
-                        }
-                        break;
-                        case 3: {
-                            System.out.println("Please change the comments");
-                            String disEditComment = validator.receiveString();
-                            owner.getDiscountList().get(discountId - 1).setComments(disEditComment);
-                        }
-                        break;
-                        default:
-                            break;
-                    }
+                        System.out.println("Please choose a discount id");
+                        int discountId = validator.receiveInt();
+                       int correctDiscountId =  validator.validateRange(discountId,1,ownerDiscount.size());
+                        System.out.println("Which attribute you want to ");
+                        System.out.println("1 NAME");
+                        System.out.println("2 VALUE");
+                        System.out.println("3 COMMENT");
+                        disAttribute = validator.receiveInt();
+                        switch (disAttribute) {
+                            case 1:
+                                System.out.println("Please enter the name:");
+                                String disEditName = validator.receiveString();
+                                ownerDiscount.get(discountId - 1).setDiscountName(disEditName);
 
-                } while (disAttribute < 1 || disAttribute > 3);
+                                break;
+                            case 2:
+                                System.out.println("Please enter the value");
+                                double disEditValue = validator.validateDiscountValue();
+                                ownerDiscount.get(discountId - 1).setValue(disEditValue);
+                                break;
+                            case 3:
+                                System.out.println("Please change the comments");
+                                String disEditComment = validator.receiveString();
+                                ownerDiscount.get(discountId - 1).setComments(disEditComment);
+                                break;
+                            default:
+                                break;
+                        }
+                    } while (disAttribute < 1 || disAttribute > 3);
+                    String discountContent = "";
+                    for (Discount item : ownerDiscount) {
+                        discountContent += item.disFile();
+                    }
+                    io.reWriteFile("Discounts", discountContent);
+                }
             }
         }
     }
@@ -162,6 +189,16 @@ public class CommonController {
         PrimeEvents.createUserList();
         PrimeEvents.createBookingList();
 
+    }
+    public void createOwnerDiscountList()
+    {
+        int ownerId = PrimeEvents.getEventUser().getUserId();
+        ArrayList<User> allUsers = PrimeEvents.getUserList();
+        for(User user:allUsers)
+        {
+            if(user.getUserId() == ownerId)
+                ((Owner)user).createDiscountList(ownerId);
+        }
     }
 }
 

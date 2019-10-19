@@ -96,32 +96,27 @@ public class OwnerController {
     public void addDiscount()
     //String name, double value, int id, String comments
     {
-        //commonController.createDatabase();
-
-        Owner owner = (Owner)PrimeEvents.getEventUser();// the user in the owner is null
+        Owner owner = (Owner)PrimeEvents.getEventUser();
         ArrayList<Discount> ownerDiscount = owner.getDiscountList();
         int choose = -1;
+        int discountId;
         do{
-            if(ownerDiscount == null)
+            if(ownerDiscount.size() == 0)
             {
                 System.out.println("Now, there is no discount in the database");
                 System.out.println("Please add some discount.");
+                discountId = 1;
             }
-            for(int i = 0; i < owner.getDiscountList().size(); i++)
+            else
             {
-                Discount ownerDisDetail = owner.getDiscountList().get(i);
-                if (ownerDisDetail == null)
-                {
-                    System.out.println("Now, there is no discount in the database");
-                }
+                discountId = ownerDiscount.size() + 1;
             }
             System.out.println("Please enter discount name");
             String discountName = input.receiveString().trim();
             System.out.println("Please enter discount value");
-            double discountValue = Double.parseDouble(input.receiveString().trim());
+            double discountValue = input.validateDiscountValue();
             System.out.println("Please enter comments for the discount");
             String discountComments = input.receiveString().trim();
-            int discountId = ownerDiscount.size() + 1;
             System.out.println(discountId + "," + discountName + "," + discountValue + "," + discountComments + ";");
             System.out.println("Do you add the discount into system");
             System.out.println("1 YES     2 NO  (PLEASE ENTER NUMBER)");
@@ -129,7 +124,7 @@ public class OwnerController {
             String contents = owner.getUserId() + "$" + discountId + "$" + discountName + "$" + discountValue + "$" + discountComments + "$$";
             if(choose == 1)
             {
-                io.writeFile("Discounts", "contents");
+                io.writeFile("Discounts", contents);
             }
             else
                 System.out.println("Please re-add the discount");

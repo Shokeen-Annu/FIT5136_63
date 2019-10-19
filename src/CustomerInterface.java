@@ -138,10 +138,18 @@ public class CustomerInterface{
             Scanner scanner = new Scanner(System.in);
             searchChoice = scanner.nextInt();
             String searchInput = " ";
+            boolean specialChar = true;
             switch (searchChoice) {
                 case 1:
-                         System.out.println("Please enter the name of hall");
-                         searchInput = validator.receiveString().toUpperCase();
+                         do{
+                               System.out.println("Please enter the name of hall");
+                               searchInput = validator.receiveString().trim().toUpperCase();
+                               specialChar = validator.validateSpecialChar(searchInput);
+                               if(searchInput.isEmpty() == true || specialChar == false)
+                               {
+                                   System.out.println("Please enter the correct format!!");
+                               }
+                         }while(searchInput.isEmpty() == true || specialChar == false);
                          commonController.viewHalls("NAME", searchInput);
                         flag = backMenu();
                     break;
