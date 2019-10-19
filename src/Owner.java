@@ -78,6 +78,12 @@ public class Owner extends User {
         return discountList;
     }
 
+    /**
+     * This method converts the information into this format in order to write into the txt file.
+     *
+     * @param userId The integer indicates the user id.
+     *  @return String this convert value into this format
+     */
     public ArrayList<Discount> createDiscountList(int userId)
     {
         String allDiscount = fileIO.readFile("Discounts");
@@ -123,6 +129,11 @@ public class Owner extends User {
         quotationList.add(newQuotation);
     }
     @Override
+/**
+ * This method converts the information into this format in order to write into the txt file
+ *
+ *  @return String this convert value into this format
+ */
     public String toString() {
         return getUserId() +
                 "$" + getFirstName() +

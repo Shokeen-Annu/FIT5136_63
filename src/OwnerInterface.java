@@ -11,6 +11,11 @@ public class OwnerInterface {
     private InputValidation validator = new InputValidation();
     private CommonController commonController = new CommonController();
     private OwnerController ownerController = new OwnerController();
+
+    /**
+     * This method displays owner menu.
+     *
+     **/
     public void displayOwnerMenu()
     {
         boolean flag = true;
@@ -69,6 +74,12 @@ public class OwnerInterface {
             }
         } while (choiceNumber < 1 || choiceNumber >6 || !flag);
     }
+
+    /**
+     * This method displays manage hall menu.
+     *
+     * @return boolean This returns the value for back menu.
+     **/
     public boolean displayManageHallMenu()
     {
         boolean manageHallFlag = true;
@@ -199,6 +210,12 @@ public class OwnerInterface {
         } while (choiceNumber < 1 || choiceNumber >4 || !manageHallFlag);
         return true;
     }
+
+    /**
+     * This method displays manage booking menu.
+     *
+     * @return boolean This returns the value for back menu.
+     **/
     public boolean displayManageBookingMenu()
     {
         boolean manageBookingFlag = true;
@@ -241,6 +258,11 @@ public class OwnerInterface {
         return true;
     }
 
+    /**
+     * This method is to display manage discount menu.
+     *
+     * @return boolean This returns the value for back menu.
+     **/
     public boolean displayManageDiscountMenu ()
     {
         boolean manageOwnerDiscountFlag = true;

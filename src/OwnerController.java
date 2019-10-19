@@ -28,6 +28,7 @@ public class OwnerController {
         return new Hall();
     }
 
+
     public boolean deleteHall(Hall hall)
     {
         boolean result=false;
@@ -93,8 +94,12 @@ public class OwnerController {
     {
 
     }
+
+    /**
+     * This method is for adding discounts
+     *
+     **/
     public void addDiscount()
-    //String name, double value, int id, String comments
     {
         Owner owner = (Owner)PrimeEvents.getEventUser();
         ArrayList<Discount> ownerDiscount = owner.getDiscountList();
