@@ -4,11 +4,11 @@ import java.util.regex.Pattern;
 public class InputValidation {
 
 
-    public boolean validateInt(String inputLength)
+    public boolean validateInt(String input)
     {
-        for (int i = 0; i < inputLength.length();i++)
+        for (int i = 0; i < input.length();i++)
         {
-            char inputCharacter = inputLength.charAt(i);
+            char inputCharacter = input.charAt(i);
             if (inputCharacter < '0' || inputCharacter > '9')
             {
                 return false;
@@ -28,6 +28,20 @@ public class InputValidation {
             System.out.println("Please enter correct value.");
         }
         return inputString;
+    }
+    public boolean isStringNullOrEmpty(String input)
+    {
+        if(input.trim().isEmpty() || input == null)
+            return true;
+        else
+            return false;
+    }
+    public boolean validateLengthOfString(String input,int maxLength, int minLength)
+    {
+        if(input.length() >= minLength && input.length() <= maxLength)
+            return true;
+        else
+            return false;
     }
     public int receiveInt()
     {
@@ -53,7 +67,7 @@ public class InputValidation {
         if(email.trim().isEmpty() || email == null)
             return false;
 
-        Pattern pattern = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
 
         if(pattern.matcher(email).matches() == true)
             return true;
@@ -69,9 +83,45 @@ public class InputValidation {
         if(!password.matches("(.*[A-Z].*)") ||
                 !password.matches("(.*[0-9].*)") ||
                 !password.matches("(.*[a-z].*)") ||
-                !password.matches("(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)") ||
-                !(password.length()<5 || password.length()>12))
+                !password.matches("(.*[,~,!,@,#,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)") ||
+                (password.length()<5 || password.length()>12))
             return false;
+
+        return true;
+    }
+
+    public boolean isPhoneNumUnique(String input)
+    {
+        ArrayList<User> allUsers=  PrimeEvents.getUserList();
+        for(User user: allUsers)
+        {
+            if(user.getPhoneNumber().equals(input))
+                return false;
+        }
+        return true;
+    }
+
+    public boolean isEmailUnique(String input)
+    {
+        ArrayList<User> allUsers=  PrimeEvents.getUserList();
+        for(User user: allUsers)
+        {
+            if(user.getEmail().equals(input))
+                return false;
+        }
+        return true;
+    }
+
+    public boolean isDollarSign(String input)
+    {
+        for (int i = 0; i < input.length();i++)
+        {
+            char inputCharacter = input.charAt(i);
+            if (inputCharacter == '$')
+            {
+                return false;
+            }
+        }
         return true;
     }
 

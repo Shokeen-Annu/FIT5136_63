@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class FileIO {
 
@@ -61,5 +62,33 @@ public class FileIO {
             System.out.println("Enter a filename:");
         }
     }
+
+    public ArrayList<String[]> readFileToArray(String txtFile )
+    {
+        try
+        {
+            FileReader inputFile = new FileReader(txtFile);
+            Scanner parser = new Scanner(inputFile);
+            ArrayList<String[]> txt = new ArrayList<String[]>();
+            while(parser.hasNextLine())
+            {
+                String line = parser.nextLine();
+                String[] strArray = line.split(",");
+                txt.add(strArray);
+            }
+            inputFile.close();
+            return txt;
+        }
+        catch(FileNotFoundException exception)
+        {
+            System.out.println(txtFile + "not found");
+        }
+        catch(IOException exception)
+        {
+            System.out.println("Unexpected I/O error occurred");
+        }
+        return null;
+    }
+
 
 }

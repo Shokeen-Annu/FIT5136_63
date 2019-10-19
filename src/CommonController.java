@@ -85,6 +85,13 @@ public class CommonController {
                     }
                 }
                 break;
+            case "OWNER":
+                int ownerId = Integer.parseInt(searchInput);
+                for(Hall hall : allHalls)
+                {
+                    if(hall.getUserId() == ownerId)
+                        System.out.println(hall.displayHall());
+                }
                 default: break;
         }
 
@@ -189,6 +196,54 @@ public class CommonController {
         PrimeEvents.createUserList();
         PrimeEvents.createBookingList();
 
+    }
+
+    public boolean registerNewUser(String firstName, String lastName, String phoneNum, String email,
+    String password,String sq1,String sq1Ans,String sq2,String sq2Ans,boolean isVeteran,boolean isSenior,String role)
+    {
+        try {
+            User user = null;
+            if (role.equals("customer")) {
+                user = new Customer();
+                ((Customer) user).setSeniorCitizen(isSenior);
+                ((Customer) user).setVeteran(isVeteran);
+                ((Customer) user).setSecurityQuestion1(sq1);
+                ((Customer) user).setSecurityQuestion2(sq2);
+                ((Customer) user).setSecurityAnswer1(sq1Ans);
+                ((Customer) user).setSecurityAnswer2(sq2Ans);
+            } else if (role.equals("owner")) {
+                user = new Owner();
+                ((Owner) user).setSecurityQuestion1(sq1);
+                ((Owner) user).setSecurityQuestion2(sq2);
+                ((Owner) user).setSecurityAnswer1(sq1Ans);
+                ((Owner) user).setSecurityAnswer2(sq2Ans);
+            }
+
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setPhoneNumber(phoneNum);
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setAddress(" ");
+            user.setRole(role);
+            int maxUserId = -1;
+            for (User item : PrimeEvents.getUserList()) {
+                if (maxUserId < item.getUserId())
+                    maxUserId = item.getUserId();
+            }
+            user.setUserId(maxUserId + 1);
+            String userContent = "";
+            userContent = user.toString();
+
+            io.writeFile("Users", userContent);
+            PrimeEvents.createUserList();
+            return true;
+        }
+        catch(Exception ex)
+        {
+            System.out.println("User is not created. Some error occurred.");
+            return false;
+        }
     }
     public void createOwnerDiscountList()
     {

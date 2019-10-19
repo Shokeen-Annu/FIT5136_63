@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class OwnerInterface {
     private int choiceNumber;
     private InputValidation validator = new InputValidation();
@@ -93,11 +96,13 @@ public class OwnerInterface {
             }
             else if (choiceNumber == 3) {
                 boolean repeat = false;
+                boolean isDeleteConfirmed = true;
                 System.out.println("-------------- DELETE HALLS --------------");
                 System.out.println();
                 System.out.println();
                 System.out.println("Please select hall from the list below:");
-                commonController.viewHalls("ALL",""); //show only owner's halls
+                commonController.viewHalls("OWNER",
+                        Integer.toString(PrimeEvents.getEventUser().getUserId()));
                 do {
                     boolean isDeleteSuccess = false;
                     System.out.println("Enter hall number to delete:");
@@ -105,12 +110,68 @@ public class OwnerInterface {
                     if (hallId == -1)
                         repeat = true;
                     else {
-                        // ask for confirmation
-                        isDeleteSuccess = ownerController.deleteHall(hallId);
-                        if(isDeleteSuccess)
-                            System.out.println("Hall is deleted successfully");
-                        else
-                            System.out.println("Please enter correct hall number");
+                        ArrayList<Hall> allHalls = PrimeEvents.getHallList();
+                        Hall hall = null;
+                        for(Hall item: allHalls)
+                        {
+                            if(item.getHallId() == hallId) {
+                                hall = item;
+                                repeat = false;
+                            }
+                        }
+                        if(hall == null) {
+                            System.out.println("No such hall exist.");
+                            repeat = true;
+                        }
+                        if(!repeat) {
+                            boolean confirmationRepeat = false;
+                            do {
+                                System.out.println("Are you sure you want to delete the hall?");
+                                System.out.println("Enter your choice number");
+                                System.out.println("1 Yes");
+                                System.out.println("2 No");
+                                int isConfirmation = validator.receiveInt();
+                                if (isConfirmation == -1)
+                                    confirmationRepeat = true;
+                                else if (isConfirmation == 2) {
+                                    isDeleteConfirmed = false;
+                                    System.out.println("Hall is not deleted.");
+                                    System.out.println("Do you want to select hall again?");
+                                    boolean isSelectHallAgain = false;
+                                    do {
+                                        System.out.println("Enter your choice number");
+                                        System.out.println("1 Yes");
+                                        System.out.println("2 No");
+                                        int userSelection = validator.receiveInt();
+                                        if (userSelection == -1) {
+                                            isSelectHallAgain = true;
+                                            repeat = false;
+                                        }
+                                        else if (userSelection == 1) {
+                                            repeat = true;
+                                            isSelectHallAgain = false;
+                                        }
+                                        else
+                                        {
+                                            repeat = false;
+                                            isSelectHallAgain = false;
+                                        }
+                                    }while(isSelectHallAgain);
+
+                                }
+                                else if (isConfirmation == 1)
+                                    isDeleteConfirmed = true;
+                            } while (confirmationRepeat);
+                            if (isDeleteConfirmed) {
+                                isDeleteSuccess = ownerController.deleteHall(hall);
+                                if (isDeleteSuccess)
+                                    System.out.println("Hall is deleted successfully");
+                                else {
+                                    System.out.println("Please enter correct hall number from the list provided.");
+                                    repeat = true;
+                                }
+                            }
+                        }
                     }
                 }while(repeat);
 
@@ -141,7 +202,7 @@ public class OwnerInterface {
             System.out.println("      MANAGE BOOKING     ");
             System.out.println();
             System.out.println("1 VIEW RECEIPT");
-            System.out.println("2 PROVIDE QUOTATION");
+            System.out.println("2 VIEW QUOTATION");
             System.out.println("3 CANCEL BOOKING");
             System.out.println("4 RETURN TO OWNER MENU");
 
@@ -152,7 +213,13 @@ public class OwnerInterface {
                 manageBookingFlag = backMenu();
             }
             else if (choiceNumber == 2) {
+                ownerController.readQuotationFromTxt();
+                changeQuotation(false);
+
                 System.out.println("Please provide quotation to customer here");
+
+
+
                 manageBookingFlag = backMenu();
             }
             else if (choiceNumber == 3) {
@@ -217,5 +284,27 @@ public class OwnerInterface {
             return false;
         else
             return true;
+    }
+
+    public boolean changeQuotation (boolean isMainMenu)
+    {
+
+        System.out.println("Please Enter hall Id you want to change quotation a");
+        int hallId = validator.receiveInt();
+        System.out.println("Please Enter Customer Id you want to change quotation ");
+        int customerId = validator.receiveInt();
+
+        if(ownerController.readQuotationFromOwner(hallId,customerId))
+        {
+            int price =validator.receiveInt();
+            ownerController.changePrice(hallId,customerId,price);
+
+        }
+        else
+        {
+            return false;
+        }
+
+        return true;
     }
 }
