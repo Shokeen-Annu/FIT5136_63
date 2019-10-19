@@ -1,3 +1,9 @@
+/**
+ *  This is the an administrator controller. The method in this class is for administrator to realize their function.
+ *
+ * @author    Yuwu
+ * @version   20/10/2019
+ */
 public class AdminController {
 
 public boolean deleteCustomer(int customerId)

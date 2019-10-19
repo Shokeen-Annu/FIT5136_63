@@ -1,7 +1,12 @@
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
-
+/**
+ *  This is the FileIO entity. the method in this class is to read from txt file and write to txt file.
+ *
+ * @author    Annu Shokeen, Zhijie Li, YuWu
+ * @version   20/10/2019
+ */
 public class FileIO {
 
      public String readFile(String filePath)

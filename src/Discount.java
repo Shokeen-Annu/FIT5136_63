@@ -1,3 +1,9 @@
+/**
+ *  This is the discount entity, which contains the get, set and display methods about discount.
+ *
+ * @author    Annu Shokeen, Zhijie Li
+ * @version   20/10/2019
+ */
 public class Discount {
 
     private int discountId;
@@ -46,10 +52,21 @@ public class Discount {
         this.comments = comments;
     }
 
+    /**
+     * This method displays all the discount details
+     *
+     *  @return String This is discount detail
+     */
     public String displayDiscount()
     {
         return "Discount id: " + discountId + "\n" + "Name: " + discountName + "\n" + "Discount value: "+ value + "\n" + "Discount: " + comments + "\n";
     }
+
+    /**
+     * This method converts the information into this format in order to write into the txt file
+     *
+     *  @return String this convert value into this format
+     */
     public String disFile()
     {
         return userId + "$" + discountId + "$" + discountName + "$" + value + "$" + comments + "$$";

@@ -1,4 +1,9 @@
-
+/**
+ *  This is the Prime Event interface. This method contains the main menu, user menu and back menu.
+ *
+ * @author    Annu Shokeen
+ * @version   20/10/2019
+ */
 
 public class PEInterface {
 
@@ -8,6 +13,10 @@ public class PEInterface {
     private InputValidation validator = new InputValidation();
     private CommonController commonController = new CommonController();
 
+    /**
+     * This method displays the main menu.
+     *
+     */
     public void displayMainMenu()
     {
         CommonController.createDatabase();
@@ -310,6 +319,12 @@ public class PEInterface {
             }
         }while(choiceNumber<1 || choiceNumber>6 || !flag);
     }
+
+    /**
+     * This method converts the information into this format in order to write into the txt file
+     *
+     * @param  role The string is to identify the role of user
+     */
     public void displayUserMenu(String role)
     {
         role = role.toUpperCase();
@@ -330,6 +345,11 @@ public class PEInterface {
         }
     }
 
+    /**
+     * This method is used to back to  previous page.
+     *
+     * @return boolean to back menu
+     **/
     public boolean backMenu()
     {
         System.out.println("Press 0 to return to menu");

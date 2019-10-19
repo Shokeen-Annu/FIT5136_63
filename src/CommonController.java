@@ -1,4 +1,11 @@
 import java.util.ArrayList;
+/**
+ *  This is the common controller which contains the common methods. The primeEventLogin, logout and viewHall method, createDataBase
+ *  can be used by different role, and the deleteDiscount and editDiscount can be used by administrator and owner.
+ *
+ * @author    Annu Shokeen, Zhijie Li, YuWu
+ * @version   20/10/2019
+ */
 
 public class CommonController {
 

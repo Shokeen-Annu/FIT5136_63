@@ -3,7 +3,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
-
+/**
+ *  This is the a customer boundary class, which provides all the menu can be used by the customer.
+ *
+ * @author    Zhijie Li, YuWu
+ * @version   20/10/2019
+ */
 public class CustomerInterface{
 
     private InputValidation validator = new InputValidation();

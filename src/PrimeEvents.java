@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.regex.Pattern;
-
+/**
+ *  This is the a prime event entity class. using this class to create the database.
+ *  And some methods to get and set user list, hall list, and booking list.
+ *
+ * @author    Annu Shokeen, Zhijie Li, YuWu
+ * @version   20/10/2019
+ */
 public class PrimeEvents {
     private static User eventUser;
     private static ArrayList<Hall> hallList = new ArrayList<>();
@@ -11,7 +17,10 @@ public class PrimeEvents {
     private static FileIO fileIO = new FileIO();
     private InputValidation input = new InputValidation();
 
-
+    /**
+     * This method is to create a hall list and get all the hall information from the txt file.
+     *
+     */
     public static void createHallList(){
         String allHalls = fileIO.readFile("Halls");
         String[] hallDetailsArr = allHalls.split(Pattern.quote("$$"));
@@ -35,6 +44,10 @@ public class PrimeEvents {
         }
     }
 
+    /**
+     * This method is to create a user list and get all the users information from the txt file
+     *
+     */
     public static void createUserList()
     {
         String allUsers = fileIO.readFile("Users");

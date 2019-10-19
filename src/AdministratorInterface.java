@@ -1,9 +1,18 @@
 import java.util.Scanner;
-
+/**
+ *  This is the an administrator boundary class. The method in this class tis to display the  menu administrator.
+ *
+ * @author    Annu Shokeen
+ * @version   20/10/2019
+ */
 
 public class AdministratorInterface{
     private InputValidation validator = new InputValidation();
     private CommonController commonController = new CommonController();
+
+/**
+* This method displays the administrator menu.
+*/
     public void displayAdminMenu()
     {
         int admInput = -1;
@@ -55,6 +64,11 @@ public class AdministratorInterface{
     }while(admInput<1 || admInput>6 || !flag);
     }
 
+/**
+ * This method is used to back to  previous page.
+ *
+ * @return boolean to back menu
+**/
     public boolean backMenu()
     {
         System.out.println("Press 0 to return to menu");
@@ -64,6 +78,12 @@ public class AdministratorInterface{
         else
             return true;
     }
+
+/**
+ * This method displays the menu for viewing booking history.
+ *
+ *@return boolean This is for the back to previous menu
+**/
     public boolean viewBookingHistoryMenu() {
         boolean flag = true;
         int admView = -1;
@@ -98,6 +118,11 @@ public class AdministratorInterface{
         return true;
     }
 
+/**
+ * This method displays the menu for managing discount
+ *
+ * @return boolean This is for the back to  previous Menu
+**/
     public boolean manageDiscountMenu()
     {
         int admDis = -1;
@@ -138,6 +163,5 @@ public class AdministratorInterface{
     {
         return false;
     }
-
 
 }

@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 import java.util.Date;
+/**
+ *  This is the a owner entity class. This class inherits from the user class.
+ *
+ * @author    Zhijie Li, YuWu
+ * @version   20/10/2019
+ */
 
 import java.util.regex.Pattern;
 

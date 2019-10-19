@@ -1,7 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
+/**
+ *  This is the entity to save all the validate method.
+ *
+ * @author    Annu Shokeen, Zhijie Li
+ * @version   20/10/2019
+ */
 public class InputValidation {
 
 

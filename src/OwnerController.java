@@ -3,7 +3,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
+/**
+ *  This is the a owner controller class which contains all the methods can be used by owner.
+ *
+ * @author    Annu Shokeen, zhijie li, Yuwu
+ * @version   20/10/2019
+ */
 public class OwnerController {
     private Owner owner;
     private InputValidation input = new InputValidation();

@@ -1,5 +1,10 @@
 import java.util.ArrayList;
-import java.util.Scanner;
+/**
+ *  This is the a owner boundary class. The method in this class is to display all the menu about owner.
+ *
+ * @author    Annu Shokeen, zhijie li, Yuwu
+ * @version   20/10/2019
+ */
 
 public class OwnerInterface {
     private int choiceNumber;
@@ -276,6 +281,12 @@ public class OwnerInterface {
 
         return true;
     }
+
+    /**
+     * This method is used to back to  previous page.
+     *
+     * @return boolean to back menu
+     **/
     public boolean backMenu()
     {
         System.out.println("Press 0 to return to menu");
