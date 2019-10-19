@@ -91,10 +91,11 @@ public class Customer extends User {
     public void quotationAdd(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest,int customerId, int newHallId, double newPrice,
                               boolean newIsCatering, String newTypeOfMeal)
     {
-        int quotationId = 1;
-        quotationId= quotationId+1;
+        /*int quotationId = 1;
+        quotationId= quotationId+1;*/
 
-        Quotation newQuotation =new Quotation(  quotationId,newDate, newBookingStartDate,newBookingFinishDate,
+
+        Quotation newQuotation =new Quotation(  newDate, newBookingStartDate,newBookingFinishDate,
                                                 newNumberOfGuest,customerId,newHallId,newPrice,
                                                 newIsCatering, newTypeOfMeal);
          quotationList.add(newQuotation);
@@ -105,6 +106,12 @@ public class Customer extends User {
         int index =  quotationList.size()-1;
         return quotationList.get(index);
     }
+    public Quotation getSpecificQuotation(int index)
+    {
+        return quotationList.get(index);
+    }
+
+
 
 }
 

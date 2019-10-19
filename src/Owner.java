@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Date;
+
 public class Owner extends User {
 
     private String securityQuestion1;
@@ -7,11 +9,21 @@ public class Owner extends User {
     private String securityAnswer2;
     private ArrayList<Hall> hallList;
 
+
+
+    private ArrayList <Quotation> quotationList;
     private ArrayList<Discount> discountList;
     private ArrayList<Booking> bookingList;
     private FileIO fileIO = new FileIO();
 
 
+    public ArrayList<Quotation> getQuotationList() {
+        return quotationList;
+    }
+
+    public void setQuotatinList(ArrayList<Quotation> quotationList) {
+        this.quotationList = quotationList;
+    }
     public String getSecurityQuestion1() {
         return securityQuestion1;
     }
@@ -59,11 +71,11 @@ public class Owner extends User {
 
     public ArrayList<Discount> createDiscountList(int userId)
     {
-        String allDiscount = fileIO.readFile("Halls");
-        String[] discountDetail = allDiscount.split(";");
+        String allDiscount = fileIO.readFile("D:\\2019 monash S2\\FIT5136_Project\\FIT5136_ActualProject\\Discounts.txt");
+        String[] discountDetail = allDiscount.split("$$");
         if(getUserId() == userId) {
             for (int i = 0; i < discountDetail.length; i++) {
-                String[] specificDiscount = discountDetail[i].split(",");
+                String[] specificDiscount = discountDetail[i].split("$");
                 Discount temdriDiscount = new Discount();
                 temdriDiscount.setDiscountId(Integer.parseInt(specificDiscount[0]));
                 temdriDiscount.setDiscountName(specificDiscount[1]);
@@ -83,4 +95,19 @@ public class Owner extends User {
         this.bookingList = bookingList;
     }
 
+
+
+    public int HallsCount()
+    {
+        return hallList.size();
+    }
+
+    public void quotationAdd(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest, int customerId, int newHallId, double newPrice,
+                             boolean newIsCatering, String newTypeOfMeal)
+    {
+        Quotation newQuotation =new Quotation(  newDate, newBookingStartDate,newBookingFinishDate,
+                newNumberOfGuest,customerId,newHallId,newPrice,
+                newIsCatering, newTypeOfMeal);
+        quotationList.add(newQuotation);
+    }
 }

@@ -10,7 +10,7 @@ public class PEInterface {
 
     public void displayMainMenu()
     {
-        commonController.createDatabase();
+        CommonController.createDatabase();
         int choiceNumber = -1;
         boolean flag = true;
         do {
@@ -34,7 +34,7 @@ public class PEInterface {
                     commonController.viewHalls("ALL"," ");
                     break;
                 case 2:
-                    flag = customerInterface.displaySearchHallMenu(true);
+                    flag = customerInterface.displaySearchHallMenu(true, false);
                     break;
                 case 3:
 

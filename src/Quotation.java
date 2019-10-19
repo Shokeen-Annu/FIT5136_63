@@ -1,7 +1,7 @@
 import java.util.Date;
 
 public class Quotation {
-    private int quotationId;
+
     private Date date;
     private Date bookingStartDate;
     private Date bookingFinishDate;
@@ -13,10 +13,9 @@ public class Quotation {
     private String typeOfMeal;
 
 
-    public Quotation(int newQuotationId,Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest,int newUserId, int newHallId, double newPrice,
+    public Quotation(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest,int newUserId, int newHallId, double newPrice,
                      boolean newIsCatering, String newTypeOfMeal)
     {
-        quotationId=newQuotationId;
         date = newDate;
         bookingStartDate= newBookingStartDate;
         bookingFinishDate = newBookingFinishDate;
@@ -26,8 +25,11 @@ public class Quotation {
         price = newPrice;
         isCatering = newIsCatering;
         typeOfMeal=newTypeOfMeal;
-        quotationId = getQuotationId();
+
+
     }
+    public Quotation()
+    {}
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -42,13 +44,13 @@ public class Quotation {
         this.hallId = hallId;
     }
 
-    public int getQuotationId() {
+/*    public int getQuotationId() {
         return quotationId;
     }
 
     public void setQuotationId(int quotationId) {
         this.quotationId = quotationId;
-    }
+    }*/
 
     public Date getDate() {
         return date;

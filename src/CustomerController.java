@@ -1,10 +1,16 @@
+import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+
 
 public class CustomerController {
     private Customer customer = new Customer();
     private  Booking booking = new Booking();
     private PrimeEvents primeEvents = new PrimeEvents();
+    private  Hall hall = new Hall();
 
     public boolean bookHall(int id)
     {
@@ -40,8 +46,13 @@ public class CustomerController {
         // save quotation into customer quotation list
 
     }
-    public  void currentQuotation() // interface
+
+    public void saveQuotation()
     {
+        FileIO fileIO = new FileIO();
+        String message = "";
+
+        int customerId = customer.getUserId();
         int hallId = customer.getLastQuotation().getHallId();
         Date date =  customer.getLastQuotation().getDate();
         Date bookingStartDate = customer.getLastQuotation().getBookingStartDate();
@@ -50,27 +61,81 @@ public class CustomerController {
         double price = customer.getLastQuotation().getPrice();
         boolean isCatering = customer.getLastQuotation().isCatering();
         String typeOfMeal = customer.getLastQuotation().getTypeOfMeal();
-        System.out.println("Hall ID : "+ hallId);
-        System.out.println("Today is : "+ date);
-        System.out.println("Booking Start Date : "+ bookingStartDate);
-        System.out.println("Booking Finish Date : "+ bookingFinishDate);
-        System.out.println("Number Of Guests : "+ numberOfGuest);
-        System.out.println("price : "+ price);
-        System.out.println("IsCatering : "+ isCatering);
-        System.out.println("Type Of Meal : "+ typeOfMeal);
+        message +=  date + "," + bookingStartDate + "," +  bookingFinishDate + ","+ numberOfGuest + "," + customerId + ""
+                    + hallId + ","  + price + "," +isCatering + ","+ typeOfMeal + "\r\n";
+        fileIO.writeFile("Quotations",message);
     }
 
-    public void saveQuotation()
+    public void readQuotationFromTxt( )
     {
-
+        FileIO fileIO = new FileIO();
+        ArrayList<String[]> quotaionTxt = fileIO.readFileToArray("Quotations");
+        int customerId = customer.getUserId();
+        System.out.println("---------There are your quotations:---------");
+        for(int i = 0 ; i< quotaionTxt.size(); i++)
+        {
+            if (customerId== Integer.parseInt( quotaionTxt.get(i)[4]))
+            {
+                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+               try {
+                   Date date = dateFormat.parse(quotaionTxt.get(i)[0]);
+                   Date bookingStartDate = dateFormat.parse(quotaionTxt.get(i)[1]);
+                   Date bookingFinishDate = dateFormat.parse(quotaionTxt.get(i)[2]);
+                   int numberOfGuest = Integer.parseInt( quotaionTxt.get(i)[3]);
+                   customerId = Integer.parseInt( quotaionTxt.get(i)[4]);
+                   int hallId = Integer.parseInt( quotaionTxt.get(i)[5]);
+                   double price = Double.parseDouble( quotaionTxt.get(i)[6]);
+                   boolean isCatering = Boolean.parseBoolean(quotaionTxt.get(i)[7]);
+                   String typeOfMeal = quotaionTxt.get(i)[8];
+                   customer.quotationAdd(date,bookingStartDate, bookingFinishDate,numberOfGuest,customerId,hallId, price,
+                           isCatering, typeOfMeal);
+                   int j =1;
+                   System.out.println(j);
+                   System.out.println("Hall ID : "+ hallId);
+                   System.out.println("Quotation date : "+ date);
+                   System.out.println("Booking Start Date : "+ bookingStartDate);
+                   System.out.println("Booking Finish Date : "+ bookingFinishDate);
+                   System.out.println("Number Of Guests : "+ numberOfGuest);
+                   System.out.println("Price : "+ price);
+                   System.out.println("IsCatering : "+ isCatering);
+                   System.out.println("Type Of Meal : "+ typeOfMeal);
+                   System.out.println("----------------------------");
+                   j++;
+               }
+               catch (ParseException e) {
+                   System.out.println("The date format is wrong !");
+               }
+            }
+        }
     }
 
-    public boolean payDeposit(int hallId,double price)
+    public boolean readQuotationFromCustomer(int whichQuotation)
     {
-        boolean result = false;
-        //code here
-        return result;
+        int i = whichQuotation-1;
+        if (customer.getSpecificQuotation(i).getPrice() != 0)
+        {
+            System.out.println("The owner answered the quotation, you can pay the deposit now:");
+            return true;
+        }
+        else
+        {
+            System.out.println("Sorry, please wait owner to answer the quotation.");
+        }
+        return false;
     }
+
+    public void printReceipt(int whichQuotation, int cardNumber)
+    {
+        Date todayDate = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String date = dateFormat.format(todayDate);
+        int i = whichQuotation -1;
+        System.out.println("Customer Id:" + customer.getSpecificQuotation(i).getUserId());
+        System.out.println("Hall Id:" + customer.getSpecificQuotation(i).getHallId());
+        System.out.println("Card number:" + cardNumber);
+        System.out.println("Receipt Date" + date);
+    }
+
 
 
     private boolean cancelBooking(int bookingId)
@@ -90,10 +155,7 @@ public class CustomerController {
 
 
 
-    public void viewQuotation(int quotationId)
-    {
 
-    }
 
     private boolean updateAccount(String email, String password)
     {
