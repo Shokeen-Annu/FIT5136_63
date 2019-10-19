@@ -99,5 +99,23 @@ public class Customer extends User {
                                                 newIsCatering, newTypeOfMeal);
          quotationList.add(newQuotation);
     }
+
+    @Override
+    public String toString() {
+        return getUserId() +
+                "$" + getFirstName() +
+                "$" + getLastName() +
+                "$" + getPhoneNumber() +
+                "$" + getEmail() +
+                "$" + getPassword() +
+                "$" + getAddress() +
+                "$" + getRole() +
+                "$" + isVeteran +
+                "$" + isSeniorCitizen +
+                "$" + securityQuestion1 +
+                "$" + securityQuestion2 +
+                "$" + securityAnswer1 +
+                "$" + securityAnswer2 + "$$";
+    }
 }
 

@@ -83,4 +83,19 @@ public class Owner extends User {
         this.bookingList = bookingList;
     }
 
+    @Override
+    public String toString() {
+        return getUserId() +
+                "$" + getFirstName() +
+                "$" + getLastName() +
+                "$" + getPhoneNumber() +
+                "$" + getEmail() +
+                "$" + getPassword() +
+                "$" + getAddress() +
+                "$" + getRole() +
+                "$" + securityQuestion1 +
+                "$" + securityQuestion2 +
+                "$" + securityAnswer1 +
+                "$" + securityAnswer2 + "$$";
+    }
 }

@@ -18,22 +18,13 @@ public class OwnerController {
     {
         return new Hall();
     }
-    public boolean deleteHall(int hallId)
+
+    public boolean deleteHall(Hall hall)
     {
         boolean result=false;
         try {
             Owner owner = (Owner) PrimeEvents.getEventUser();
             ArrayList<Hall> allHalls = PrimeEvents.getHallList();
-            Hall hall = null;
-            for(Hall item: allHalls)
-            {
-                if(item.getHallId() == hallId) {
-                    hall = item;
-                    result = true;
-                }
-            }
-            if(hall == null)
-                return result;
             // verify hall exists for owner
             ArrayList<Hall> ownerHalls = owner.getHallList();
             boolean isHallVerified = false;

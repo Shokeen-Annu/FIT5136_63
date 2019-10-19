@@ -37,7 +37,7 @@ public class PrimeEvents {
 
     public static void createUserList()
     {
-        String allUsers = fileIO.readFile("D:\\2019 monash S2\\FIT5136_Project\\FIT5136_ActualProject\\Users");
+        String allUsers = fileIO.readFile("Users");
         String[] userDetails = allUsers.split(Pattern.quote("$$"));
         for(int i = 0; i< userDetails.length;i++)
         {
