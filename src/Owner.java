@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Date;
+
 public class Owner extends User {
 
     private String securityQuestion1;
@@ -7,11 +9,21 @@ public class Owner extends User {
     private String securityAnswer2;
     private ArrayList<Hall> hallList;
 
+
+
+    private ArrayList <Quotation> quotationList;
     private ArrayList<Discount> discountList;
     private ArrayList<Booking> bookingList;
     private FileIO fileIO = new FileIO();
 
 
+    public ArrayList<Quotation> getQuotationList() {
+        return quotationList;
+    }
+
+    public void setQuotatinList(ArrayList<Quotation> quotationList) {
+        this.quotationList = quotationList;
+    }
     public String getSecurityQuestion1() {
         return securityQuestion1;
     }
@@ -83,6 +95,21 @@ public class Owner extends User {
         this.bookingList = bookingList;
     }
 
+
+
+    public int HallsCount()
+    {
+        return hallList.size();
+    }
+
+    public void quotationAdd(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest, int customerId, int newHallId, double newPrice,
+                             boolean newIsCatering, String newTypeOfMeal)
+    {
+        Quotation newQuotation =new Quotation(  newDate, newBookingStartDate,newBookingFinishDate,
+                newNumberOfGuest,customerId,newHallId,newPrice,
+                newIsCatering, newTypeOfMeal);
+        quotationList.add(newQuotation);
+    }
     @Override
     public String toString() {
         return getUserId() +
