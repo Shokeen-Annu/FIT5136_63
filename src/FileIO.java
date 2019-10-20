@@ -48,6 +48,9 @@ public class FileIO {
      */
     public void writeFile(String filename,String data) {
 
+       String previousContent = readFile(filename);
+       String newContent = previousContent + data;
+       reWriteFile(filename,newContent);
         BufferedWriter out = null;
         if (filename.trim().length() > 0) {
             try {
@@ -86,7 +89,7 @@ public class FileIO {
         }
     }
 
-    public ArrayList<String[]> readFileToArray(String txtFile )
+  /*  public ArrayList<String[]> readFileToArray(String txtFile )
     {
         try
         {
@@ -96,7 +99,7 @@ public class FileIO {
             while(parser.hasNextLine())
             {
                 String line = parser.nextLine();
-                String[] strArray = line.split(",");
+                String[] strArray = line.split("$");
                 txt.add(strArray);
             }
             inputFile.close();
@@ -111,7 +114,7 @@ public class FileIO {
             System.out.println("Unexpected I/O error occurred");
         }
         return null;
-    }
+    }*/
 
 
 }

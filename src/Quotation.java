@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 /**
  *  This is the a quotation entity class. This class contains all the get and set method about quotation.
@@ -7,6 +8,15 @@ import java.util.Date;
  */
 public class Quotation {
 
+    public int getQuotationId() {
+        return quotationId;
+    }
+
+    public void setQuotationId(int quotationId) {
+        this.quotationId = quotationId;
+    }
+
+    private int quotationId;
     private Date date;
     private Date bookingStartDate;
     private Date bookingFinishDate;
@@ -16,6 +26,22 @@ public class Quotation {
     private double price;
     private boolean isCatering;
     private String typeOfMeal;
+
+    @Override
+    public String toString() {
+        SimpleDateFormat dateFormat =   new SimpleDateFormat( "dd-MM-yyyy" );
+        return dateFormat.format(date) +
+                "$" + dateFormat.format(bookingStartDate) +
+                "$" + dateFormat.format(bookingFinishDate) +
+                "$" + numberOfGuest +
+                "$" + userId +
+                "$" + hallId +
+                "$" + price +
+                "$" + isCatering +
+                "$" + typeOfMeal +
+                "$" + quotationId + "$$";
+    }
+
 
     /**
      * Non-default constructor for object of class Game
@@ -31,7 +57,7 @@ public class Quotation {
      * @param newTypeOfMeal A String indicates the meal type of the hall
      */
     public Quotation(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest,int newUserId, int newHallId, double newPrice,
-                     boolean newIsCatering, String newTypeOfMeal)
+                     boolean newIsCatering, String newTypeOfMeal,int id)
     {
         date = newDate;
         bookingStartDate= newBookingStartDate;
@@ -42,7 +68,7 @@ public class Quotation {
         price = newPrice;
         isCatering = newIsCatering;
         typeOfMeal=newTypeOfMeal;
-
+        quotationId = id;
 
     }
     public Quotation()

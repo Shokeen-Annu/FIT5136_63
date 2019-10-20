@@ -1,8 +1,8 @@
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 /**
  *  This is the an administrator controller. The method in this class is for administrator to realize their function.
  *
@@ -11,19 +11,23 @@ import java.util.Date;
  */
 
 public class CustomerController {
-    private Customer customer = new Customer();
+    //private Customer customer = new Customer();
     private  Booking booking = new Booking();
     private PrimeEvents primeEvents = new PrimeEvents();
     private  Hall hall = new Hall();
 
     public boolean bookHall(int id)
     {
-        boolean result = true;
-        int checkId = primeEvents.getSpecificHall(id-1).getHallId() +1;
-        if (id != checkId)
-       {
-            result = false;
-       }
+        int checkId = 0;
+        boolean result = false;
+        for(Hall hall :primeEvents.getHallList() ) {
+            checkId = hall.getHallId();
+
+            if (id == checkId) {
+                result = true;
+                break;
+            }
+        }
        return result;
     }
 
@@ -43,7 +47,9 @@ public class CustomerController {
     public void requestForQuotation(int hallId,Date date,Date bookingStartDate, Date bookingFinishDate, int numberOfGuest,double price,
                                     boolean isCatering, String typeOfMeal)
     {
-        int customerId = customer.getUserId();
+
+        Customer customer = (Customer) PrimeEvents.getEventUser();
+        int customerId = primeEvents.getEventUser().getUserId();
         customer.quotationAdd(date,bookingStartDate, bookingFinishDate,numberOfGuest,customerId,hallId, price,
                                 isCatering, typeOfMeal);
 
@@ -55,66 +61,91 @@ public class CustomerController {
     {
         FileIO fileIO = new FileIO();
         String message = "";
+        Customer customer = (Customer) PrimeEvents.getEventUser();
+        SimpleDateFormat sdf =   new SimpleDateFormat( " dd-MM-yyyy " );
 
-        int customerId = customer.getUserId();
+        int customerId = PrimeEvents.getEventUser().getUserId();
         int hallId = customer.getLastQuotation().getHallId();
+
         Date date =  customer.getLastQuotation().getDate();
+        String dateString = sdf.format(date);
+
         Date bookingStartDate = customer.getLastQuotation().getBookingStartDate();
+        String  bookingStartDateString = sdf.format(bookingStartDate);
+
         Date bookingFinishDate = customer.getLastQuotation().getBookingFinishDate();
+        String bookingFinishDateString = sdf.format(bookingFinishDate);
         int numberOfGuest = customer.getLastQuotation().getNumberOfGuest();
         double price = customer.getLastQuotation().getPrice();
         boolean isCatering = customer.getLastQuotation().isCatering();
-        String typeOfMeal = customer.getLastQuotation().getTypeOfMeal();
-        message +=  date + "," + bookingStartDate + "," +  bookingFinishDate + ","+ numberOfGuest + "," + customerId + ""
-                    + hallId + ","  + price + "," +isCatering + ","+ typeOfMeal + "\r\n";
+        String typeOfMeal = " ";
+        typeOfMeal = customer.getLastQuotation().getTypeOfMeal();
+
+        // Create quotation id
+        int maxId = 0;
+        for(Quotation quotation:PrimeEvents.getQuotationList())
+        {
+            int id = quotation.getQuotationId();
+            if(maxId < id)
+                maxId = id;
+        }
+        message +=  dateString.trim() + "$" + bookingStartDateString.trim() + "$" +  bookingFinishDateString.trim() + "$"+ numberOfGuest + "$" + customerId + "$"
+                    + hallId + "$"  + price + "$" +isCatering + "$"+ typeOfMeal + "$"+(maxId+1)+"$$";
         fileIO.writeFile("Quotations",message);
     }
 
-    public void readQuotationFromTxt( )
-    {
+    public void readQuotationFromTxt( ) {
         FileIO fileIO = new FileIO();
-        ArrayList<String[]> quotaionTxt = fileIO.readFileToArray("Quotations");
-        int customerId = customer.getUserId();
         System.out.println("---------There are your quotations:---------");
-        for(int i = 0 ; i< quotaionTxt.size(); i++)
-        {
-            if (customerId== Integer.parseInt( quotaionTxt.get(i)[4]))
-            {
-                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-               try {
-                   Date date = dateFormat.parse(quotaionTxt.get(i)[0]);
-                   Date bookingStartDate = dateFormat.parse(quotaionTxt.get(i)[1]);
-                   Date bookingFinishDate = dateFormat.parse(quotaionTxt.get(i)[2]);
-                   int numberOfGuest = Integer.parseInt( quotaionTxt.get(i)[3]);
-                   customerId = Integer.parseInt( quotaionTxt.get(i)[4]);
-                   int hallId = Integer.parseInt( quotaionTxt.get(i)[5]);
-                   double price = Double.parseDouble( quotaionTxt.get(i)[6]);
-                   boolean isCatering = Boolean.parseBoolean(quotaionTxt.get(i)[7]);
-                   String typeOfMeal = quotaionTxt.get(i)[8];
-                   customer.quotationAdd(date,bookingStartDate, bookingFinishDate,numberOfGuest,customerId,hallId, price,
-                           isCatering, typeOfMeal);
-                   int j =1;
-                   System.out.println(j);
-                   System.out.println("Hall ID : "+ hallId);
-                   System.out.println("Quotation date : "+ date);
-                   System.out.println("Booking Start Date : "+ bookingStartDate);
-                   System.out.println("Booking Finish Date : "+ bookingFinishDate);
-                   System.out.println("Number Of Guests : "+ numberOfGuest);
-                   System.out.println("Price : "+ price);
-                   System.out.println("IsCatering : "+ isCatering);
-                   System.out.println("Type Of Meal : "+ typeOfMeal);
-                   System.out.println("----------------------------");
-                   j++;
-               }
-               catch (ParseException e) {
-                   System.out.println("The date format is wrong !");
-               }
-            }
+        ArrayList<Quotation> allQuotationList = PrimeEvents.getQuotationList();
+        boolean isNoQuotation = true;
+        for (Quotation quotation : allQuotationList) {
+
+                Customer customer = (Customer) PrimeEvents.getEventUser();
+                if (customer.getUserId() == quotation.getUserId()) {
+                    isNoQuotation = false;
+                    Date date = quotation.getDate();
+                    Date bookingStartDate = quotation.getBookingStartDate();
+                    Date bookingFinishDate = quotation.getBookingFinishDate();
+                    int numberOfGuest = quotation.getNumberOfGuest();
+                    int customerId = quotation.getUserId();
+                    int hallId = quotation.getHallId();
+                    double price = quotation.getPrice();
+                    boolean isCatering = quotation.isCatering();
+                    String typeOfMeal = quotation.getTypeOfMeal();
+                    customer.quotationAddFromText(date, bookingStartDate, bookingFinishDate, numberOfGuest, customerId, hallId, price,
+                            isCatering, typeOfMeal, quotation.getQuotationId());
+                    SimpleDateFormat dateFormat =   new SimpleDateFormat( "dd-MM-yyyy" );
+                    System.out.println("Request Id :" + quotation.getQuotationId());
+                    System.out.println("Hall ID : " + hallId);
+                    System.out.println("Customer ID : " + customerId);
+                    System.out.println("Quotation date : " + dateFormat.format(date));
+                    System.out.println("Booking Start Date : " + dateFormat.format(bookingStartDate));
+                    System.out.println("Booking Finish Date : " + dateFormat.format(bookingFinishDate));
+                    System.out.println("Number Of Guests : " + numberOfGuest);
+                    System.out.println("Price : " + price);
+                    System.out.println("IsCatering : " + isCatering);
+                    System.out.println("Type Of Meal : " + typeOfMeal);
+                    System.out.println("----------------------------");
+                }
+
         }
     }
 
     public boolean readQuotationFromCustomer(int whichQuotation)
     {
+        int checkQuotation = 0;
+        boolean result = false;
+        Customer customer = (Customer) PrimeEvents.getEventUser();
+        for(Quotation quotation : PrimeEvents.getQuotationList())
+        {
+            checkQuotation = quotation.getQuotationId();
+            if( checkQuotation == whichQuotation)
+            {
+                result = true;
+                break;
+            }
+        }
         int i = whichQuotation-1;
         if (customer.getSpecificQuotation(i).getPrice() != 0)
         {
@@ -125,19 +156,21 @@ public class CustomerController {
         {
             System.out.println("Sorry, please wait owner to answer the quotation.");
         }
-        return false;
+        return result;
+
     }
 
-    public void printReceipt(int whichQuotation, int cardNumber)
+    public void printReceipt(int whichQuotation, String cardNumber)
     {
+        Customer customer = (Customer) PrimeEvents.getEventUser();
         Date todayDate = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String date = dateFormat.format(todayDate);
         int i = whichQuotation -1;
-        System.out.println("Customer Id:" + customer.getSpecificQuotation(i).getUserId());
-        System.out.println("Hall Id:" + customer.getSpecificQuotation(i).getHallId());
-        System.out.println("Card number:" + cardNumber);
-        System.out.println("Receipt Date" + date);
+        System.out.println("Customer Id: " + customer.getSpecificQuotation(i).getUserId());
+        System.out.println("Hall Id: " + customer.getSpecificQuotation(i).getHallId());
+        System.out.println("Card number: " + cardNumber);
+        System.out.println("Receipt Date: " + dateFormat.format(date));
     }
 
 

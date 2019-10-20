@@ -1,8 +1,12 @@
+import com.sun.org.apache.xpath.internal.operations.Quo;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Pattern;
+
 /**
  *  This is the a owner controller class which contains all the methods can be used by owner.
  *
@@ -10,10 +14,10 @@ import java.util.Date;
  * @version   20/10/2019
  */
 public class OwnerController {
-    private Owner owner;
+
     private InputValidation input = new InputValidation();
     private FileIO io = new FileIO();
-    //private PrimeEvents primeEvents = new PrimeEvents();
+    private PrimeEvents primeEvents = new PrimeEvents();
     private CommonController commonController = new CommonController();
     private boolean addHall(Hall hall)
     {
@@ -151,127 +155,103 @@ public class OwnerController {
     public void readQuotationFromTxt( )
     {
         FileIO fileIO = new FileIO();
-        ArrayList<String[]> quotaionTxt = fileIO.readFileToArray("Quotations");
-        ArrayList <Hall> ownersHalls = owner.getHallList();
+        ArrayList<Quotation> allQuotationList = PrimeEvents.getQuotationList();
+        ArrayList<Hall> allHalls = PrimeEvents.getHallList();
+        //match quotation to owner's hall
+        boolean isNoQuotation = true;
 
-
-        System.out.println("---------There are your quotations:---------");
-        for(int i = 0 ; i< quotaionTxt.size(); i++)
+        for(Quotation quotation: allQuotationList)
         {
-            for(int n=0;n< owner.HallsCount();n++)
+            for(Hall hall:allHalls)
             {
-            int hallId =  ownersHalls.get(n).getUserId(); ;
-            if (hallId == Integer.parseInt( quotaionTxt.get(i)[5]))
-            {
-                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                try {
-                    Date date = dateFormat.parse(quotaionTxt.get(i)[0]);
-                    Date bookingStartDate = dateFormat.parse(quotaionTxt.get(i)[1]);
-                    Date bookingFinishDate = dateFormat.parse(quotaionTxt.get(i)[2]);
-                    int numberOfGuest = Integer.parseInt( quotaionTxt.get(i)[3]);
-                    int customerId = Integer.parseInt( quotaionTxt.get(i)[4]);
-                    hallId = Integer.parseInt( quotaionTxt.get(i)[5]);
-                    double price = Double.parseDouble( quotaionTxt.get(i)[6]);
-                    boolean isCatering = Boolean.parseBoolean(quotaionTxt.get(i)[7]);
-                    String typeOfMeal = quotaionTxt.get(i)[8];
-                    owner.quotationAdd(date,bookingStartDate, bookingFinishDate,numberOfGuest,customerId,hallId, price,
-                           isCatering, typeOfMeal);
-                    int j =1;
-                    System.out.println(j);
-                    System.out.println("Hall ID : "+ hallId);
-                    System.out.println("Customer ID : "+ customerId);
-                    System.out.println("Quotation date : "+ date);
-                    System.out.println("Booking Start Date : "+ bookingStartDate);
-                    System.out.println("Booking Finish Date : "+ bookingFinishDate);
-                    System.out.println("Number Of Guests : "+ numberOfGuest);
-                    System.out.println("Price : "+ price);
-                    System.out.println("IsCatering : "+ isCatering);
-                    System.out.println("Type Of Meal : "+ typeOfMeal);
+                int ownerId = hall.getUserId();
+                Owner owner = (Owner)PrimeEvents.getEventUser();
+                if( hall.getHallId() == quotation.getHallId() && ownerId == owner.getUserId()) {
+                    isNoQuotation = false;
+                    Date date = quotation.getDate();
+                    Date bookingStartDate = quotation.getBookingStartDate();
+                    Date bookingFinishDate = quotation.getBookingFinishDate();
+                    int numberOfGuest = quotation.getNumberOfGuest();
+                    int customerId = quotation.getUserId();
+                    int hallId = quotation.getHallId();
+                    double price = quotation.getPrice();
+                    boolean isCatering = quotation.isCatering();
+                    String typeOfMeal = quotation.getTypeOfMeal();
+                    owner.quotationAdd(date, bookingStartDate, bookingFinishDate, numberOfGuest, customerId, hallId, price,
+                            isCatering, typeOfMeal,quotation.getQuotationId());
+
+                    System.out.println("Request Id :"+ quotation.getQuotationId());
+                    System.out.println("Hall ID : " + hallId);
+                    System.out.println("Customer ID : " + customerId);
+                    System.out.println("Quotation date : " + date);
+                    System.out.println("Booking Start Date : " + bookingStartDate);
+                    System.out.println("Booking Finish Date : " + bookingFinishDate);
+                    System.out.println("Number Of Guests : " + numberOfGuest);
+                    System.out.println("Price : " + price);
+                    System.out.println("IsCatering : " + isCatering);
+                    System.out.println("Type Of Meal : " + typeOfMeal);
                     System.out.println("----------------------------");
-                    j++;
+
                 }
-                catch (ParseException e) {
-                    System.out.println("The date format is wrong !");
-                }
-            }
             }
         }
+        if(isNoQuotation)
+        {
+            System.out.println("You do not have any quotation");
+        }
+
     }
 
-    public boolean readQuotationFromOwner (int hallId,int customerId)
+    public boolean readQuotationFromOwner (int requestId)
     {
+        Owner owner = (Owner)PrimeEvents.getEventUser();
         ArrayList <Quotation> quotations = owner.getQuotationList();
+        boolean isQuotationExist = false;
         for(int i=0; i < quotations.size();i++) {
-            if (  hallId == quotations.get(i).getHallId() && customerId == quotations.get(i).getUserId()) {
-                System.out.println("Now you can change quotation price:");
+            if (  requestId == quotations.get(i).getQuotationId()) {
+                System.out.println("You are verified to create quotation. Enter quotation price:");
+                isQuotationExist = true;
                 return true;
-            } else {
-                System.out.println("Sorry, the quotation is not exist.");
             }
         }
+        if (!isQuotationExist) {
+        System.out.println("Sorry, the quotation does not exist.");
+    }
         return false;
     }
 
 
-    public void changePrice(int theHallId, int theCustomerId,int changePrice) {
+    public void changePrice(int requestId,int changePrice) {
+        Owner owner = (Owner)PrimeEvents.getEventUser();
+        boolean isQuotationUpdated = false;
         ArrayList<Quotation> quotations = owner.getQuotationList();
         for (int i = 0; i < quotations.size(); i++) {
-            if (theHallId == quotations.get(i).getHallId() && theCustomerId == quotations.get(i).getUserId()) {
+            if (requestId == quotations.get(i).getQuotationId()) {
                 quotations.get(i).setPrice(changePrice);
-            }
-        }
-        FileIO fileIO = new FileIO();
-        ArrayList<String[]> quotationTxt = fileIO.readFileToArray("Quotations");
-        ArrayList <Quotation> allQuotationList = new ArrayList<>();
-
-        // read all quotation from txt
-        for (int i = 0; i < quotationTxt.size(); i++) {
-            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            try {
-                Date date = dateFormat.parse(quotationTxt.get(i)[0]);
-                Date bookingStartDate = dateFormat.parse(quotationTxt.get(i)[1]);
-                Date bookingFinishDate = dateFormat.parse(quotationTxt.get(i)[2]);
-                int numberOfGuest = Integer.parseInt(quotationTxt.get(i)[3]);
-                int customerID = Integer.parseInt(quotationTxt.get(i)[4]);
-                int hallId = Integer.parseInt(quotationTxt.get(i)[5]);
-                double price = Double.parseDouble(quotationTxt.get(i)[6]);
-                boolean isCatering = Boolean.parseBoolean(quotationTxt.get(i)[7]);
-                String typeOfMeal = quotationTxt.get(i)[8];
-
-                Quotation newQuotation =new Quotation(  date, bookingStartDate, bookingFinishDate, numberOfGuest, customerID, hallId, price,
-                        isCatering, typeOfMeal);
-                allQuotationList.add(newQuotation);
-            } catch (ParseException e) {
-                System.out.println("The date format is wrong !");
+                isQuotationUpdated = true;
             }
         }
 
-        // write quotation price
-        String message = "";
-        for(int j=0;j< allQuotationList.size();j++) {
-            int customerId = allQuotationList.get(j).getUserId();
-            int hallId = allQuotationList.get(j).getHallId();
-            Date date = allQuotationList.get(j).getDate();
-            Date bookingStartDate = allQuotationList.get(j).getBookingStartDate();
-            Date bookingFinishDate = allQuotationList.get(j).getBookingFinishDate();
-            int numberOfGuest = allQuotationList.get(j).getNumberOfGuest();
-            boolean isCatering = allQuotationList.get(j).isCatering();
-            String typeOfMeal = allQuotationList.get(j).getTypeOfMeal();
-            if(theCustomerId == allQuotationList.get(j).getUserId() && theHallId == allQuotationList.get(j).getHallId())
+
+        ArrayList <Quotation> allQuotationList = PrimeEvents.getQuotationList();
+        //Update quotation text file
+        if(isQuotationUpdated) {
+            owner.setQuotatinList(quotations);
+
+            for (Quotation quotation : allQuotationList) {
+                if (quotation.getQuotationId() == requestId) {
+                    quotation.setPrice(changePrice);
+                }
+
+            }
+            String content = "";
+            for(Quotation quotation: allQuotationList)
             {
-                double price = changePrice;
-                message += date + "," + bookingStartDate + "," + bookingFinishDate + "," + numberOfGuest + "," + customerId + ""
-                        + hallId + "," + price + "," + isCatering + "," + typeOfMeal + "\r\n";
-                fileIO.writeFile("Quotations", message);
+                content += quotation.toString();
             }
-            else
-            {
-                 double price = allQuotationList.get(j).getPrice();
-                message += date + "," + bookingStartDate + "," + bookingFinishDate + "," + numberOfGuest + "," + customerId + ""
-                        + hallId + "," + price + "," + isCatering + "," + typeOfMeal + "\r\n";
-                fileIO.writeFile("Quotations", message);
-            }
+            io.reWriteFile("Quotations",content);
         }
+
     }
 }
 

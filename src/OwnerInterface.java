@@ -20,6 +20,7 @@ public class OwnerInterface {
     {
         boolean flag = true;
         commonController.createOwnerDiscountList();
+
         do {
             System.out.println("      WELCOME TO OWNER MENU     ");
             System.out.println();
@@ -224,7 +225,7 @@ public class OwnerInterface {
             System.out.println("      MANAGE BOOKING     ");
             System.out.println();
             System.out.println("1 VIEW RECEIPT");
-            System.out.println("2 VIEW QUOTATION");
+            System.out.println("2 VIEW REQUESTS FOR QUOTATIONS");
             System.out.println("3 CANCEL BOOKING");
             System.out.println("4 RETURN TO OWNER MENU");
 
@@ -235,10 +236,11 @@ public class OwnerInterface {
                 manageBookingFlag = backMenu();
             }
             else if (choiceNumber == 2) {
+                System.out.println("---------There are your requests for quotations:---------");
                 ownerController.readQuotationFromTxt();
                 changeQuotation(false);
 
-                System.out.println("Please provide quotation to customer here");
+
 
 
 
@@ -322,15 +324,13 @@ public class OwnerInterface {
     public boolean changeQuotation (boolean isMainMenu)
     {
 
-        System.out.println("Please Enter hall Id you want to change quotation a");
-        int hallId = validator.receiveInt();
-        System.out.println("Please Enter Customer Id you want to change quotation ");
-        int customerId = validator.receiveInt();
+        System.out.println("Please enter request id to create a quotation:");
+        int requestId = validator.receiveInt();
 
-        if(ownerController.readQuotationFromOwner(hallId,customerId))
+        if(ownerController.readQuotationFromOwner(requestId))
         {
             int price =validator.receiveInt();
-            ownerController.changePrice(hallId,customerId,price);
+            ownerController.changePrice(requestId,price);
 
         }
         else

@@ -230,6 +230,7 @@ public class CommonController {
         PrimeEvents.createHallList();
         PrimeEvents.createUserList();
         PrimeEvents.createBookingList();
+        PrimeEvents.createQuotationList();
 
     }
 
