@@ -201,10 +201,5 @@ public class PrimeEvents {
     public static void setSeniorCitizenConcession(double senCitizenConcession) {
         seniorCitizenConcession = senCitizenConcession;
     }
-    public Hall getSpecificHall(int hallID)
-    {
-
-        return hallList.get(hallID-1);
-    }
 
 }
