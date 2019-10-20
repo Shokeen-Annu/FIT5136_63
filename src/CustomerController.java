@@ -134,30 +134,29 @@ public class CustomerController {
 
     public boolean readQuotationFromCustomer(int whichQuotation)
     {
-        int checkQuotation = 0;
-        boolean result = false;
+
         Customer customer = (Customer) PrimeEvents.getEventUser();
-        for(Quotation quotation : PrimeEvents.getQuotationList())
-        {
-            checkQuotation = quotation.getQuotationId();
-            if( checkQuotation == whichQuotation)
-            {
-                result = true;
-                break;
+        ArrayList <Quotation> quotations = customer.getQuotationList();
+        boolean isQuotationExist = false;
+        for(int i=0; i < quotations.size();i++) {
+            if (  whichQuotation == quotations.get(i).getQuotationId()) {
+                if (quotations.get(i).getPrice() != 0)
+                {
+                    System.out.println("The owner answered the quotation, you can pay the deposit now:");
+                    return true;
+                }
+                else
+                {
+                    System.out.println("Sorry, please wait owner to answer the quotation.");
+                }
+                isQuotationExist = true;
+                return true;
             }
         }
-        int i = whichQuotation-1;
-        if (customer.getSpecificQuotation(i).getPrice() != 0)
-        {
-            System.out.println("The owner answered the quotation, you can pay the deposit now:");
-            return true;
+        if (!isQuotationExist) {
+            System.out.println("Sorry, the quotation does not exist.");
         }
-        else
-        {
-            System.out.println("Sorry, please wait owner to answer the quotation.");
-        }
-        return result;
-
+        return false;
     }
 
     public void printReceipt(int whichQuotation, String cardNumber)
