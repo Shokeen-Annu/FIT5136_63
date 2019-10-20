@@ -16,6 +16,11 @@ public class CustomerController {
     private PrimeEvents primeEvents = new PrimeEvents();
     private  Hall hall = new Hall();
 
+    /**
+     * This method check customer's input hall id exist or not.
+     *
+     * @return boolean returns to customerInterface to check the hall exist or not.
+     **/
     public boolean bookHall(int id)
     {
         int checkId = 0;
@@ -31,6 +36,11 @@ public class CustomerController {
        return result;
     }
 
+    /**
+     * This method ask customer to confirm customer want to book this hall or not.
+     *
+     * @return boolean returns to customerInterface to check customer want to confirm or not.
+     **/
     public boolean askForConfirmation(int choice)
     {
         boolean tryAgain = false;
@@ -44,6 +54,10 @@ public class CustomerController {
         return tryAgain;
     }
 
+    /**
+     * This method add what customer inputs the details quotation to quotation list of the customer.
+
+     **/
     public void requestForQuotation(int hallId,Date date,Date bookingStartDate, Date bookingFinishDate, int numberOfGuest,double price,
                                     boolean isCatering, String typeOfMeal)
     {
@@ -57,6 +71,9 @@ public class CustomerController {
 
     }
 
+    /**
+     * This method save quotation to txt file.
+     **/
     public void saveQuotation()
     {
         FileIO fileIO = new FileIO();
@@ -94,6 +111,9 @@ public class CustomerController {
         fileIO.writeFile("Quotations",message);
     }
 
+    /**
+     * This method read "Quotations" txt file to read quotation's information and display.
+     **/
     public void readQuotationFromTxt( ) {
         FileIO fileIO = new FileIO();
         System.out.println("---------There are your quotations:---------");
@@ -132,6 +152,13 @@ public class CustomerController {
         }
     }
 
+    /**
+     * This method read quotation from this customer quotation list,
+     * Check the customer input if it equals to quotation Id or not.
+     * Check the quotation which price is provided
+     *
+     * @return boolean returns to check whether the user want to back to previous page
+     **/
     public boolean readQuotationFromCustomer(int whichQuotation)
     {
 
@@ -148,9 +175,10 @@ public class CustomerController {
                 else
                 {
                     System.out.println("Sorry, please wait owner to answer the quotation.");
+
                 }
                 isQuotationExist = true;
-                return true;
+
             }
         }
         if (!isQuotationExist) {
@@ -159,17 +187,21 @@ public class CustomerController {
         return false;
     }
 
+    /**
+     * This method print Receipt of customer.
+     **/
     public void printReceipt(int whichQuotation, String cardNumber)
     {
         Customer customer = (Customer) PrimeEvents.getEventUser();
-        Date todayDate = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date todayDate = new Date();
+
         String date = dateFormat.format(todayDate);
         int i = whichQuotation -1;
         System.out.println("Customer Id: " + customer.getSpecificQuotation(i).getUserId());
         System.out.println("Hall Id: " + customer.getSpecificQuotation(i).getHallId());
         System.out.println("Card number: " + cardNumber);
-        System.out.println("Receipt Date: " + dateFormat.format(date));
+        System.out.println("Receipt Date: " + date);
     }
 
 

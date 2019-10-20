@@ -17,7 +17,6 @@ public class Customer extends User {
     private ArrayList<String> cardDetails;
     private ArrayList<Booking> bookingList;
     private ArrayList<Quotation> quotationList = new ArrayList<>();
-    private Booking booking;
 
 
     public boolean getIsSeniorCitizen() {

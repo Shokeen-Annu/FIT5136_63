@@ -327,23 +327,33 @@ public class OwnerInterface {
         return result;
     }
 
+    /**
+     * This method displays the setting price of quotation process.
+     * @return boolean returns to check whether the user want to back to previous page
+     **/
     public boolean changeQuotation (boolean isMainMenu)
     {
 
         System.out.println("Please enter request id to create a quotation:");
-        int requestId = validator.receiveInt();
 
-        if(ownerController.readQuotationFromOwner(requestId))
-        {
-            int price =validator.receiveInt();
-            ownerController.changePrice(requestId,price);
+        boolean selectAgain = false;
+        do {
+            int requestId = validator.receiveInt();
+            if(requestId ==-1) {
+                selectAgain = true;
+            }
+            else {
+                if (ownerController.readQuotationFromOwner(requestId)) {
+                    int price = validator.receiveInt();
+                    ownerController.changePrice(requestId, price);
 
-        }
-        else
-        {
-            return false;
-        }
+                } else {
+                    return false;
+                }
+                selectAgain =false;
+            }
 
+        }while (selectAgain);
         return true;
     }
 }

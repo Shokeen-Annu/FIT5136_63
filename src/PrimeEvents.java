@@ -117,6 +117,11 @@ public class PrimeEvents {
     {
 
     }
+
+    /**
+     * This method is to create quotation list.
+     *
+     */
     public static void createQuotationList()
     {
         String allQuotation = fileIO.readFile("Quotations");
@@ -200,11 +205,6 @@ public class PrimeEvents {
 
     public static void setSeniorCitizenConcession(double senCitizenConcession) {
         seniorCitizenConcession = senCitizenConcession;
-    }
-    public Hall getSpecificHall(int hallID)
-    {
-
-        return hallList.get(hallID-1);
     }
 
 }
