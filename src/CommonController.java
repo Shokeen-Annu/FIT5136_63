@@ -194,18 +194,18 @@ public class CommonController {
                             case 1:
                                 System.out.println("Please enter the name:");
                                 String disEditName = validator.receiveString();
-                                ownerDiscount.get(discountId - 1).setDiscountName(disEditName);
+                                ownerDiscount.get(correctDiscountId - 1).setDiscountName(disEditName);
 
                                 break;
                             case 2:
                                 System.out.println("Please enter the value");
                                 double disEditValue = validator.validateDiscountValue();
-                                ownerDiscount.get(discountId - 1).setValue(disEditValue);
+                                ownerDiscount.get(correctDiscountId - 1).setValue(disEditValue);
                                 break;
                             case 3:
                                 System.out.println("Please change the comments");
                                 String disEditComment = validator.receiveString();
-                                ownerDiscount.get(discountId - 1).setComments(disEditComment);
+                                ownerDiscount.get(correctDiscountId - 1).setComments(disEditComment);
                                 break;
                             default:
                                 break;
