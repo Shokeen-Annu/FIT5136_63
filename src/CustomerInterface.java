@@ -276,7 +276,11 @@ public class CustomerInterface{
         return true;
     }
 
-
+    /**
+     * This method to display booking process step by step.
+     *
+     * @return boolean returns to check whether the user want to back to previous page
+     **/
     public boolean bookingMenu(boolean isMainMenu) {
         boolean flag = true;
         //displaySearchHallMenu(false, true);
@@ -357,7 +361,9 @@ public class CustomerInterface{
 
     }
 
-
+    /**
+     * This method will pass the quotation details which customer inputs to customerController
+     **/
 public void sendQuotation(int hallId){
     Date todayDate = new Date();
     Date bookingStartDate = new Date();
@@ -469,12 +475,21 @@ public void sendQuotation(int hallId){
     System.out.println("Type Of Meal : "+ typeOfMeal);
 }
 
-
+    /**
+     * This method displays the quotations the customer has.
+     *
+     * @return boolean returns to check whether the user want to back to previous page
+     **/
 public boolean viewQuotation (boolean isMainMenu )
 {
     customerController.readQuotationFromTxt();
     return true;
 }
+    /**
+     * This method displays the pay deposit process step by step.
+     *
+     * @return boolean returns to check whether the user want to back to previous page
+     **/
 public boolean payDeposit (boolean isMainMenu)
     {
         boolean flag = true ;

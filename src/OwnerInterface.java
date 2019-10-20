@@ -321,6 +321,10 @@ public class OwnerInterface {
             return true;
     }
 
+    /**
+     * This method displays the setting price of quotation process.
+     * @return boolean returns to check whether the user want to back to previous page
+     **/
     public boolean changeQuotation (boolean isMainMenu)
     {
 
