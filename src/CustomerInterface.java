@@ -438,7 +438,8 @@ public void sendQuotation(int hallId){
                boolean isSelectMealAgain = false;
                do {
                    typeOfMeal = validator.receiveString();
-                   if (typeOfMeal.isEmpty()) {
+
+                   if (typeOfMeal.isEmpty() && !validator.isDollarSign(typeOfMeal)) {
                        System.out.println("Please enter what type of meal you want to :");
                        isSelectMealAgain = false;
                    }
@@ -482,16 +483,14 @@ public boolean payDeposit (boolean isMainMenu)
         System.out.println("2 NO");
         int choice = validator.receiveInt();
         switch (choice) {
-            case 1: System.out.println("Please choose which quotation you want to pay:");
+            case 1: System.out.println("Please choose which quotation you want to pay: (enter Quotation Id)");
                     boolean chooseAgain =false;
                     do {
                         int whichQuotation = validator.receiveInt();
-                        if(whichQuotation == -1)
-                        {
+                        if (whichQuotation == -1) {
                             chooseAgain = true;
-                        }
-                        else {
-                            if (customerController.readQuotationFromCustomer(whichQuotation)) {
+                        } else {
+                                if (customerController.readQuotationFromCustomer(whichQuotation)) {
                                 System.out.println("--------- Paying Deposit ---------");
                                 System.out.println("Enter your card number: ");
                                 String cardNumber = validator.receiveString();
@@ -515,30 +514,6 @@ public boolean payDeposit (boolean isMainMenu)
                                 } else if (printOrNot == 2) {
                                     return false;
                                 }
-                            } else {
-                                System.out.println("The quotation is not exist");
-                                System.out.println("Do you want to re-enter or not");
-                                System.out.println("1 YES");
-                                System.out.println("2 NO");
-                                boolean selectAgain = false;
-                                do {
-                                    int choose = validator.receiveInt();
-                                    if (choose == -1) {
-                                        selectAgain = true;
-                                    } else {
-                                        switch (choose) {
-                                            case 1:
-                                                flag = false;
-                                                break;
-                                            case 2:
-                                                flag = true;
-                                                break;
-                                            default:
-                                                System.out.println("Please choose the option correctly");
-                                                break;
-                                        }
-                                    }
-                                } while (selectAgain);
                             }
                         }
                     }while(chooseAgain);
