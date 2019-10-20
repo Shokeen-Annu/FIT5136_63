@@ -42,8 +42,7 @@ public class Quotation {
                 "$" + quotationId + "$$";
     }
 
-    public Quotation(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest, int newUserId, int newHallId, double newPrice,
-                     boolean newIsCatering, String newTypeOfMeal, int id)
+
     /**
      * Non-default constructor for object of class Game
      *
@@ -58,7 +57,7 @@ public class Quotation {
      * @param newTypeOfMeal A String indicates the meal type of the hall
      */
     public Quotation(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest,int newUserId, int newHallId, double newPrice,
-                     boolean newIsCatering, String newTypeOfMeal)
+                     boolean newIsCatering, String newTypeOfMeal,int id)
     {
         date = newDate;
         bookingStartDate= newBookingStartDate;

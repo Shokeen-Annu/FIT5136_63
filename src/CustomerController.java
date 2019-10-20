@@ -1,9 +1,7 @@
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 /**
  *  This is the an administrator controller. The method in this class is for administrator to realize their function.
@@ -130,7 +128,7 @@ public class CustomerController {
                     System.out.println("Type Of Meal : " + typeOfMeal);
                     System.out.println("----------------------------");
                 }
-            }
+
         }
     }
 

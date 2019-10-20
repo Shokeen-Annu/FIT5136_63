@@ -17,12 +17,12 @@ public class Owner extends User {
     private String securityAnswer2;
     private ArrayList<Hall> hallList;
     private ArrayList <Quotation> quotationList = new ArrayList<>();
-    private ArrayList<Discount> discountList;
+
 
     private ArrayList<Discount> discountList = new ArrayList<>();
 
 
-    private ArrayList <Quotation> quotationList;
+
 
     private ArrayList<Booking> bookingList;
     private FileIO fileIO = new FileIO();
