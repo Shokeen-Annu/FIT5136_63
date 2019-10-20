@@ -28,7 +28,11 @@ public class OwnerController {
         return new Hall();
     }
 
-
+    /**
+     * This method is for deleting hall
+     *
+     * @return boolean check the user deletes the hall or not.
+     **/
     public boolean deleteHall(Hall hall)
     {
         boolean result=false;

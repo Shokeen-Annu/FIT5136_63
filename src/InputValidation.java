@@ -9,7 +9,12 @@ import java.util.regex.Pattern;
  */
 public class InputValidation {
 
-
+    /**
+     * This method for validating the integer from the input.
+     *
+     * @param input This indicates the inputs from other method.
+     * @return boolean This returns whether their input is an integer.
+     */
     public boolean validateInt(String input)
     {
         for (int i = 0; i < input.length();i++)
@@ -22,6 +27,12 @@ public class InputValidation {
         }
         return true;
     }
+
+    /**
+     * This method for validating the String from the input.
+     *
+     * @return String This returns the input from the users
+     */
     public String receiveString()
     {
         Scanner scanner = new Scanner(System.in);
@@ -35,6 +46,13 @@ public class InputValidation {
         }
         return inputString;
     }
+
+    /**
+     * This method for validating the string is empty or not.
+     *
+     * @param input This indicates the inputs from other method.
+     * @return boolean This returns for result of check
+     */
     public boolean isStringNullOrEmpty(String input)
     {
         if(input.trim().isEmpty() || input == null)
@@ -42,6 +60,15 @@ public class InputValidation {
         else
             return false;
     }
+
+    /**
+     * This method for validating the length of input of string from the input
+     *
+     * @param input This indicates the inputs from other method.
+     * @param maxLength This indicates the max length of input string.
+     * @param minLength This indicates the min length of input string
+     * @return boolean This returns for result of check
+     */
     public boolean validateLengthOfString(String input,int maxLength, int minLength)
     {
         if(input.length() >= minLength && input.length() <= maxLength)
@@ -49,6 +76,12 @@ public class InputValidation {
         else
             return false;
     }
+
+    /**
+     * This method for validating the length of input of string from the input
+     *
+     * @return int This returns the input integer
+     */
     public int receiveInt()
     {
         Scanner scanner = new Scanner(System.in);
@@ -62,12 +95,13 @@ public class InputValidation {
         }
         return input;
     }
-    public boolean validateString(String input)
-    {
-        if(input.toUpperCase().equals("YES"))
-        {  return true;}
-        return false;
-    }
+
+    /**
+     * This method for validating the format of the input email.
+     *
+     * @param email This is for the input email
+     * @return boolean This returns for result of check
+     */
     public boolean validateEmail(String email){
 
         if(email.trim().isEmpty() || email == null)
@@ -81,6 +115,12 @@ public class InputValidation {
             return false;
 
     }
+    /**
+     * This method for validating the password
+     *
+     * @param password This is indicates the password from the user input.
+     * @return boolean This returns for result of check
+     */
     public boolean validatePassword(String password){
 
         if(password.trim().isEmpty() || password == null)
@@ -96,6 +136,12 @@ public class InputValidation {
         return true;
     }
 
+    /**
+     * This method for validating the phone number is unique or not.
+     *
+     * @param input This indicates the inputs of user's phone number
+     * @return boolean This returns for result of check
+     */
     public boolean isPhoneNumUnique(String input)
     {
         ArrayList<User> allUsers=  PrimeEvents.getUserList();
@@ -107,6 +153,12 @@ public class InputValidation {
         return true;
     }
 
+    /**
+     * This method for validating the email is unique or not.
+     *
+     * @param input This indicates the inputs of user's email
+     * @return boolean This returns for result of check
+     */
     public boolean isEmailUnique(String input)
     {
         ArrayList<User> allUsers=  PrimeEvents.getUserList();
@@ -118,6 +170,12 @@ public class InputValidation {
         return true;
     }
 
+    /**
+     * This method for validating the input of dollar sign.
+     *
+     * @param input This indicates the inputs of dollar sign.
+     * @return boolean This returns for result of check
+     */
     public boolean isDollarSign(String input)
     {
         for (int i = 0; i < input.length();i++)
@@ -131,6 +189,12 @@ public class InputValidation {
         return true;
     }
 
+    /**
+     * This method for validating the inout of special character.
+     *
+     * @param input This indicates the inputs of special character
+     * @return boolean This returns for result of check
+     */
     public boolean validateSpecialChar(String input)
     {
         if(input.matches("(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)"))
@@ -140,6 +204,11 @@ public class InputValidation {
         return true;
     }
 
+    /**
+     * This method for validating the format and value of discount
+     *
+     * @return double This returns for value of discount
+     */
     public double validateDiscountValue()
     {
             Scanner scanner = new Scanner(System.in);
@@ -157,6 +226,13 @@ public class InputValidation {
             }
             return input;
     }
+    /**
+     * This method for validating the length of input of string from the input
+     *
+     * @param small This the minimum value of the range.
+     * @param  big This is the maximum value of the range.
+     * @return int This returns the value of the correct choose.
+     */
     public int validateRange(int number, int small, int big)
     {
         do{

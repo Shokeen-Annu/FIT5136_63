@@ -9,6 +9,12 @@ import java.util.ArrayList;
  */
 public class FileIO {
 
+    /**
+     * This method read the content from the file.
+     *
+     * @param filePath The string indicates the file name
+     *  @return String  return the content of file
+     */
      public String readFile(String filePath)
     {
         String result = "";
@@ -34,6 +40,12 @@ public class FileIO {
         return result;
     }
 
+    /**
+     * This method is to append the information into txt file
+     *
+     * @param filename This indicates the file name.
+     * @param data This indicates the data which need to append.
+     */
     public void writeFile(String filename,String data) {
 
         BufferedWriter out = null;
@@ -51,6 +63,12 @@ public class FileIO {
         }
     }
 
+    /**
+     * This method is write some information into txt file
+     *
+     * @param filename This indicates the file name.
+     * @param data This indicates the data which need to write into file
+     */
     public void reWriteFile(String filename,String data) {
 
         if (filename.trim().length() > 0) {

@@ -13,6 +13,12 @@ public class CommonController {
     private InputValidation validator = new InputValidation();
     private FileIO io = new FileIO();
 
+    /**
+     * This method is for user to choose the type to view halls.
+     *
+     *   @param email
+     *   @param password
+     */
     public String primeEventsLogin(String email,String password)
     {
         String role = "";
@@ -29,6 +35,12 @@ public class CommonController {
         return role;
     }
 
+    /**
+     * This method is for user to choose the type to view halls.
+     *
+     *   @param choice
+     *   @return boolean This is to check the user, if they want to log out
+     */
     public boolean logout(int choice)
     {
         boolean tryAgain = false;
@@ -41,6 +53,12 @@ public class CommonController {
         return tryAgain;
     }
 
+    /**
+     * This method is for user to choose the type to view halls.
+     *
+     *   @param type The String indicates the type of choose.
+     *   @param searchInput The String indicates the input from the customer.
+     */
     public void viewHalls(String type, String searchInput)
     {
         ArrayList<Hall> allHalls = PrimeEvents.getHallList();
@@ -103,7 +121,11 @@ public class CommonController {
         }
 
     }
-    // users can use the method to delete discount
+
+    /**
+     * This method is for user to delete the discount
+     *
+     */
     public void deleteDiscount()
     {
 
@@ -136,10 +158,12 @@ public class CommonController {
                 }
             }
         }
-
-
     }
 
+    /**
+     * This method is for user to edit the discount. They can edit discount from its name, value and comment.
+     *
+     */
     public void editDiscount() {
        ArrayList<User> allUsers = PrimeEvents.getUserList();
         for (int i = 0; i < allUsers.size(); i++) {
@@ -197,6 +221,10 @@ public class CommonController {
         }
     }
 
+    /**
+     * This method is used to save the value into database
+     *
+     */
     public static void createDatabase()
     {
         PrimeEvents.createHallList();
@@ -252,6 +280,11 @@ public class CommonController {
             return false;
         }
     }
+
+    /**
+     * This method creates the discount database for owner.
+     *
+     */
     public void createOwnerDiscountList()
     {
         int ownerId = PrimeEvents.getEventUser().getUserId();
