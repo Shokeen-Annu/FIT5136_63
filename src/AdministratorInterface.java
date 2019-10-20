@@ -71,12 +71,17 @@ public class AdministratorInterface{
 **/
     public boolean backMenu()
     {
-        System.out.println("Press 0 to return to menu");
-        int admInput = validator.receiveInt();
-        if(admInput == 0)
-            return false;
-        else
-            return true;
+        int admInput;
+        boolean result;
+        do{
+            System.out.println("Press 0 to return to menu");
+            admInput = validator.receiveInt();
+            if (admInput == 0)
+                result = false;
+            else
+                result = true;
+        }while(admInput == -1);
+        return result;
     }
 
 /**
