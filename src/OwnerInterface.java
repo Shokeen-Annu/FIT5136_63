@@ -325,19 +325,25 @@ public class OwnerInterface {
     {
 
         System.out.println("Please enter request id to create a quotation:");
-        int requestId = validator.receiveInt();
 
-        if(ownerController.readQuotationFromOwner(requestId))
-        {
-            int price =validator.receiveInt();
-            ownerController.changePrice(requestId,price);
+        boolean selectAgain = false;
+        do {
+            int requestId = validator.receiveInt();
+            if(requestId ==-1) {
+                selectAgain = true;
+            }
+            else {
+                if (ownerController.readQuotationFromOwner(requestId)) {
+                    int price = validator.receiveInt();
+                    ownerController.changePrice(requestId, price);
 
-        }
-        else
-        {
-            return false;
-        }
+                } else {
+                    return false;
+                }
+                selectAgain =false;
+            }
 
+        }while (selectAgain);
         return true;
     }
 }

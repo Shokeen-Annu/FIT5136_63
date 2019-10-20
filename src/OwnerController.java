@@ -1,4 +1,5 @@
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -172,13 +173,13 @@ public class OwnerController {
                     String typeOfMeal = quotation.getTypeOfMeal();
                     owner.quotationAdd(date, bookingStartDate, bookingFinishDate, numberOfGuest, customerId, hallId, price,
                             isCatering, typeOfMeal,quotation.getQuotationId());
-
+                    SimpleDateFormat dateFormat =   new SimpleDateFormat( "dd-MM-yyyy" );
                     System.out.println("Request Id :"+ quotation.getQuotationId());
                     System.out.println("Hall ID : " + hallId);
                     System.out.println("Customer ID : " + customerId);
-                    System.out.println("Quotation date : " + date);
-                    System.out.println("Booking Start Date : " + bookingStartDate);
-                    System.out.println("Booking Finish Date : " + bookingFinishDate);
+                    System.out.println("Quotation date : " + dateFormat.format(date));
+                    System.out.println("Booking Start Date : " + dateFormat.format(bookingStartDate));
+                    System.out.println("Booking Finish Date : " + dateFormat.format(bookingFinishDate));
                     System.out.println("Number Of Guests : " + numberOfGuest);
                     System.out.println("Price : " + price);
                     System.out.println("IsCatering : " + isCatering);

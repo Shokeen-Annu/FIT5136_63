@@ -148,9 +148,10 @@ public class CustomerController {
                 else
                 {
                     System.out.println("Sorry, please wait owner to answer the quotation.");
+
                 }
                 isQuotationExist = true;
-                return true;
+
             }
         }
         if (!isQuotationExist) {
@@ -162,14 +163,15 @@ public class CustomerController {
     public void printReceipt(int whichQuotation, String cardNumber)
     {
         Customer customer = (Customer) PrimeEvents.getEventUser();
-        Date todayDate = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date todayDate = new Date();
+
         String date = dateFormat.format(todayDate);
         int i = whichQuotation -1;
         System.out.println("Customer Id: " + customer.getSpecificQuotation(i).getUserId());
         System.out.println("Hall Id: " + customer.getSpecificQuotation(i).getHallId());
         System.out.println("Card number: " + cardNumber);
-        System.out.println("Receipt Date: " + dateFormat.format(date));
+        System.out.println("Receipt Date: " + date);
     }
 
 

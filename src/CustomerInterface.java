@@ -481,16 +481,19 @@ public boolean payDeposit (boolean isMainMenu)
         System.out.println("Do you want to pay deposit or not? (select 1 or 2)");
         System.out.println("1 YES");
         System.out.println("2 NO");
-        int choice = validator.receiveInt();
-        switch (choice) {
-            case 1: System.out.println("Please choose which quotation you want to pay: (enter Quotation Id)");
-                    boolean chooseAgain =false;
+        boolean selectChoiceAgain = false;
+        do {
+            int choice = validator.receiveInt();
+            switch (choice) {
+                case 1:
+                    System.out.println("Please choose which quotation you want to pay: (enter Quotation Id)");
+                    boolean chooseAgain = false;
                     do {
                         int whichQuotation = validator.receiveInt();
                         if (whichQuotation == -1) {
                             chooseAgain = true;
                         } else {
-                                if (customerController.readQuotationFromCustomer(whichQuotation)) {
+                            if (customerController.readQuotationFromCustomer(whichQuotation)) {
                                 System.out.println("--------- Paying Deposit ---------");
                                 System.out.println("Enter your card number: ");
                                 String cardNumber = validator.receiveString();
@@ -511,16 +514,25 @@ public boolean payDeposit (boolean isMainMenu)
                                 int printOrNot = validator.receiveInt();
                                 if (printOrNot == 1) {
                                     customerController.printReceipt(whichQuotation, cardNumber);
+                                    return false;
                                 } else if (printOrNot == 2) {
                                     return false;
                                 }
                             }
+                            else
+                            {
+                                selectChoiceAgain = false;
+                            }
                         }
-                    }while(chooseAgain);
+                    } while (chooseAgain);
                     break;
-            case 2: return false;
-            default:  System.out.println("Please choose the option correctly");
-        }
+                case 2:
+                    return false;
+                default:
+                    selectChoiceAgain = true;
+                    System.out.println("Please choose the option correctly");
+            }
+        }while(selectChoiceAgain);
         return true;
     }
 }
