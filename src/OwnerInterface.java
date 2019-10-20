@@ -1,13 +1,25 @@
-import java.util.Scanner;
+import java.util.ArrayList;
+/**
+ *  This is the a owner boundary class. The method in this class is to display all the menu about owner.
+ *
+ * @author    Annu Shokeen, zhijie li, Yuwu
+ * @version   20/10/2019
+ */
 
 public class OwnerInterface {
     private int choiceNumber;
     private InputValidation validator = new InputValidation();
     private CommonController commonController = new CommonController();
     private OwnerController ownerController = new OwnerController();
+
+    /**
+     * This method displays owner menu.
+     *
+     **/
     public void displayOwnerMenu()
     {
         boolean flag = true;
+        commonController.createOwnerDiscountList();
 
         do {
             System.out.println("      WELCOME TO OWNER MENU     ");
@@ -21,8 +33,8 @@ public class OwnerInterface {
             System.out.println();
             System.out.println("Enter your choice number:");
             //Test
-            Scanner scanner = new Scanner(System.in);
-            choiceNumber = scanner.nextInt();
+
+            choiceNumber = validator.receiveInt();
 
             if (choiceNumber == 1) {
                 System.out.println("-------------- CREATE HALL --------------");
@@ -63,6 +75,12 @@ public class OwnerInterface {
             }
         } while (choiceNumber < 1 || choiceNumber >6 || !flag);
     }
+
+    /**
+     * This method displays manage hall menu.
+     *
+     * @return boolean This returns the value for back menu.
+     **/
     public boolean displayManageHallMenu()
     {
         boolean manageHallFlag = true;
@@ -76,8 +94,8 @@ public class OwnerInterface {
             System.out.println("4 VIEW REVIEW OF HALLS");
             System.out.println("5 RETURN TO OWNER MENU");
             System.out.println("Enter your choice number:");
-            Scanner scanner = new Scanner(System.in);
-            choiceNumber = scanner.nextInt();
+
+            choiceNumber = validator.receiveInt();
 
             if (choiceNumber == 1) {
                 System.out.println("-------------- VIEW OWNER HALLS --------------");
@@ -95,11 +113,13 @@ public class OwnerInterface {
             }
             else if (choiceNumber == 3) {
                 boolean repeat = false;
+                boolean isDeleteConfirmed = true;
                 System.out.println("-------------- DELETE HALLS --------------");
                 System.out.println();
                 System.out.println();
                 System.out.println("Please select hall from the list below:");
-                commonController.viewHalls("ALL",""); //show only owner's halls
+                commonController.viewHalls("OWNER",
+                        Integer.toString(PrimeEvents.getEventUser().getUserId()));
                 do {
                     boolean isDeleteSuccess = false;
                     System.out.println("Enter hall number to delete:");
@@ -107,12 +127,68 @@ public class OwnerInterface {
                     if (hallId == -1)
                         repeat = true;
                     else {
-                        // ask for confirmation
-                        isDeleteSuccess = ownerController.deleteHall(hallId);
-                        if(isDeleteSuccess)
-                            System.out.println("Hall is deleted successfully");
-                        else
-                            System.out.println("Please enter correct hall number");
+                        ArrayList<Hall> allHalls = PrimeEvents.getHallList();
+                        Hall hall = null;
+                        for(Hall item: allHalls)
+                        {
+                            if(item.getHallId() == hallId) {
+                                hall = item;
+                                repeat = false;
+                            }
+                        }
+                        if(hall == null) {
+                            System.out.println("No such hall exist.");
+                            repeat = true;
+                        }
+                        if(!repeat) {
+                            boolean confirmationRepeat = false;
+                            do {
+                                System.out.println("Are you sure you want to delete the hall?");
+                                System.out.println("Enter your choice number");
+                                System.out.println("1 Yes");
+                                System.out.println("2 No");
+                                int isConfirmation = validator.receiveInt();
+                                if (isConfirmation == -1)
+                                    confirmationRepeat = true;
+                                else if (isConfirmation == 2) {
+                                    isDeleteConfirmed = false;
+                                    System.out.println("Hall is not deleted.");
+                                    System.out.println("Do you want to select hall again?");
+                                    boolean isSelectHallAgain = false;
+                                    do {
+                                        System.out.println("Enter your choice number");
+                                        System.out.println("1 Yes");
+                                        System.out.println("2 No");
+                                        int userSelection = validator.receiveInt();
+                                        if (userSelection == -1) {
+                                            isSelectHallAgain = true;
+                                            repeat = false;
+                                        }
+                                        else if (userSelection == 1) {
+                                            repeat = true;
+                                            isSelectHallAgain = false;
+                                        }
+                                        else
+                                        {
+                                            repeat = false;
+                                            isSelectHallAgain = false;
+                                        }
+                                    }while(isSelectHallAgain);
+
+                                }
+                                else if (isConfirmation == 1)
+                                    isDeleteConfirmed = true;
+                            } while (confirmationRepeat);
+                            if (isDeleteConfirmed) {
+                                isDeleteSuccess = ownerController.deleteHall(hall);
+                                if (isDeleteSuccess)
+                                    System.out.println("Hall is deleted successfully");
+                                else {
+                                    System.out.println("Please enter correct hall number from the list provided.");
+                                    repeat = true;
+                                }
+                            }
+                        }
                     }
                 }while(repeat);
 
@@ -135,6 +211,12 @@ public class OwnerInterface {
         } while (choiceNumber < 1 || choiceNumber >4 || !manageHallFlag);
         return true;
     }
+
+    /**
+     * This method displays manage booking menu.
+     *
+     * @return boolean This returns the value for back menu.
+     **/
     public boolean displayManageBookingMenu()
     {
         boolean manageBookingFlag = true;
@@ -146,8 +228,8 @@ public class OwnerInterface {
             System.out.println("2 VIEW REQUESTS FOR QUOTATIONS");
             System.out.println("3 CANCEL BOOKING");
             System.out.println("4 RETURN TO OWNER MENU");
-            Scanner scanner = new Scanner(System.in);
-            choiceNumber = scanner.nextInt();
+
+            choiceNumber = validator.receiveInt();
 
             if (choiceNumber == 1) {
                 System.out.println("You can view receipts here");
@@ -178,6 +260,11 @@ public class OwnerInterface {
         return true;
     }
 
+    /**
+     * This method is to display manage discount menu.
+     *
+     * @return boolean This returns the value for back menu.
+     **/
     public boolean displayManageDiscountMenu ()
     {
         boolean manageOwnerDiscountFlag = true;
@@ -189,8 +276,8 @@ public class OwnerInterface {
             System.out.println("2 DELETE DISCOUNT");
             System.out.println("3 EDIT DISCOUNT");
             System.out.println("4 RETURN TO OWNER MENU");
-            Scanner scanner = new Scanner(System.in);
-            choiceNumber = scanner.nextInt();
+            System.out.println("PLEASE ENTER A CHOICE");
+            choiceNumber = validator.receiveInt();
 
             if (choiceNumber == 1) {
                 System.out.println("Please add discount information");
@@ -200,12 +287,12 @@ public class OwnerInterface {
             }
             else if (choiceNumber == 2) {
                 System.out.println("You can delete discount here");
-                int deleteId = validator.receiveInt();
-                commonController.deleteDiscount(deleteId);
+                commonController.deleteDiscount();
                 manageOwnerDiscountFlag = backMenu();
             }
             else if (choiceNumber == 3) {
                 System.out.println("You can edit discount here");
+                commonController.editDiscount();
                 manageOwnerDiscountFlag = backMenu();
             }
             else if (choiceNumber == 4) {
@@ -218,6 +305,12 @@ public class OwnerInterface {
 
         return true;
     }
+
+    /**
+     * This method is used to back to  previous page.
+     *
+     * @return boolean to back menu
+     **/
     public boolean backMenu()
     {
         System.out.println("Press 0 to return to menu");

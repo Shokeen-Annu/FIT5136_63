@@ -1,4 +1,9 @@
-import java.util.Scanner;
+/**
+ *  This is the a user entity class. This class contains all the get and set method about user.
+ *
+ * @author    Annu Shokeen
+ * @version   20/10/2019
+ */
 
 public class User {
 

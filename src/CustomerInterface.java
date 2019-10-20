@@ -3,14 +3,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
-
+/**
+ *  This is the a customer boundary class, which provides all the menu can be used by the customer.
+ *
+ * @author    Zhijie Li, YuWu
+ * @version   20/10/2019
+ */
 public class CustomerInterface{
 
     private InputValidation validator = new InputValidation();
     private CommonController commonController = new CommonController();
     private CustomerController customerController = new CustomerController();
 
-
+    /**
+     * This method displays the customer menu.
+     */
     public void displayCustomerMenu()
     {
         int customerNumber = -1;
@@ -104,6 +111,12 @@ public class CustomerInterface{
 
         }while (customerNumber < 1 || customerNumber > 9 || !flag);
     }
+
+    /**
+     * This method is used to back to  previous page.
+     *
+     * @return boolean to back menu
+     **/
     public boolean backMenu()
     {
         System.out.println("Press 0 to return to menu");
@@ -113,6 +126,11 @@ public class CustomerInterface{
         else
             return true;
     }
+    /**
+     * This method is used to back or to select hall menu
+     *
+     * @return boolean to back menu
+     **/
     public boolean newBackMenu()
     {
         System.out.println("Press 0 to return to menu or press 9 to select the hall");
@@ -122,7 +140,11 @@ public class CustomerInterface{
         else
             return true;
     }
-
+    /**
+     * This method displays the search hall menu.
+     *
+     * @return boolean returns to check whether the user want to back to previous page
+     **/
     public boolean displaySearchHallMenu(boolean isMainMenu, boolean isBookHall)
     {
         boolean flag = true;
@@ -145,8 +167,19 @@ public class CustomerInterface{
             Scanner scanner = new Scanner(System.in);
             searchChoice = scanner.nextInt();
             String searchInput = " ";
+            boolean specialChar = true;
             switch (searchChoice) {
                 case 1:
+                         do{
+                               System.out.println("Please enter the name of hall");
+                               searchInput = validator.receiveString().trim().toUpperCase();
+                               specialChar = validator.validateSpecialChar(searchInput);
+                               if(searchInput.isEmpty() == true || specialChar == false)
+                               {
+                                   System.out.println("Please enter the correct format!!");
+                               }
+                         }while(searchInput.isEmpty() == true || specialChar == false);
+                         commonController.viewHalls("NAME", searchInput);
                     System.out.println("Please enter the name of hall");
                      searchInput = validator.receiveString();
                     commonController.viewHalls("NAME", "searchInput");
@@ -201,7 +234,11 @@ public class CustomerInterface{
         return true;
     }
 
-
+    /**
+     * This method displays the booking hall menu.
+     *
+     * @return boolean returns to check whether the user want to back to previous page
+     **/
     public boolean displayBookHallMenu(boolean isMainMenu)
     {
         int choice;

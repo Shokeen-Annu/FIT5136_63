@@ -1,6 +1,11 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/**
+ *  This is the a quotation entity class. This class contains all the get and set method about quotation.
+ *
+ * @author    Zhijie Li, Yuwu
+ * @version   20/10/2019
+ */
 public class Quotation {
 
     public int getQuotationId() {
@@ -39,6 +44,21 @@ public class Quotation {
 
     public Quotation(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest, int newUserId, int newHallId, double newPrice,
                      boolean newIsCatering, String newTypeOfMeal, int id)
+    /**
+     * Non-default constructor for object of class Game
+     *
+     * @param newDate A date indicates the date for sending quotation
+     * @param newBookingStartDate A date indicates the date for start booking
+     * @param newBookingFinishDate A date indicates the date for finish booking
+     * @param newNumberOfGuest A integer indicates the number of guest
+     * @param newHallId A integer indicates the id of the hall
+     * @param newUserId A integer indicates the id of the user
+     * @param newPrice A double indicates the price in this quotation
+     * @param newIsCatering A boolean indicates the catering in this quotation
+     * @param newTypeOfMeal A String indicates the meal type of the hall
+     */
+    public Quotation(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest,int newUserId, int newHallId, double newPrice,
+                     boolean newIsCatering, String newTypeOfMeal)
     {
         date = newDate;
         bookingStartDate= newBookingStartDate;

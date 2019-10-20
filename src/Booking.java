@@ -1,4 +1,10 @@
 import java.util.Date;
+/**
+ *  This is the a booking class. This class contains all the get and set methods of booking .
+ *
+ * @author    Annu Shokeen
+ * @version   20/10/2019
+ */
 
 public class Booking {
 

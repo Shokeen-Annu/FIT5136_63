@@ -1,5 +1,13 @@
 import java.util.ArrayList;
 import java.util.Date;
+/**
+ *  This is the a owner entity class. This class inherits from the user class.
+ *
+ * @author    Zhijie Li, YuWu
+ * @version   20/10/2019
+ */
+
+import java.util.regex.Pattern;
 
 public class Owner extends User {
 
@@ -10,6 +18,12 @@ public class Owner extends User {
     private ArrayList<Hall> hallList;
     private ArrayList <Quotation> quotationList = new ArrayList<>();
     private ArrayList<Discount> discountList;
+
+    private ArrayList<Discount> discountList = new ArrayList<>();
+
+
+    private ArrayList <Quotation> quotationList;
+
     private ArrayList<Booking> bookingList;
     private FileIO fileIO = new FileIO();
 
@@ -66,21 +80,30 @@ public class Owner extends User {
         return discountList;
     }
 
+    /**
+     * This method converts the information into this format in order to write into the txt file.
+     *
+     * @param userId The integer indicates the user id.
+     *  @return String this convert value into this format
+     */
     public ArrayList<Discount> createDiscountList(int userId)
     {
-        String allDiscount = fileIO.readFile("D:\\2019 monash S2\\FIT5136_Project\\FIT5136_ActualProject\\Discounts.txt");
-        String[] discountDetail = allDiscount.split("$$");
-        if(getUserId() == userId) {
+        String allDiscount = fileIO.readFile("Discounts");
+        String[] discountDetail = allDiscount.split(Pattern.quote("$$"));
+
             for (int i = 0; i < discountDetail.length; i++) {
-                String[] specificDiscount = discountDetail[i].split("$");
-                Discount temdriDiscount = new Discount();
-                temdriDiscount.setDiscountId(Integer.parseInt(specificDiscount[0]));
-                temdriDiscount.setDiscountName(specificDiscount[1]);
-                temdriDiscount.setValue(Double.parseDouble(specificDiscount[2]));
-                temdriDiscount.setComments(specificDiscount[3]);
-                discountList.add(temdriDiscount);
+                String[] specificDiscount = discountDetail[i].split(Pattern.quote("$"));
+                if(userId == Integer.parseInt(specificDiscount[0])) {
+                    Discount temdriDiscount = new Discount();
+                    temdriDiscount.setUserId(Integer.parseInt(specificDiscount[0]));
+                    temdriDiscount.setDiscountId(Integer.parseInt(specificDiscount[1]));
+                    temdriDiscount.setDiscountName(specificDiscount[2]);
+                    temdriDiscount.setValue(Double.parseDouble(specificDiscount[3]));
+                    temdriDiscount.setComments(specificDiscount[4]);
+                    discountList.add(temdriDiscount);
+                }
             }
-        }
+
         return discountList;
     }
 
@@ -106,5 +129,25 @@ public class Owner extends User {
                 newNumberOfGuest,customerId,newHallId,newPrice,
                 newIsCatering, newTypeOfMeal,quotationId);
         quotationList.add(newQuotation);
+    }
+    @Override
+/**
+ * This method converts the information into this format in order to write into the txt file
+ *
+ *  @return String this convert value into this format
+ */
+    public String toString() {
+        return getUserId() +
+                "$" + getFirstName() +
+                "$" + getLastName() +
+                "$" + getPhoneNumber() +
+                "$" + getEmail() +
+                "$" + getPassword() +
+                "$" + getAddress() +
+                "$" + getRole() +
+                "$" + securityQuestion1 +
+                "$" + securityQuestion2 +
+                "$" + securityAnswer1 +
+                "$" + securityAnswer2 + "$$";
     }
 }

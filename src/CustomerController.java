@@ -1,11 +1,16 @@
-import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
 
+/**
+ *  This is the an administrator controller. The method in this class is for administrator to realize their function.
+ *
+ * @author    Yuwu
+ * @version   20/10/2019
+ */
 
 public class CustomerController {
     //private Customer customer = new Customer();
@@ -126,10 +131,6 @@ public class CustomerController {
                     System.out.println("----------------------------");
                 }
             }
-
-        if(isNoQuotation)
-        {
-            System.out.println("You do not have any quotation");
         }
     }
 

@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
-
+/**
+ * This is the an customer entity class. This class inherits from the user class.
+ *
+ * @author    YuWu
+ * @version   20/10/2019
+ */
 public class Customer extends User {
 
     private boolean isSeniorCitizen;
@@ -117,5 +121,27 @@ public class Customer extends User {
 
 
 
+/**
+* This method converts the information into this format in order to write into the txt file
+ *
+ *  @return String this convert value into this format
+*/
+    @Override
+    public String toString() {
+        return getUserId() +
+                "$" + getFirstName() +
+                "$" + getLastName() +
+                "$" + getPhoneNumber() +
+                "$" + getEmail() +
+                "$" + getPassword() +
+                "$" + getAddress() +
+                "$" + getRole() +
+                "$" + isVeteran +
+                "$" + isSeniorCitizen +
+                "$" + securityQuestion1 +
+                "$" + securityQuestion2 +
+                "$" + securityAnswer1 +
+                "$" + securityAnswer2 + "$$";
+    }
 }
 

@@ -1,12 +1,20 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
-
+/**
+ *  This is the FileIO entity. the method in this class is to read from txt file and write to txt file.
+ *
+ * @author    Annu Shokeen, Zhijie Li, YuWu
+ * @version   20/10/2019
+ */
 public class FileIO {
 
+    /**
+     * This method read the content from the file.
+     *
+     * @param filePath The string indicates the file name
+     *  @return String  return the content of file
+     */
      public String readFile(String filePath)
     {
         String result = "";
@@ -32,13 +40,38 @@ public class FileIO {
         return result;
     }
 
+    /**
+     * This method is to append the information into txt file
+     *
+     * @param filename This indicates the file name.
+     * @param data This indicates the data which need to append.
+     */
     public void writeFile(String filename,String data) {
 
        String previousContent = readFile(filename);
        String newContent = previousContent + data;
        reWriteFile(filename,newContent);
+        BufferedWriter out = null;
+        if (filename.trim().length() > 0) {
+            try {
+                out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename,true)));
+                //PrintWriter output = new PrintWriter(filename);
+                out.write(data);
+                out.close();
+            } catch (IOException e) {
+                System.out.println("I/O Error");
+            }
+        } else {
+            System.out.println("Enter a filename:");
+        }
     }
 
+    /**
+     * This method is write some information into txt file
+     *
+     * @param filename This indicates the file name.
+     * @param data This indicates the data which need to write into file
+     */
     public void reWriteFile(String filename,String data) {
 
         if (filename.trim().length() > 0) {

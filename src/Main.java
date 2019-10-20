@@ -1,4 +1,9 @@
-
+/**
+ * THis is the main method
+ *
+ * @author    Annu Shokeen, Zhijie Li,YuWu
+ * @version   20/10/2019
+ */
 
 public class Main {
 

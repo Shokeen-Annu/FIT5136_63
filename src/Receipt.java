@@ -1,5 +1,10 @@
-import java.text.DecimalFormat;
 import java.util.Date;
+/**
+ *  This is the a receipt entity class. This class contains all the get and set method about receipt.
+ *
+ * @author    Yuwu
+ * @version   20/10/2019
+ */
 
 public class Receipt {
 

@@ -1,3 +1,9 @@
+/**
+ *  This is the a review entity class. This class contains all the get and set method about receipt.
+ *
+ * @author    Zhijie Li
+ * @version   20/10/2019
+ */
 public class Review {
     private int hallQuality;
     private int hallDecoration;

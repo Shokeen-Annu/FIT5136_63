@@ -1,4 +1,10 @@
 import java.util.ArrayList;
+/**
+ *  This is the hall entity, which contains the get, set and display methods about hall.
+ *
+ * @author    Annu Shokeen, Zhijie Li
+ * @version   20/10/2019
+ */
 
 public class Hall {
     private int hallId;
@@ -33,6 +39,11 @@ public class Hall {
         this.quotation = quotation;
     }
 
+/**
+* This method converts the information into this format in order to write into the txt file
+*
+*  @return String this convert value into this format
+*/
     @Override
     public String toString() {
         return hallId +
@@ -145,6 +156,11 @@ public class Hall {
         isPhotography = photography;
     }
 
+/**
+* This method displays all the hall details
+ *
+ *  @return String for display all the hall details
+*/
     public String displayHall()
     {
         return "Hall id: " +  hallId + "\n" +
@@ -158,6 +174,11 @@ public class Hall {
                 "Occassion type: " + typeOfOccassion + "\n";
     }
 
+ /**
+  * This method displays the availability of the hall
+  *
+  * @return String to show the availability for the customer
+*/
     public String displayAvailability()
     {
         if(getAvailability())
