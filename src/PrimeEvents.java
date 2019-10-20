@@ -117,6 +117,11 @@ public class PrimeEvents {
     {
 
     }
+
+    /**
+     * This method is to create quotation list.
+     *
+     */
     public static void createQuotationList()
     {
         String allQuotation = fileIO.readFile("Quotations");

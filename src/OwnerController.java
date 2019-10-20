@@ -146,6 +146,10 @@ public class OwnerController {
         return result;
     }
 
+    /**
+     * This method read quotations from txt file.
+     * Print these quotations.
+     **/
     public void readQuotationFromTxt( )
     {
         FileIO fileIO = new FileIO();
@@ -196,6 +200,12 @@ public class OwnerController {
 
     }
 
+    /**
+     * This method read quotation from this owner quotation list,
+     * Check the owner input if it equals to quotation Id or not.
+     * Ask owner to enter the price.
+     * @return boolean returns to check whether the user want to back to previous page
+     **/
     public boolean readQuotationFromOwner (int requestId)
     {
         Owner owner = (Owner)PrimeEvents.getEventUser();
@@ -214,7 +224,11 @@ public class OwnerController {
         return false;
     }
 
-
+    /**
+     * This method store price to owner's quotations.
+     *
+     * @return boolean returns to check whether the user want to back to previous page
+     **/
     public void changePrice(int requestId,int changePrice) {
         Owner owner = (Owner)PrimeEvents.getEventUser();
         boolean isQuotationUpdated = false;

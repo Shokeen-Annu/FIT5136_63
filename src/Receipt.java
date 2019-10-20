@@ -8,19 +8,19 @@ import java.util.Date;
 
 public class Receipt {
 
-    private int receipId;
+    private int receiptId;
     private Date receiptDate;
     private  int userId;
     private double finalPrice;
     private double restOfBill;
     private  String hallAddress;
 
-    public int getReceipId() {
-        return receipId;
+    public int getReceiptId() {
+        return receiptId;
     }
 
-    public void setReceipId(int receipId) {
-        this.receipId = receipId;
+    public void setReceiptId(int receipId) {
+        this.receiptId = receipId;
     }
 
     public Date getReceiptDate() {
