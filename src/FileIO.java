@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.Scanner;
-import java.util.ArrayList;
 /**
  *  This is the FileIO entity. the method in this class is to read from txt file and write to txt file.
  *
@@ -48,14 +47,14 @@ public class FileIO {
      */
     public void writeFile(String filename,String data) {
 
-       String previousContent = readFile(filename);
+     /*  String previousContent = readFile(filename);
        String newContent = previousContent + data;
-       reWriteFile(filename,newContent);
+       reWriteFile(filename,newContent);*/
         BufferedWriter out = null;
         if (filename.trim().length() > 0) {
             try {
                 out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename,true)));
-                //PrintWriter output = new PrintWriter(filename);
+
                 out.write(data);
                 out.close();
             } catch (IOException e) {
@@ -67,7 +66,7 @@ public class FileIO {
     }
 
     /**
-     * This method is write some information into txt file
+     * This method is overwrite information into txt file.
      *
      * @param filename This indicates the file name.
      * @param data This indicates the data which need to write into file
@@ -89,32 +88,6 @@ public class FileIO {
         }
     }
 
-  /*  public ArrayList<String[]> readFileToArray(String txtFile )
-    {
-        try
-        {
-            FileReader inputFile = new FileReader(txtFile);
-            Scanner parser = new Scanner(inputFile);
-            ArrayList<String[]> txt = new ArrayList<String[]>();
-            while(parser.hasNextLine())
-            {
-                String line = parser.nextLine();
-                String[] strArray = line.split("$");
-                txt.add(strArray);
-            }
-            inputFile.close();
-            return txt;
-        }
-        catch(FileNotFoundException exception)
-        {
-            System.out.println(txtFile + "not found");
-        }
-        catch(IOException exception)
-        {
-            System.out.println("Unexpected I/O error occurred");
-        }
-        return null;
-    }*/
 
 
 }

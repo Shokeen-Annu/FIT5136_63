@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 /**
- *  This is the a prime event entity class. using this class to create the database.
+ *  This is the a prime event entity class. This class is used to create the database.
  *  And some methods to get and set user list, hall list, and booking list.
  *
  * @author    Annu Shokeen, Zhijie Li, YuWu
@@ -27,6 +27,11 @@ public class PrimeEvents {
      */
     public static void createHallList(){
         String allHalls = fileIO.readFile("Halls");
+        if(allHalls.isEmpty())
+        {
+            System.out.println("Halls file is not found!");
+            return;
+        }
         String[] hallDetailsArr = allHalls.split(Pattern.quote("$$"));
         for(int i = 0; i< hallDetailsArr.length; i++)
         {

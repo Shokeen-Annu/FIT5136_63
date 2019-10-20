@@ -87,14 +87,6 @@ public class Quotation {
         this.hallId = hallId;
     }
 
-/*    public int getQuotationId() {
-        return quotationId;
-    }
-
-    public void setQuotationId(int quotationId) {
-        this.quotationId = quotationId;
-    }*/
-
     public Date getDate() {
         return date;
     }

@@ -11,7 +11,7 @@ public class AdministratorInterface{
     private CommonController commonController = new CommonController();
 
 /**
-* This method displays the administrator menu.
+* This method displays the administrator main menu.
 */
     public void displayAdminMenu()
     {

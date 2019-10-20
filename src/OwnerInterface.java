@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 /**
- *  This is the a owner boundary class. The method in this class is to display all the menu about owner.
+ *  This is an owner boundary class. The method in this class is to display all the menu about owner.
  *
  * @author    Annu Shokeen, zhijie li, Yuwu
  * @version   20/10/2019
