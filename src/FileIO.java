@@ -47,14 +47,10 @@ public class FileIO {
      */
     public void writeFile(String filename,String data) {
 
-     /*  String previousContent = readFile(filename);
-       String newContent = previousContent + data;
-       reWriteFile(filename,newContent);*/
         BufferedWriter out = null;
         if (filename.trim().length() > 0) {
             try {
                 out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename,true)));
-
                 out.write(data);
                 out.close();
             } catch (IOException e) {
