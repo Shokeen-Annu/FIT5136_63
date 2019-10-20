@@ -1,11 +1,6 @@
-import com.sun.org.apache.xpath.internal.operations.Quo;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 /**
  *  This is the a owner controller class which contains all the methods can be used by owner.
@@ -17,8 +12,6 @@ public class OwnerController {
 
     private InputValidation input = new InputValidation();
     private FileIO io = new FileIO();
-    private PrimeEvents primeEvents = new PrimeEvents();
-    private CommonController commonController = new CommonController();
     private boolean addHall(Hall hall)
     {
         boolean result=false;
