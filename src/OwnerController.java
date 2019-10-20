@@ -204,7 +204,7 @@ public class OwnerController {
             {
                 int ownerId = hall.getUserId();
                 Owner owner = (Owner)PrimeEvents.getEventUser();
-                if( hall.getHallId() == quotation.getHallId() && ownerId == owner.getUserId()) {
+                if( hall.getHallId() == quotation.getHallId() && ownerId == owner.getUserId() && quotation.getPrice()==0.0) {
                     isNoQuotation = false;
                     Date date = quotation.getDate();
                     Date bookingStartDate = quotation.getBookingStartDate();
@@ -298,6 +298,7 @@ public class OwnerController {
                 content += quotation.toString();
             }
             io.reWriteFile("Quotations",content);
+            System.out.println("Quotation is sent to the customer.");
         }
 
     }

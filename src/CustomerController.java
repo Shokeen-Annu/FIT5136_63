@@ -109,6 +109,7 @@ public class CustomerController {
         message +=  dateString.trim() + "$" + bookingStartDateString.trim() + "$" +  bookingFinishDateString.trim() + "$"+ numberOfGuest + "$" + customerId + "$"
                     + hallId + "$"  + price + "$" +isCatering + "$"+ typeOfMeal + "$"+(maxId+1)+"$$";
         fileIO.writeFile("Quotations",message);
+        PrimeEvents.createQuotationList();
     }
 
     /**
@@ -122,7 +123,7 @@ public class CustomerController {
         for (Quotation quotation : allQuotationList) {
 
                 Customer customer = (Customer) PrimeEvents.getEventUser();
-                if (customer.getUserId() == quotation.getUserId()) {
+                if (customer.getUserId() == quotation.getUserId() && quotation.getPrice()!=0.0) {
                     isNoQuotation = false;
                     Date date = quotation.getDate();
                     Date bookingStartDate = quotation.getBookingStartDate();
@@ -144,6 +145,7 @@ public class CustomerController {
                     System.out.println("Booking Finish Date : " + dateFormat.format(bookingFinishDate));
                     System.out.println("Number Of Guests : " + numberOfGuest);
                     System.out.println("Price : " + price);
+                    System.out.println("Deposit : " + price/2);
                     System.out.println("IsCatering : " + isCatering);
                     System.out.println("Type Of Meal : " + typeOfMeal);
                     System.out.println("----------------------------");

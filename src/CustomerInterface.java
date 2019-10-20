@@ -259,7 +259,7 @@ public class CustomerInterface{
         System.out.println();
         System.out.println("Enter your choice number:");
         Scanner scanner = new Scanner(System.in);
-        choice = scanner.nextInt();
+        choice = validator.receiveInt();
        switch (choice)
         {
             case 1: bookingMenu(false);
@@ -289,7 +289,7 @@ public class CustomerInterface{
      **/
     public boolean bookingMenu(boolean isMainMenu) {
         boolean flag = true;
-        //displaySearchHallMenu(false, true);
+        displaySearchHallMenu(false, true);
         do {
             boolean isSelectHallIdAgain = false;
             do{
@@ -321,7 +321,7 @@ public class CustomerInterface{
                                 switch (choice) {
                                     case 1:
                                         customerController.saveQuotation();
-                                        System.out.println("Quotation already sent to owner.");
+                                        System.out.println("Quotation is sent to the owner.");
                                         break;
                                     case 2:
                                         return false;
@@ -334,7 +334,7 @@ public class CustomerInterface{
                         flag = true;
                     }
                 } else {
-                    System.out.println("The hall is not exist");
+                    System.out.println("The hall does not exist");
                     System.out.println("Do you want to re-enter or not");
                     System.out.println("1 YES");
                     System.out.println("2 NO");
@@ -470,13 +470,13 @@ public void sendQuotation(int hallId){
                isEnterAgain=true;
            }
        }while (isEnterAgain);
-    System.out.println("--------- Your quotation ---------");
+    System.out.println("--------- Your requested quotation ---------");
     System.out.println("Hall ID : "+ hallId);
     System.out.println("Quotation date : "+ dateFormat.format(todayDate));
     System.out.println("Booking Start Date : "+ dateFormat.format(bookingStartDate));
     System.out.println("Booking Finish Date : "+dateFormat.format(bookingFinishDate));
     System.out.println("Number Of Guests : "+ numberOfGuest);
-    System.out.println("Price : "+ price);
+    //System.out.println("Price : "+ price);
     System.out.println("IsCatering : "+ isCatering);
     System.out.println("Type Of Meal : "+ typeOfMeal);
 }
