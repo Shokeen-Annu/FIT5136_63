@@ -1,7 +1,17 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Quotation {
 
+    public int getQuotationId() {
+        return quotationId;
+    }
+
+    public void setQuotationId(int quotationId) {
+        this.quotationId = quotationId;
+    }
+
+    private int quotationId;
     private Date date;
     private Date bookingStartDate;
     private Date bookingFinishDate;
@@ -12,9 +22,23 @@ public class Quotation {
     private boolean isCatering;
     private String typeOfMeal;
 
+    @Override
+    public String toString() {
+        SimpleDateFormat dateFormat =   new SimpleDateFormat( "dd-MM-yyyy" );
+        return dateFormat.format(date) +
+                "$" + dateFormat.format(bookingStartDate) +
+                "$" + dateFormat.format(bookingFinishDate) +
+                "$" + numberOfGuest +
+                "$" + userId +
+                "$" + hallId +
+                "$" + price +
+                "$" + isCatering +
+                "$" + typeOfMeal +
+                "$" + quotationId + "$$";
+    }
 
-    public Quotation(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest,int newUserId, int newHallId, double newPrice,
-                     boolean newIsCatering, String newTypeOfMeal)
+    public Quotation(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest, int newUserId, int newHallId, double newPrice,
+                     boolean newIsCatering, String newTypeOfMeal, int id)
     {
         date = newDate;
         bookingStartDate= newBookingStartDate;
@@ -25,7 +49,7 @@ public class Quotation {
         price = newPrice;
         isCatering = newIsCatering;
         typeOfMeal=newTypeOfMeal;
-
+        quotationId = id;
 
     }
     public Quotation()

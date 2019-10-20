@@ -12,7 +12,7 @@ public class Customer extends User {
     private String securityAnswer2;
     private ArrayList<String> cardDetails;
     private ArrayList<Booking> bookingList;
-    private ArrayList<Quotation> quotationList;
+    private ArrayList<Quotation> quotationList = new ArrayList<>();
     private Booking booking;
 
 
@@ -91,14 +91,18 @@ public class Customer extends User {
     public void quotationAdd(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest,int customerId, int newHallId, double newPrice,
                               boolean newIsCatering, String newTypeOfMeal)
     {
-        /*int quotationId = 1;
-        quotationId= quotationId+1;*/
-
-
         Quotation newQuotation =new Quotation(  newDate, newBookingStartDate,newBookingFinishDate,
                                                 newNumberOfGuest,customerId,newHallId,newPrice,
-                                                newIsCatering, newTypeOfMeal);
+                                                newIsCatering, newTypeOfMeal,-1);
          quotationList.add(newQuotation);
+    }
+    public void quotationAddFromText(Date newDate, Date newBookingStartDate, Date newBookingFinishDate, int newNumberOfGuest,int customerId, int newHallId, double newPrice,
+                             boolean newIsCatering, String newTypeOfMeal,int quotationId)
+    {
+        Quotation newQuotation =new Quotation(  newDate, newBookingStartDate,newBookingFinishDate,
+                newNumberOfGuest,customerId,newHallId,newPrice,
+                newIsCatering, newTypeOfMeal,quotationId);
+        quotationList.add(newQuotation);
     }
 
     public Quotation getLastQuotation()

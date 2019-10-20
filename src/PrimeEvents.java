@@ -1,3 +1,6 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -6,6 +9,7 @@ public class PrimeEvents {
     private static ArrayList<Hall> hallList = new ArrayList<>();
     private static ArrayList<User> userList = new ArrayList<>();
     private static ArrayList<Booking> bookingList = new ArrayList<>();
+    private static ArrayList<Quotation> quotationList = new ArrayList<>();
     private static double veteranConcession;
     private static double seniorCitizenConcession;
     private static FileIO fileIO = new FileIO();
@@ -95,6 +99,45 @@ public class PrimeEvents {
     {
 
     }
+    public static void createQuotationList()
+    {
+        String allQuotation = fileIO.readFile("Quotations");
+        if(allQuotation.isEmpty())
+            return;
+        String[] quotationDetails = allQuotation.split(Pattern.quote("$$"));
+        //read all quotation
+        // read all quotation from txt
+        for (int i = 0; i < quotationDetails.length; i++) {
+            String[] specificQuotation = quotationDetails[i].split(Pattern.quote("$"));
+            Quotation temdriQuotation = new Quotation();
+
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            try {
+                temdriQuotation.setDate(dateFormat.parse(specificQuotation[0]));
+            }catch (ParseException e) {
+                System.out.println("The date format is wrong !");
+            }
+            try{
+                temdriQuotation.setBookingStartDate(dateFormat.parse(specificQuotation[1]));
+            } catch (ParseException e) {
+                System.out.println("The date format is wrong !");
+            }
+            try {
+                temdriQuotation.setBookingFinishDate(dateFormat.parse(specificQuotation[2]));
+            }
+            catch (ParseException e) {
+                System.out.println("The date format is wrong !");
+            }
+            temdriQuotation.setNumberOfGuest(Integer.parseInt(specificQuotation[3]));
+            temdriQuotation.setUserId(Integer.parseInt(specificQuotation[4]));
+            temdriQuotation.setHallId(Integer.parseInt(specificQuotation[5]));
+            temdriQuotation.setPrice(Double.parseDouble(specificQuotation[6]));
+            temdriQuotation.setCatering(Boolean.parseBoolean(specificQuotation[7]));
+            temdriQuotation.setTypeOfMeal(specificQuotation[8]);
+            temdriQuotation.setQuotationId(Integer.parseInt(specificQuotation[9]));
+            quotationList.add(temdriQuotation);
+        }
+    }
     public static User getEventUser() {
         return eventUser;
     }
@@ -114,6 +157,9 @@ public class PrimeEvents {
         return hallList;
     }
 
+    public static ArrayList<Quotation> getQuotationList() {
+        return quotationList;
+    }
     public static ArrayList<User> getUserList() {
         return userList;
     }
@@ -139,7 +185,8 @@ public class PrimeEvents {
     }
     public Hall getSpecificHall(int hallID)
     {
-        return hallList.get(hallID);
+
+        return hallList.get(hallID-1);
     }
 
 }
