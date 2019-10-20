@@ -190,7 +190,7 @@ public class InputValidation {
     }
 
     /**
-     * This method for validating the inout of special character.
+     * This method for validating the input of special character.
      *
      * @param input This indicates the inputs of special character
      * @return boolean This returns for result of check

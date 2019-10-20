@@ -3,7 +3,7 @@ import java.util.Date;
 /**
  * This is the an customer entity class. This class inherits from the user class.
  *
- * @author    YuWu
+ * @author    YuWu, Annu Shokeen
  * @version   20/10/2019
  */
 public class Customer extends User {

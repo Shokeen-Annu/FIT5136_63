@@ -9,6 +9,12 @@ import java.util.Date;
 
 import java.util.regex.Pattern;
 
+/**
+ * THis is the owner class inherited from user.
+ *
+ * @author    Annu Shokeen, Zhijie Li,YuWu
+ * @version   20/10/2019
+ */
 public class Owner extends User {
 
     private String securityQuestion1;
@@ -81,10 +87,10 @@ public class Owner extends User {
     }
 
     /**
-     * This method converts the information into this format in order to write into the txt file.
+     * This method reads the information from text file and save it in ArrayList.
      *
      * @param userId The integer indicates the user id.
-     *  @return String this convert value into this format
+     *  @return ArrayList<Discount> this convert discounts into this ArrayList
      */
     public ArrayList<Discount> createDiscountList(int userId)
     {

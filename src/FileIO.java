@@ -67,7 +67,7 @@ public class FileIO {
     }
 
     /**
-     * This method is write some information into txt file
+     * This method is overwrite information into txt file.
      *
      * @param filename This indicates the file name.
      * @param data This indicates the data which need to write into file

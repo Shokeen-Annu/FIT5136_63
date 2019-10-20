@@ -14,10 +14,10 @@ public class CommonController {
     private FileIO io = new FileIO();
 
     /**
-     * This method is for user to choose the type to view halls.
+     * This method is for user to login and verify user.
      *
-     *   @param email
-     *   @param password
+     *   @param email user email address
+     *   @param password user password
      */
     public String primeEventsLogin(String email,String password)
     {
@@ -36,7 +36,7 @@ public class CommonController {
     }
 
     /**
-     * This method is for user to choose the type to view halls.
+     * This method is for user to logout from the system.
      *
      *   @param choice
      *   @return boolean This is to check the user, if they want to log out
@@ -222,7 +222,7 @@ public class CommonController {
     }
 
     /**
-     * This method is used to save the value into database
+     * This method is used to save the value into database i.e. arraylists in Primeevents class
      *
      */
     public static void createDatabase()
@@ -234,6 +234,10 @@ public class CommonController {
 
     }
 
+    /**
+     * This method is used to register new user and save into database.
+     *
+     */
     public boolean registerNewUser(String firstName, String lastName, String phoneNum, String email,
     String password,String sq1,String sq1Ans,String sq2,String sq2Ans,boolean isVeteran,boolean isSenior,String role)
     {
