@@ -19,6 +19,7 @@ public class OwnerInterface {
     public void displayOwnerMenu()
     {
         boolean flag = true;
+
         commonController.createOwnerDiscountList();
 
         do {
@@ -299,7 +300,7 @@ public class OwnerInterface {
                 return false;
             }
             else {
-                System.out.println("Re-enter your option");
+                System.out.println("Re-enter your option number correctly!");
             }
         } while (choiceNumber < 1 || choiceNumber >4 || !manageOwnerDiscountFlag );
 
@@ -313,12 +314,17 @@ public class OwnerInterface {
      **/
     public boolean backMenu()
     {
-        System.out.println("Press 0 to return to menu");
-        int input = validator.receiveInt();
-        if(input == 0)
-            return false;
-        else
-            return true;
+        int input;
+        boolean result;
+        do {
+            System.out.println("Press 0 to return to menu");
+            input = validator.receiveInt();
+            if (input == 0)
+                result = false;
+            else
+                result = true;
+        }while (input == -1);
+        return result;
     }
 
     public boolean changeQuotation (boolean isMainMenu)

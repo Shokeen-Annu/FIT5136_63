@@ -119,12 +119,17 @@ public class CustomerInterface{
      **/
     public boolean backMenu()
     {
-        System.out.println("Press 0 to return to menu");
-        int admInput = validator.receiveInt();
-        if(admInput == 0)
-            return false;
-        else
-            return true;
+        int admInput;
+        boolean result;
+        do {
+            System.out.println("Press 0 to return to menu");
+            admInput = validator.receiveInt();
+            if (admInput == 0)
+                result =  false;
+            else
+                result = true;
+        }while(admInput == -1);
+        return result;
     }
     /**
      * This method is used to back or to select hall menu
@@ -133,12 +138,17 @@ public class CustomerInterface{
      **/
     public boolean newBackMenu()
     {
-        System.out.println("Press 0 to return to menu or press 9 to select the hall");
-        int admInput = validator.receiveInt();
-        if(admInput == 0)
-            return false;
-        else
-            return true;
+        int admInput;
+        boolean result;
+        do {
+            System.out.println("Press 0 to return to menu or press 9 to select the hall");
+            admInput = validator.receiveInt();
+            if (admInput == 0)
+                result = false;
+            else
+                result = true;
+        }while(admInput == -1);
+        return result;
     }
     /**
      * This method displays the search hall menu.
@@ -156,19 +166,16 @@ public class CustomerInterface{
             System.out.println();
             System.out.println("Choose one way to search a hall");
             System.out.println("1 NAME OF HALL");
-            System.out.println("2 STAR RATING");
-            System.out.println("3 OCCASION TYPE");
-            System.out.println("4 ADDRESS");
-            System.out.println("5 DATE");
             System.out.println("6 BACK TO MAIN MENU");
             System.out.println();
             System.out.println("Enter your choice number:");
 
             Scanner scanner = new Scanner(System.in);
-            searchChoice = scanner.nextInt();
+            searchChoice = validator.receiveInt();
             String searchInput = " ";
             boolean specialChar = true;
             switch (searchChoice) {
+                case -1:break;
                 case 1:
                          do{
                                System.out.println("Please enter the name of hall");
@@ -176,20 +183,18 @@ public class CustomerInterface{
                                specialChar = validator.validateSpecialChar(searchInput);
                                if(searchInput.isEmpty() == true || specialChar == false)
                                {
-                                   System.out.println("Please enter the correct format!!");
+                                   System.out.println("Please enter the correct format!! Do not " +
+                                           "enter $ or empty string.");
                                }
                          }while(searchInput.isEmpty() == true || specialChar == false);
                          commonController.viewHalls("NAME", searchInput);
-                    System.out.println("Please enter the name of hall");
-                     searchInput = validator.receiveString();
-                    commonController.viewHalls("NAME", "searchInput");
 
                     if(isBookHall)
                         flag = newBackMenu();
                     else
                         flag = backMenu();
                     break;
-                case 2:
+               /* case 2:
                     System.out.println("Please enter the rating");
                     int searchRate = validator.receiveInt();
                     commonController.viewHalls("RATING", "searchRate");
@@ -222,10 +227,11 @@ public class CustomerInterface{
                         flag = newBackMenu();
                     else
                         flag = backMenu();
-                    break;
+                    break;*/
                 case 6:
                     return false;
                 default:
+                    flag = false;
                     System.out.println("Please choose the option correctly");
                     break;
             }

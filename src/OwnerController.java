@@ -106,6 +106,7 @@ public class OwnerController {
         ArrayList<Discount> ownerDiscount = owner.getDiscountList();
         int choose = -1;
         int discountId;
+        int max = -1;
         do{
             if(ownerDiscount.size() == 0)
             {
@@ -115,26 +116,67 @@ public class OwnerController {
             }
             else
             {
-                discountId = ownerDiscount.size() + 1;
+                for(Discount item: ownerDiscount)
+                    if(max < item.getDiscountId())
+                        max = item.getDiscountId();
+                discountId = max + 1;
             }
+            boolean isNameValid = true;
             System.out.println("Please enter discount name");
-            String discountName = input.receiveString().trim();
+            String discountName ="";
+            do {
+                if(!isNameValid)
+                    System.out.println("Please enter name correctly. It should be less than 15 characters");
+                discountName = input.receiveString().trim();
+                isNameValid = !input.isStringNullOrEmpty(discountName) && input.validateLengthOfString(discountName,15,1)
+                        && input.isDollarSign(discountName);
+            }while(!isNameValid);
+
+
             System.out.println("Please enter discount value");
-            double discountValue = input.validateDiscountValue();
+            double discountValue;
+            do{
+                discountValue = input.validateDiscountValue();
+            } while(discountValue > 1 || discountValue <= Double.parseDouble("0"));
+
+            boolean isCommentValid = true;
             System.out.println("Please enter comments for the discount");
-            String discountComments = input.receiveString().trim();
-            System.out.println(discountId + "," + discountName + "," + discountValue + "," + discountComments + ";");
-            System.out.println("Do you add the discount into system");
-            System.out.println("1 YES     2 NO  (PLEASE ENTER NUMBER)");
-            choose = input.receiveInt();
+            String discountComments ="";
+            do{
+                if(!isCommentValid)
+                    System.out.println("Please enter comments less than 50 characters.");
+                discountComments = input.receiveString().trim();
+                isCommentValid = input.validateLengthOfString(discountComments,50,0)
+                                && input.isDollarSign(discountComments);
+            } while(!isCommentValid);
+            System.out.println("You entered the following discount: \n Id: "+discountId + ",Name: " + discountName + ",Value: " + discountValue + ",Comments:" + discountComments + ";");
+            if(discountComments.equals(""))
+                discountComments = " ";
             String contents = owner.getUserId() + "$" + discountId + "$" + discountName + "$" + discountValue + "$" + discountComments + "$$";
-            if(choose == 1)
-            {
-                io.writeFile("Discounts", contents);
-            }
-            else
-                System.out.println("Please re-add the discount");
+            boolean isConfirm = false;
+            do {
+                System.out.println("Do you add the discount into system");
+                System.out.println("1 YES     2 NO  (Please enter number)");
+                choose = input.receiveInt();
+                if (choose == 1) {
+                    io.writeFile("Discounts", contents);
+                    owner.createDiscountList(owner.getUserId());
+                    System.out.println("Discount is created successfully.");
+                    isConfirm = false;
+                }
+                else if(choose == -1)
+                    isConfirm = true;
+                else if(choose == 2) {
+                    isConfirm = false;
+                    choose = 1;
+                    System.out.println("Discount is not created.");
+                }
+                else {
+                    System.out.println("Please enter choice correctly");
+                    isConfirm = false;
+                }
                 System.out.println();
+            }while(isConfirm);
         }while(choose != 1);
     }
     private boolean isHallPresent(int hallId)

@@ -219,6 +219,10 @@ public class InputValidation {
                 {
                     System.out.println("Please enter the value smaller than 1");
                 }
+                else if(input <= Double.parseDouble("0"))
+                {
+                    System.out.println("Please enter the value greater than 0");
+                }
             }
             catch (Exception ex)
             {
@@ -236,12 +240,13 @@ public class InputValidation {
     public int validateRange(int number, int small, int big)
     {
         do{
-            if(number < small || number > big )
+            //if(number < small || number > big )
+            if(number == -1)
             {
                 System.out.println("Please enter correct value.");
                 number = receiveInt();
             }
-        }while(number < small || number > big);
+        }while(number == -1);
         return number;
     }
 }

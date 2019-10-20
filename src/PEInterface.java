@@ -41,6 +41,7 @@ public class PEInterface {
                 case -1: break;
                 case 1:
                     commonController.viewHalls("ALL"," ");
+                    flag = backMenu();
                     break;
                 case 2:
                     flag = customerInterface.displaySearchHallMenu(true, false);
@@ -350,13 +351,17 @@ public class PEInterface {
      *
      * @return boolean to back menu
      **/
-    public boolean backMenu()
-    {
+    public boolean backMenu() {
+        int admInput;
+        boolean result;
+        do{
         System.out.println("Press 0 to return to menu");
-        int admInput = validator.receiveInt();
-        if(admInput == 0)
-            return false;
+        admInput = validator.receiveInt();
+        if (admInput == 0)
+            result = false;
         else
-            return true;
+            result = true;
+    }while(admInput == -1);
+        return result;
     }
 }
