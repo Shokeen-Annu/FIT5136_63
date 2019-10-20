@@ -60,6 +60,11 @@ public class PrimeEvents {
     public static void createUserList()
     {
         String allUsers = fileIO.readFile("Users");
+        if(allUsers.isEmpty())
+        {
+            System.out.println("Users file is not found!");
+            return;
+        }
         String[] userDetails = allUsers.split(Pattern.quote("$$"));
         for(int i = 0; i< userDetails.length;i++)
         {
@@ -125,8 +130,10 @@ public class PrimeEvents {
     public static void createQuotationList()
     {
         String allQuotation = fileIO.readFile("Quotations");
-        if(allQuotation.isEmpty())
+        if(allQuotation.isEmpty()) {
+            System.out.println("Quotations file is not found!");
             return;
+        }
         String[] quotationDetails = allQuotation.split(Pattern.quote("$$"));
         //read all quotation
         // read all quotation from txt

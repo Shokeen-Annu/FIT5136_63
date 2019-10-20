@@ -90,6 +90,10 @@ public class Owner extends User {
     {
         discountList = new ArrayList<>();
         String allDiscount = fileIO.readFile("Discounts");
+        if(allDiscount.trim().isEmpty()) {
+            System.out.println("Discounts file is not found!");
+            return discountList;
+        }
         String[] discountDetail = allDiscount.split(Pattern.quote("$$"));
 
             for (int i = 0; i < discountDetail.length; i++) {
